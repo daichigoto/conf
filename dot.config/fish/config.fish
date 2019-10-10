@@ -46,7 +46,7 @@ function prompt_pwd
 end
 
 function fish_prompt
-	set -l hostname (hostname -s | tr 'a-z' 'A-Z')
+	set -l hostname (hostname -s | tr 'a-z' 'A-Z') > /dev/null 2>&1
 	switch $hostname
 	case 'MAC*'
 		set hostname MAC
