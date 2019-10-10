@@ -1,0 +1,267 @@
+# users generic .tcshrc file for tcsh(1)
+#
+# Copyright (c) 1997-2004,2008 Daichi GOTO <daichi@ongs.co.jp>
+# Copyright (c) 2006,2009,2013,2014 ONGS Inc. <info@ongs.co.jp>
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+#
+# 1. Redistributions of source code must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright
+#    notice, this list of conditions and the following disclaimer in the
+#    documentation and/or other materials provided with the distribution.
+# 
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
+# PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS
+# BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER 
+# IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+# THE POSSIBILITY OF SUCH DAMAGE.
+
+# author: Daichi GOTO (daichi@ongs.co.jp)
+# first edition: Mon May 13 06:46:22 JST 2002
+
+## Environment variable
+#
+# LANG
+#
+setenv LANG ja_JP.UTF-8
+[ 0 = $uid ] && setenv LANG en_US.UTF-8
+
+## Default shell configuration
+#
+# do spell-word editor command before each completion attempt
+#
+set autocorrect
+
+# do expand-history editor command before each completion attempt
+#
+set autoexpand
+
+# list the possibilities after an ambiguous completion
+#
+set autolist
+
+# enable color display for ls-F
+#
+set color
+
+# enable color escape sequence for NLS message files
+#
+set colorcat
+
+# do spelling-correcte of command automatically
+#
+set correct=cmd
+
+# enable display and editing Japanese(UTF-8) code
+#
+set dspmbyte=utf8
+
+# list the all jobs (long format) when a job is suspended 
+#
+set listjobs=long
+
+# never beep when complete
+#
+set matchbeep=never
+
+# stop the beep
+#
+set nobeep
+
+# disable the ding in the prompt
+#
+set noding
+
+# do not error when filename or directory completion gets fail
+#
+set nonomatch
+
+# notify as soon as possible when backgroup jobs get change
+#
+set notify
+
+# ask before `rm *' command
+#
+set rmstar
+
+# treat symlinks as normal status
+#
+set symlinks=ignore
+
+## Keybind configuration
+#
+# backward delete word binded to Ctrl-W
+#
+bindkey ^W backward-delete-word
+
+# delele key
+#
+bindkey "^[[3~" delete-char
+
+# historical backward search with linehead string binded to up-key
+#
+bindkey -k up history-search-backward
+
+# historical forward search with linehead string binded to down-key
+#
+bindkey -k down history-search-forward
+
+## Command history configuration
+#
+set histfile=$HOME/.history-"${tty:as|/|-|}"
+set history=1000
+set savehist=1000
+set histdup=erase
+
+# merge history files
+#
+if ( -f $HOME/.history-${tty:as|/|-|} ) then
+	touch $HOME/.tcshhistory$$ $histfile
+	chmod 600 $HOME/.tcshhistory$$ $histfile
+	cat $HOME/.history* | paste - - | sort | uniq -f 1 | \
+		awk '{print $1 "\n" substr($0, 14, length($0) - 13)}' | \
+		tail -${history} \
+		> ${HOME}/.tcshhistory$$
+	mv $HOME/.tcshhistory$$ $histfile
+endif
+
+## Completion configuration
+#
+complete cd p/1/d/
+
+complete where 'n/*/c/'
+complete which 'n/*/c/'
+
+complete man 'n/*/c/'
+
+complete alias 'n/*/a/'
+complete unalias 'n/*/a/'
+
+complete set 'p/1/s/=' 'c/*=/f/' 'n/=/f/'
+complete unset 'n/*/s/'
+
+complete setenv 'p/1/e/' 'c/*:/f/'
+complete unsetenv 'n/*/e/'
+
+complete env 'p/1/e/=' 'c/*=/f/' 'n/=/f/' 'c/*:/f/' 'n/*/c/'
+
+## Alias configuration
+#
+alias ls ls -G -w
+alias la ls -a
+alias lf ls -F
+alias ll ls -l
+
+alias less less -X
+
+alias du du -h
+alias df df -h
+
+alias su su -l
+
+## terminal configuration
+#
+# undef stop/start cchar for some applications to use C-s/C-q as their keybind
+stty start undef
+stty stop undef
+
+if ( ${?TERM} ) then
+	switch ( $TERM )
+	case xterm:
+	case xterm-clear:
+	case xterm-color:
+	case xterm-256color:
+		setenv LSCOLORS cxFxCxdxBxegedabagacad
+		setenv LS_COLORS 'di=32:ln=35:so=01:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+		breaksw
+	case kterm-color:
+		stty erase '^H'
+		setenv LSCOLORS cxFxCxdxBxegedabagacad
+		setenv LS_COLORS 'di=01;32:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+		breaksw
+	case kterm:
+		stty erase '^H'
+		breaksw
+	case cons25:
+		unsetenv LANG
+		setenv LSCOLORS cxFxCxdxBxegedabagacad
+		setenv LS_COLORS 'di=01;32:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+		breaksw
+	case jfbterm-color:
+		setenv LSCOLORS cxFxCxdxBxegedabagacad
+		setenv LS_COLORS 'di=01;32:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+		breaksw
+	default:
+		setenv LSCOLORS cxFxCxdxBxegedabagacad
+		setenv LS_COLORS 'di=01;32:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+		breaksw
+	endsw
+endif
+
+# set prompt
+#
+if ( ${?TERM} ) then
+	switch ( $TERM )
+	case xterm:
+	case xterm-clear:
+	case xterm-color:
+	case xterm-256color:
+	case kterm:
+	case kterm-color:
+		# temporary custom pwd command, /tmp/tcsh-$$-shortpwd
+		#
+		rm -f /tmp/tcsh-[0-9]*-shortpwd >& /dev/null
+		cat<<EOF>/tmp/tcsh-$$-shortpwd
+#!/bin/sh
+w=\$(tput cols)
+l=\$(echo "scale=0; \$w * 5 / 10" | bc)
+pwd | awk '{if ('\$l' > length(\$0)) print; else {\$0=substr(\$0,length(\$0)-'\$l','\$l'+1); print "..."\$0}}'
+EOF
+		chmod 500 /tmp/tcsh-$$-shortpwd
+	
+		# temporary custom pwd command, /tmp/tcsh-$$-shortshortpwd
+		#
+		rm -f /tmp/tcsh-[0-9]*-shortshortpwd >& /dev/null
+		cat<<EOF>/tmp/tcsh-$$-shortshortpwd
+#!/bin/sh
+w=\$(tput cols)
+l=\$(echo "scale=0; \$w * 5 / 10" | bc)
+pwd | awk '{if ('\$l' > length(\$0)) print; else {\$0=substr(\$0,length(\$0)-'\$l','\$l'+1); print "..."\$0}}'
+EOF
+		chmod 500 /tmp/tcsh-$$-shortshortpwd
+	
+		if ( 0 == $uid ) then
+			set prompt="%{\033[36m%}${HOST:ar:au} %B%{\033[31m%}`/tmp/tcsh-$$-shortshortpwd`%#%{\033[m%}%b "
+			alias cwdcmd 'set prompt="%{\034[36m%}${HOST:ar:au} %B%{\033[31m%}`/tmp/tcsh-$$-shortshortpwd`%#%{\033[m%}%b "'
+			set prompt2="%B%{\033[31m%}%R%#%{\033[m%}%b "
+			set prompt3="%B%{\033[31m%}%R is correct? [y,n]:%{\033[m%}%b "
+		else
+			set prompt="%{\033[;1;29m%}`/tmp/tcsh-$$-shortpwd`%%%{\033[m%} "
+			alias cwdcmd 'set prompt="%{\033[;1;29m%}`/tmp/tcsh-$$-shortpwd`%%%{\033[m%} "'
+			if (${?REMOTEHOST} && ${?SSH_CONNECTION}) then
+				set prompt="%{\033[;1;29m%}${HOST:ar:au} `/tmp/tcsh-$$-shortshortpwd`%%%{\033[m%} "
+				alias cwdcmd 'set prompt="%{\033[;1;29m%}${HOST:ar:au} `/tmp/tcsh-$$-shortshortpwd`%%%{\033[m%} "'
+			endif
+			set prompt2="%{\033[;1;29m%}%R%%%{\033[m%} "
+			set prompt3="%{\033[;1;29m%}%R is correct? [y,n]:%{\033[m%} "
+		endif
+
+		## window title setting
+		# alias postcmd echo -n '"]2;${TERM:s/-/./:r} ${HOST:ar}:${cwd}"'
+		breaksw
+	endsw
+endif
+
+## load user .tcshrc configuration file
+#
+if ( -f $HOME/.tcshrc.mine ) source $HOME/.tcshrc.mine
