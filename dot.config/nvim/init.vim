@@ -1,6 +1,6 @@
 " users generic init.vim file for nvim(1)
 "
-" Copyright (c) 2001-2004 Daichi GOTO <daichi@ongs.co.jp>
+" Copyright (c) 2001-2004,2019 Daichi GOTO <daichi@ongs.co.jp>
 " Copyright (c) 2006,2009-2012,2015,2016 ONGS Inc. <info@ongs.co.jp>
 " Copyright (c) 2010 Hiroaki TOMIDA <7gou@kiku33.com>
 " All rights reserved.
@@ -32,28 +32,56 @@
 " last modified: $Date: 2006-05-16 14:14:35 $
 " version: $Revision: 1.11 $
 
-" mouse feature off
+" disable mouse feature
 set mouse=
 
 set pastetoggle=<F2>
 
-" plug-ins management
-" git clone https://github.com/Shougo/dein.vim ~/.config/nvim/dein.vim
-if isdirectory(expand('~/.config/nvim/dein.vim'))
-	set runtimepath+=~/.config/nvim/dein.vim
-	call dein#begin(expand('~/.config/nvim/dein'))
+" ----------------------------------------------------------------------
+" Dein plug-ins management
+" ----------------------------------------------------------------------
+if &compatible
+	set nocompatible
+endif
+
+set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim
+if dein#load_state('~/.config/nvim/')
+	call dein#begin('~/.config/nvim/')
+	call dein#add('Shougo/dein.vim')
 	call dein#add('Shougo/unite.vim')
 	call dein#add('junegunn/seoul256.vim')
+	call dein#add('vim-airline/vim-airline')
+	call dein#add('vim-airline/vim-airline-themes')
 	call dein#end()
-
-	" Unite
-	nnoremap <silent> <C-o> :<C-u>Unite file buffer<CR>
-	autocmd FileType unite nmap <silent><buffer> <ESC><ESC> q
-
-	" seoul256
-	let g:seoul256_background = 233
-	colo seoul256
+	call dein#save_state()
 endif
+
+filetype plugin indent on
+syntax enable
+
+if dein#check_install()
+	call dein#install()
+endif
+
+" unite
+nnoremap <silent> <C-o> :<C-u>Unite file buffer<CR>
+autocmd FileType unite nmap <silent><buffer> <ESC><ESC> q
+
+" seoul256
+let g:seoul256_background = 233
+colo seoul256
+
+" vim-airline
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'tomorrow'
+
+" ----------------------------------------------------------------------
+" How to install Dein:
+" 	cd ~/.config/nvim/
+" 	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+" 	sh ./installer.sh .
+"	rm ./installer.sh
+" ----------------------------------------------------------------------
 
 " allow some keys to move the cursor left/right to move to 
 " the previous/next line when the cursor is on the first/last
