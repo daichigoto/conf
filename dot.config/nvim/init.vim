@@ -55,7 +55,6 @@ if dein#load_state('~/.config/nvim/')
 endif
 
 filetype plugin indent on
-syntax enable
 
 if dein#check_install()
 	call dein#install()
@@ -71,6 +70,8 @@ colo seoul256
 
 " vim-airline
 let g:airline_powerline_fonts = 1
+let g:airline_theme = 'minimalist'
+let g:airline_theme = 'molokai'
 let g:airline_theme = 'tomorrow'
 
 " ----------------------------------------------------------------------
@@ -93,8 +94,6 @@ let g:airline_theme = 'tomorrow'
 "  ~ - ~            normal
 set whichwrap=b,s,[,],<,>,~,h,l
 
-" syntax highlight on
-syntax on
 set nohlsearch " non-highlight for search keyword<Paste>
 set cursorline " use cursorline indicator
 
@@ -140,6 +139,9 @@ while strlen(customvims) > 0
 	unlet i
 endwhile
 unlet customvims
+
+" syntax highlight on
+syntax enable
 
 " load user .nvimrc configuration file
 if filereadable(expand('~/.nvimrc'))
