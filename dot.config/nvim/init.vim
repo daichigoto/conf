@@ -121,7 +121,7 @@ vmap <silent> <S-Tab> <C-o>15<Left>
 " for useful argdo mutli-files replaces
 set hidden
 
-" laod some ustomized files: ~/.config/nvim/*.vim
+" laod some customized files: ~/.config/nvim/*.vim
 let customvims = globpath(expand('~/.config/nvim'), "*.vim")
 while strlen(customvims) > 0
 	let i = stridx(customvims, "\n")
