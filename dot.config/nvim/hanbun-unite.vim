@@ -25,8 +25,6 @@
 
 " author: Daichi GOTO (daichi@ongs.co.jp)
 " first edition: Fri Feb 12 17:15:51 JST 2010
-" last modified: $Date$
-" version: $Revision$
 
 " Hanbun mode
 function! HanbunTags(ArgLead, CmdLine, CusorPos)

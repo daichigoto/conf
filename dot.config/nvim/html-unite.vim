@@ -25,8 +25,6 @@
 
 " author: Daichi GOTO (daichi@ongs.co.jp)
 " first edition: Mon Jul  9 07:27:39 JST 2012
-" last modified: $Date$
-" version: $Revision$
 
 " HTML mode
 function! HtmlKeys(ArgLead, CmdLine, CusorPos)

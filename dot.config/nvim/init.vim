@@ -29,8 +29,6 @@
 
 " author: Daichi GOTO (daichi@ongs.co.jp), Hiroaki TOMIDA (7gou@kiku33.com)
 " first edition: Fri May 17 12:31:53 JST 2002
-" last modified: $Date: 2006-05-16 14:14:35 $
-" version: $Revision: 1.11 $
 
 " disable mouse feature
 set mouse=
