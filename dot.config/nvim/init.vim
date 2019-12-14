@@ -121,6 +121,9 @@ vmap <silent> <S-Tab> <C-o>15<Left>
 " for useful argdo mutli-files replaces
 set hidden
 
+" syntax highlight on
+syntax enable
+
 " laod some customized files: ~/.config/nvim/*.vim
 let customvims = globpath(expand('~/.config/nvim'), "*.vim")
 while strlen(customvims) > 0
@@ -132,16 +135,15 @@ while strlen(customvims) > 0
 		let f = strpart(customvims, 0, i)
 		let customvims = strpart(customvims, i+1, 9999)
 	endif
-	if f !~ '\s*/init.vim' && filereadable(f)
+	if filereadable(f) &&
+	   \ f !~ '\s*/init.vim' && 
+	   \ f !~ '\s*/state_nvim.vim'
 		exe 'source ' . f
 	endif
 	unlet f
 	unlet i
 endwhile
 unlet customvims
-
-" syntax highlight on
-syntax enable
 
 " load user .nvimrc configuration file
 if filereadable(expand('~/.nvimrc'))
