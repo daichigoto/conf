@@ -71,8 +71,8 @@ colo seoul256
 " vim-airline
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'minimalist'
-let g:airline_theme = 'tomorrow'
 let g:airline_theme = 'molokai'
+let g:airline_theme = 'tomorrow'
 
 " ----------------------------------------------------------------------
 " How to install Dein:
