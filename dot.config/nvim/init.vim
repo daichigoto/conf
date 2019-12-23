@@ -30,11 +30,6 @@
 " author: Daichi GOTO (daichi@ongs.co.jp), Hiroaki TOMIDA (7gou@kiku33.com)
 " first edition: Fri May 17 12:31:53 JST 2002
 
-" disable mouse feature
-set mouse=
-
-set pastetoggle=<F2>
-
 " ----------------------------------------------------------------------
 " Dein plug-ins management
 " ----------------------------------------------------------------------
@@ -81,6 +76,11 @@ let g:airline_theme = 'molokai'
 " 	sh ./installer.sh .
 "	rm ./installer.sh
 " ----------------------------------------------------------------------
+
+" disable mouse feature
+set mouse=
+
+set pastetoggle=<F2>
 
 " allow some keys to move the cursor left/right to move to 
 " the previous/next line when the cursor is on the first/last
