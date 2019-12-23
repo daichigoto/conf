@@ -1,7 +1,7 @@
 " users generic .vimrc file for vim(1)
 "
 " Copyright (c) 2001-2004 Daichi GOTO <daichi@ongs.co.jp>
-" Copyright (c) 2006,2009-2012,2015 ONGS Inc. <info@ongs.co.jp>
+" Copyright (c) 2006,2009-2012,2015,2019 ONGS Inc. <info@ongs.co.jp>
 " Copyright (c) 2010 Hiroaki TOMIDA <7gou@kiku33.com>
 " All rights reserved.
 "
@@ -29,16 +29,59 @@
 
 " author: Daichi GOTO (daichi@ongs.co.jp), Hiroaki TOMIDA (7gou@kiku33.com)
 " first edition: Fri May 17 12:31:53 JST 2002
-" last modified: $Date: 2006-05-16 14:14:35 $
-" version: $Revision: 1.11 $
-
-" full vim mode
-set nocompatible
 
 " evim.vim will already have done these configuration.
 if v:progname == "evim"
   finish
 endif
+
+" ----------------------------------------------------------------------
+" Dein plug-ins management
+" ----------------------------------------------------------------------
+if &compatible
+	set nocompatible
+endif
+
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+if dein#load_state('~/.cache/dein')
+	call dein#begin('~/.cache/dein/')
+	call dein#add('Shougo/dein.vim')
+	call dein#add('Shougo/unite.vim')
+	call dein#add('junegunn/seoul256.vim')
+	call dein#add('vim-airline/vim-airline')
+	call dein#add('vim-airline/vim-airline-themes')
+	call dein#end()
+	call dein#save_state()
+endif
+
+filetype plugin indent on
+
+if dein#check_install()
+	call dein#install()
+endif
+
+" unite
+nnoremap <silent> <C-o> :<C-u>Unite file buffer<CR>
+autocmd FileType unite nmap <silent><buffer> <ESC><ESC> q
+
+" seoul256
+let g:seoul256_background = 233
+colo seoul256
+
+" vim-airline
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'minimalist'
+let g:airline_theme = 'tomorrow'
+let g:airline_theme = 'molokai'
+
+" ----------------------------------------------------------------------
+" How to install Dein:
+" 	mkdir -p ~/.cache/dein
+" 	cd ~/.cache/dein/
+" 	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+" 	sh ./installer.sh .
+"	rm ./installer.sh
+" ----------------------------------------------------------------------
 
 " allow [Backspace] over insert mode to remove charactors
 "  start - allow all charactors to remove
