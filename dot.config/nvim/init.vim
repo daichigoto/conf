@@ -37,9 +37,9 @@ if &compatible
 	set nocompatible
 endif
 
-set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim
-if dein#load_state('~/.config/nvim/')
-	call dein#begin('~/.config/nvim/')
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+if dein#load_state('~/.cache/dein/')
+	call dein#begin('~/.cache/dein/')
 	call dein#add('Shougo/dein.vim')
 	call dein#add('Shougo/unite.vim')
 	call dein#add('junegunn/seoul256.vim')
@@ -71,8 +71,8 @@ let g:airline_theme = 'molokai'
 
 " ----------------------------------------------------------------------
 " How to install Dein:
-" 	mkdir -p ~/.config/nvim
-" 	cd ~/.config/nvim/
+" 	mkdir -p ~/.cache/dein
+" 	cd ~/.cache/dein/
 " 	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 " 	sh ./installer.sh .
 "	rm ./installer.sh
