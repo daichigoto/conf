@@ -95,7 +95,7 @@ set pastetoggle=<F2>
 "  ~ - ~            normal
 set whichwrap=b,s,[,],<,>,~,h,l
 
-set nohlsearch " non-highlight for search keyword<Paste>
+set nohlsearch " non-highlight for search keyword
 set cursorline " use cursorline indicator
 
 " line numbers on
