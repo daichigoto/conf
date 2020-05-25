@@ -1,6 +1,6 @@
 " users generic init.vim file for nvim(1)
 "
-" Copyright (c) 2001-2004,2019 Daichi GOTO <daichi@ongs.co.jp>
+" Copyright (c) 2001-2004,2020 Daichi GOTO <daichi@ongs.co.jp>
 " Copyright (c) 2006,2009-2012,2015,2016 ONGS Inc. <info@ongs.co.jp>
 " Copyright (c) 2010 Hiroaki TOMIDA <7gou@kiku33.com>
 " All rights reserved.
@@ -49,10 +49,10 @@ if dein#load_state('~/.cache/dein/')
 	call dein#add('Shougo/dein.vim')
 
 	" Add or remove your plugins here
-	call dein#add('Shougo/unite.vim')
 	call dein#add('junegunn/seoul256.vim')
 	call dein#add('vim-airline/vim-airline')
 	call dein#add('vim-airline/vim-airline-themes')
+	call dein#add('Shougo/denite.nvim')
 
 	" Required:
 	call dein#end()
@@ -68,10 +68,6 @@ if dein#check_install()
 	call dein#install()
 endif
 
-" unite
-nnoremap <silent> <C-o> :<C-u>Unite file buffer<CR>
-autocmd FileType unite nmap <silent><buffer> <ESC><ESC> q
-
 " seoul256
 let g:seoul256_background = 233
 colo seoul256
@@ -81,6 +77,37 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme = 'minimalist'
 let g:airline_theme = 'tomorrow'
 let g:airline_theme = 'molokai'
+
+" denite
+"  <C-o> open Denite-file-buffer-list
+"    <Esc>	close Denite-file-buffer-list
+"    <Space>	select multiple files/buffers
+"    <CR>	open files/buffers
+"    o		open files/buffers
+"    s		open files/buffers in split windows (horizonal)
+"    v		open files/buffers in split windows (vertical)
+"    i		filter by string
+"    ..		move to directory above
+nnoremap <silent> <C-o> :<C-u>Denite file buffer file:new<CR>
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+	nnoremap <silent><buffer><expr> <Esc>
+		\ denite#do_map('quit')
+	nnoremap <silent><buffer><expr> <Space>
+		\ denite#do_map('toggle_select').'j'
+	nnoremap <silent><buffer><expr> <CR>
+		\ denite#do_map('do_action')
+	nnoremap <silent><buffer><expr> o
+		\ denite#do_map('do_action')
+	nnoremap <silent><buffer><expr> s
+		\ denite#do_map('do_action', 'split')
+	nnoremap <silent><buffer><expr> v
+		\ denite#do_map('do_action', 'vsplit')
+	nnoremap <silent><buffer><expr> i
+		\ denite#do_map('open_filter_buffer')
+	nnoremap <silent><buffer><expr> ..
+		\ denite#do_map('move_up_path')
+endfunction
 
 " ----------------------------------------------------------------------
 " How to install Dein:
