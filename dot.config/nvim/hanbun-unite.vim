@@ -1,4 +1,4 @@
-" Copyright (c) 2010,2012,2016 ONGS Inc. <info@ongs.co.jp>
+" Copyright (c) 2010,2012,2016,2020 ONGS Inc. <info@ongs.co.jp>
 " All rights reserved.
 "
 " Redistribution and use in source and binary forms, with or without
@@ -117,6 +117,6 @@ endfunction
 augroup AddHanbunMode
   autocmd!
   autocmd BufNewFile,BufRead typescript.xml imap <C-c>t <C-r>=<SID>hanbunTagInsert()<CR>
-  autocmd Filetype xml set omnifunc=xmlcomplete#CompleteTags
-  autocmd Filetype xml inoremap <bf> </ </<C-x><C-o>
+  autocmd BufNewFile,BufRead typescript.xml imap <C-c>e </<C-x><C-o>
+  autocmd BufNewFile,BufRead typescript.xml imap </ </<C-x><C-o>
 augroup End
