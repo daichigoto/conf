@@ -7,8 +7,7 @@
 "
 " 1. Redistributions of source code must retain the above copyright
 "    notice, this list of conditions and the following disclaimer. 
-" 2. Redistributions in binary form must reproduce the above copyright
-"    notice, this list of conditions and the following disclaimer in the
+" 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
 "    documentation and/or other materials provided with the distribution.
 "
 " THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
@@ -75,8 +74,8 @@ function! <SID>hanbunTagInsert()
   if 'docgroup' == l:tag
     let l:bf = 
     \  '<docgroup>' . "\<CR>" .
-    \  ' <docinfo>' . "\<CR>" .
-    \  ' <title><p></p></title>' . "\<CR>" .
+    \  '<docinfo>' . "\<CR>" .
+    \  '<title><p></p></title>' . "\<CR>" .
     \  "\<Left>" . '</docinfo>' . "\<CR>" .
     \  "\<CR>" .
     \  '<p></p>' . "\<CR>" .
@@ -87,23 +86,14 @@ function! <SID>hanbunTagInsert()
     \  "\<CR>" .
     \  '<p></p>' . "\<CR>" .
     \  "\<Left>" . '</docgroup>' .
-    \  <SID>back(76) . <SID>back(6 * (l:eleidx - 1))
+    \  <SID>back(0) . <SID>back(0 * (l:eleidx - 1))
 
   elseif 'list' == l:tag
     let l:bf = 
     \  '<list>' . "\<CR>" .
-    \  ' <item><p></p></item>' . "\<CR>" .
-    \  '<item><p></p></item>' . "\<CR>" .
-    \  '<item><p></p></item>' . "\<CR>" .
-    \  '<item><p></p></item>' . "\<CR>" .
-    \  '<item><p></p></item>' . "\<CR>" .
-    \  '<item><p></p></item>' . "\<CR>" .
-    \  '<item><p></p></item>' . "\<CR>" .
-    \  '<item><p></p></item>' . "\<CR>" .
-    \  '<item><p></p></item>' . "\<CR>" .
     \  '<item><p></p></item>' . "\<CR>" .
     \  "\<Left>" . '</list>' .
-    \  <SID>back(217) . <SID>back(10 * (l:eleidx - 1))
+    \  <SID>back(0) . <SID>back(0 * (l:eleidx - 1))
 
   elseif 'access' == l:tag
     let l:bf = '<access ref=""></access>' . <SID>back(11)
@@ -119,4 +109,9 @@ augroup AddHanbunMode
   autocmd BufNewFile,BufRead typescript.xml imap <C-c>t <C-r>=<SID>hanbunTagInsert()<CR>
   autocmd BufNewFile,BufRead typescript.xml imap <C-c>e </<C-x><C-o>
   autocmd BufNewFile,BufRead typescript.xml imap </ </<C-x><C-o>
+
+  " Conflicts with the auto indent feature. For this reason, the indent 
+  " on the plug-in side is turned off, and the formatting function by 
+  " the auto indent mode is used. This is why I set shiftwidth to 1.
+  set shiftwidth=1
 augroup End
