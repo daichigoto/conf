@@ -108,6 +108,7 @@ augroup AddHanbunMode
   autocmd!
   autocmd BufNewFile,BufRead typescript.xml imap <C-c>t <C-r>=<SID>hanbunTagInsert()<CR>
   autocmd BufNewFile,BufRead typescript.xml imap <C-c>e </<C-x><C-o>
+  autocmd BufNewFile,BufRead typescript.xml nmap <C-c>e a</<C-x><C-o>
   autocmd BufNewFile,BufRead typescript.xml imap </ </<C-x><C-o>
 
   " Conflicts with the auto indent feature. For this reason, the indent 
