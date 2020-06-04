@@ -87,21 +87,29 @@ function! <SID>hanbunTagInsert()
     \  "\<CR>" .
     \  '<p></p>' . "\<CR>" .
     \  "\<Left>" . '</docgroup>' .
-    \  <SID>back(0) . <SID>back(0 * (l:eleidx - 1))
+    \  <SID>back(0) . <SID>back(76 + 6 * (l:eleidx - 1))
 
   elseif 'list' == l:tag
     let l:bf = 
     \  '<list>' . "\<CR>" .
     \  '<item><p></p></item>' . "\<CR>" .
+    \  '<item><p></p></item>' . "\<CR>" .
+    \  '<item><p></p></item>' . "\<CR>" .
+    \  '<item><p></p></item>' . "\<CR>" .
+    \  '<item><p></p></item>' . "\<CR>" .
     \  "\<Left>" . '</list>' .
-    \  <SID>back(0) . <SID>back(0 * (l:eleidx - 1))
+    \  <SID>back(0) . <SID>back(107 + 5 * (l:eleidx - 1))
 
   elseif 'order' == l:tag
     let l:bf = 
     \  '<list type="order">' . "\<CR>" .
     \  '<item><p></p></item>' . "\<CR>" .
+    \  '<item><p></p></item>' . "\<CR>" .
+    \  '<item><p></p></item>' . "\<CR>" .
+    \  '<item><p></p></item>' . "\<CR>" .
+    \  '<item><p></p></item>' . "\<CR>" .
     \  "\<Left>" . '</list>' .
-    \  <SID>back(0) . <SID>back(0 * (l:eleidx - 1))
+    \  <SID>back(0) . <SID>back(107 + 5 * (l:eleidx - 1))
 
   elseif 'access' == l:tag
     let l:bf = '<access ref=""></access>' . <SID>back(11)
