@@ -114,10 +114,17 @@ endfunction
 
 augroup AddHanbunMode
   autocmd!
+  " <C-c>t  Insert Hanbun tag
   autocmd BufNewFile,BufRead typescript.xml imap <C-c>t <C-r>=<SID>hanbunTagInsert()<CR>
+
+  " <C-c>e  Insert end tag
   autocmd BufNewFile,BufRead typescript.xml imap <C-c>e </<C-x><C-o>
   autocmd BufNewFile,BufRead typescript.xml nmap <C-c>e a</<C-x><C-o>
   autocmd BufNewFile,BufRead typescript.xml imap </ </<C-x><C-o>
+
+  " <C-n>  Move to empty element
+  autocmd BufNewFile,BufRead typescript.xml nmap <C-n> /<\([^>/]\+\)><\/\1><CR>/<<CR>
+  autocmd BufNewFile,BufRead typescript.xml imap <C-n> <ESC>/<\([^>/]\+\)><\/\1><CR>/<<CR>i
 
   " Conflicts with the auto indent feature. For this reason, the indent 
   " on the plug-in side is turned off, and the formatting function by 
