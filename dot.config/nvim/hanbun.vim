@@ -124,10 +124,10 @@ augroup AddHanbunMode
 
   " <C-e>  Move to empty element
   " <C-r>  Move to pre empty element
-  autocmd BufNewFile,BufRead typescript.xml nmap <C-e> /<\([^>/]\+\)><\/\1><CR>/<<CR>
-  autocmd BufNewFile,BufRead typescript.xml imap <C-e> <ESC>/<\([^>/]\+\)><\/\1><CR>/<<CR>i
-  autocmd BufNewFile,BufRead typescript.xml nmap <C-r> ?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>
-  autocmd BufNewFile,BufRead typescript.xml imap <C-r> <ESC>?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>i
+  autocmd BufNewFile,BufRead typescript.xml nmap <C-c>n /<\([^>/]\+\)><\/\1><CR>/<<CR>
+  autocmd BufNewFile,BufRead typescript.xml imap <C-c>n <ESC>/<\([^>/]\+\)><\/\1><CR>/<<CR>i
+  autocmd BufNewFile,BufRead typescript.xml nmap <C-c>m ?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>
+  autocmd BufNewFile,BufRead typescript.xml imap <C-c>m <ESC>?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>i
 
   " Conflicts with the auto indent feature. For this reason, the indent 
   " on the plug-in side is turned off, and the formatting function by 
