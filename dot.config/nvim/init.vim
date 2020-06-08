@@ -54,6 +54,8 @@ if dein#load_state('~/.cache/dein/')
 	call dein#add('vim-airline/vim-airline-themes')
 	call dein#add('preservim/nerdtree')
 	"call dein#add('Shougo/denite.nvim')
+	call dein#add('tpope/vim-commentary')
+	call dein#add('tpope/vim-fugitive')
 
 	" Required:
 	call dein#end()
