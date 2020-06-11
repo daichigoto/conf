@@ -84,7 +84,10 @@ let g:airline_theme = 'molokai'
 
 " NERDTree
 "  <C-o> open NERDTree
+"    <C-o>	close NERDTree
+"    <CR>	open file and close NERDTree
 nnoremap <silent> <C-o> :NERDTreeToggle<CR>
+let g:NERDTreeQuitOnOpen = 1
 
 " minibufexpl
 "  bn	move to next buffer
