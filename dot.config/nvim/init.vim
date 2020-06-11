@@ -87,6 +87,7 @@ nnoremap <silent> <C-o> :NERDTreeToggle<CR>
 
 " denite
 "  <C-b> open Denite-buffer-list
+"    <C-b>	close Denite-buffer-list
 "    <Esc>	close Denite-buffer-list
 "    <Space>	select multiple buffers
 "    <CR>	open buffers
@@ -98,6 +99,8 @@ nnoremap <silent> <C-o> :NERDTreeToggle<CR>
 nnoremap <silent> <C-b> :<C-u>Denite buffer file:new<CR>
 autocmd FileType denite call s:denite_my_settings()
 function! s:denite_my_settings() abort
+	nnoremap <silent><buffer><expr> <C-b>
+		\ denite#do_map('quit')
 	nnoremap <silent><buffer><expr> <Esc>
 		\ denite#do_map('quit')
 	nnoremap <silent><buffer><expr> <Space>
@@ -118,6 +121,7 @@ endfunction
 
 " denite
 "  <C-o> open Denite-file-buffer-list
+"    <C-o>	close Denite-file-buffer-list
 "    <Esc>	close Denite-file-buffer-list
 "    <Space>	select multiple files/buffers
 "    <CR>	open files/buffers
@@ -129,6 +133,8 @@ endfunction
 "nnoremap <silent> <C-o> :<C-u>Denite file buffer file:new<CR>
 "autocmd FileType denite call s:denite_my_settings()
 "function! s:denite_my_settings() abort
+"	nnoremap <silent><buffer><expr> <C-o>
+"		\ denite#do_map('quit')
 "	nnoremap <silent><buffer><expr> <Esc>
 "		\ denite#do_map('quit')
 "	nnoremap <silent><buffer><expr> <Space>
@@ -154,6 +160,9 @@ endfunction
 " 	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 " 	sh ./installer.sh .
 "	rm ./installer.sh
+"
+" If you use Denite, also execute the following command:
+" 	pip install --user pynvim
 " ----------------------------------------------------------------------
 
 " disable mouse feature
