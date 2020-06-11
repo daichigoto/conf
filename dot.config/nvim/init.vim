@@ -53,9 +53,10 @@ if dein#load_state('~/.cache/nvim/dein/')
 	call dein#add('vim-airline/vim-airline')
 	call dein#add('vim-airline/vim-airline-themes')
 	call dein#add('preservim/nerdtree')
-	call dein#add('Shougo/denite.nvim')
+	call dein#add('fholgado/minibufexpl.vim')
 	call dein#add('tpope/vim-commentary')
 	call dein#add('tpope/vim-fugitive')
+	"call dein#add('Shougo/denite.nvim')
 
 	" Required:
 	call dein#end()
@@ -85,9 +86,30 @@ let g:airline_theme = 'molokai'
 "  <C-o> open NERDTree
 nnoremap <silent> <C-o> :NERDTreeToggle<CR>
 
+" minibufexpl
+"  bn	move to next buffer
+"  b1	move to buffer 1
+"  b2	move to buffer 2
+"  b3	move to buffer 3
+"  b4	move to buffer 4
+"  b5	move to buffer 5
+"  b6	move to buffer 6
+"  b7	move to buffer 7
+"  b8	move to buffer 8
+"  b9	move to buffer 9
+nnoremap <silent> bn :<C-u>:bnext<CR>
+nnoremap <silent> b1 :<C-u>:b1<CR>
+nnoremap <silent> b2 :<C-u>:b2<CR>
+nnoremap <silent> b3 :<C-u>:b3<CR>
+nnoremap <silent> b4 :<C-u>:b4<CR>
+nnoremap <silent> b5 :<C-u>:b5<CR>
+nnoremap <silent> b6 :<C-u>:b6<CR>
+nnoremap <silent> b7 :<C-u>:b7<CR>
+nnoremap <silent> b8 :<C-u>:b8<CR>
+nnoremap <silent> b9 :<C-u>:b9<CR>
+
 " denite
 "  <C-b> open Denite-buffer-list
-"    <C-b>	close Denite-buffer-list
 "    <Esc>	close Denite-buffer-list
 "    <Space>	select multiple buffers
 "    <CR>	open buffers
@@ -96,32 +118,31 @@ nnoremap <silent> <C-o> :NERDTreeToggle<CR>
 "    v		open buffers in split windows (vertical)
 "    i		filter by string
 "    ..		move to directory above
-nnoremap <silent> <C-b> :<C-u>Denite buffer file:new<CR>
-autocmd FileType denite call s:denite_my_settings()
-function! s:denite_my_settings() abort
-	nnoremap <silent><buffer><expr> <C-b>
-		\ denite#do_map('quit')
-	nnoremap <silent><buffer><expr> <Esc>
-		\ denite#do_map('quit')
-	nnoremap <silent><buffer><expr> <Space>
-		\ denite#do_map('toggle_select').'j'
-	nnoremap <silent><buffer><expr> <CR>
-		\ denite#do_map('do_action')
-	nnoremap <silent><buffer><expr> o
-		\ denite#do_map('do_action')
-	nnoremap <silent><buffer><expr> s
-		\ denite#do_map('do_action', 'split')
-	nnoremap <silent><buffer><expr> v
-		\ denite#do_map('do_action', 'vsplit')
-	nnoremap <silent><buffer><expr> i
-		\ denite#do_map('open_filter_buffer')
-	nnoremap <silent><buffer><expr> ..
-		\ denite#do_map('move_up_path')
-endfunction
+"nnoremap <silent> <C-b> :<C-u>Denite buffer file:new<CR>
+"autocmd FileType denite call s:denite_my_settings()
+"function! s:denite_my_settings() abort
+"	nnoremap <silent><buffer><expr> <C-b>
+"		\ denite#do_map('quit')
+"	nnoremap <silent><buffer><expr> <Esc>
+"		\ denite#do_map('quit')
+"	nnoremap <silent><buffer><expr> <Space>
+"		\ denite#do_map('toggle_select').'j'
+"	nnoremap <silent><buffer><expr> <CR>
+"		\ denite#do_map('do_action')
+"	nnoremap <silent><buffer><expr> o
+"		\ denite#do_map('do_action')
+"	nnoremap <silent><buffer><expr> s
+"		\ denite#do_map('do_action', 'split')
+"	nnoremap <silent><buffer><expr> v
+"		\ denite#do_map('do_action', 'vsplit')
+"	nnoremap <silent><buffer><expr> i
+"		\ denite#do_map('open_filter_buffer')
+"	nnoremap <silent><buffer><expr> ..
+"		\ denite#do_map('move_up_path')
+"endfunction
 
 " denite
 "  <C-o> open Denite-file-buffer-list
-"    <C-o>	close Denite-file-buffer-list
 "    <Esc>	close Denite-file-buffer-list
 "    <Space>	select multiple files/buffers
 "    <CR>	open files/buffers
@@ -133,8 +154,6 @@ endfunction
 "nnoremap <silent> <C-o> :<C-u>Denite file buffer file:new<CR>
 "autocmd FileType denite call s:denite_my_settings()
 "function! s:denite_my_settings() abort
-"	nnoremap <silent><buffer><expr> <C-o>
-"		\ denite#do_map('quit')
 "	nnoremap <silent><buffer><expr> <Esc>
 "		\ denite#do_map('quit')
 "	nnoremap <silent><buffer><expr> <Space>
@@ -170,9 +189,7 @@ set mouse=
 
 set pastetoggle=<F2>
 
-" allow some keys to move the cursor left/right to move to 
-" the previous/next line when the cursor is on the first/last
-" character in the line.
+" allow some keys to move the cursor left/right to move to the previous/next line when the cursor is on the first/last character in the line.
 "  b - [Backspace]  normal visual 
 "  s - [Space]      normal visual
 "  < - [Left]       normal visual
