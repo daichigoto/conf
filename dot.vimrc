@@ -43,11 +43,11 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.cache/vim/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-if dein#load_state('~/.cache/dein')
-	call dein#begin('~/.cache/dein/')
+if dein#load_state('~/.cache/vim/dein')
+	call dein#begin('~/.cache/vim/dein/')
 
 	" Let dein manage dein
 	" Required:
@@ -58,9 +58,9 @@ if dein#load_state('~/.cache/dein')
 	call dein#add('vim-airline/vim-airline')
 	call dein#add('vim-airline/vim-airline-themes')
 	call dein#add('preservim/nerdtree')
-	"call dein#add('Shougo/denite.nvim')
-	"call dein#add('roxma/nvim-yarp') " required by denite.vim
-	"call dein#add('roxma/vim-hug-neovim-rpc') " required by denite.vim
+	call dein#add('Shougo/denite.nvim')
+	call dein#add('roxma/nvim-yarp') " required by denite.vim
+	call dein#add('roxma/vim-hug-neovim-rpc') " required by denite.vim
 	call dein#add('tpope/vim-commentary')
 	call dein#add('tpope/vim-fugitive')
 
@@ -91,6 +91,37 @@ let g:airline_theme = 'molokai'
 " NERDTree
 "  <C-o> open NERDTree
 nnoremap <silent> <C-o> :NERDTreeToggle<CR>
+
+" denite
+"  <C-o> open Denite-buffer-list
+"    <Esc>	close Denite-buffer-list
+"    <Space>	select multiple buffers
+"    <CR>	open buffers
+"    o		open buffers
+"    s		open buffers in split windows (horizonal)
+"    v		open buffers in split windows (vertical)
+"    i		filter by string
+"    ..		move to directory above
+nnoremap <silent> <C-b> :<C-u>Denite buffer file:new<CR>
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+	nnoremap <silent><buffer><expr> <Esc>
+		\ denite#do_map('quit')
+	nnoremap <silent><buffer><expr> <Space>
+		\ denite#do_map('toggle_select').'j'
+	nnoremap <silent><buffer><expr> <CR>
+		\ denite#do_map('do_action')
+	nnoremap <silent><buffer><expr> o
+		\ denite#do_map('do_action')
+	nnoremap <silent><buffer><expr> s
+		\ denite#do_map('do_action', 'split')
+	nnoremap <silent><buffer><expr> v
+		\ denite#do_map('do_action', 'vsplit')
+	nnoremap <silent><buffer><expr> i
+		\ denite#do_map('open_filter_buffer')
+	nnoremap <silent><buffer><expr> ..
+		\ denite#do_map('move_up_path')
+endfunction
 
 " denite
 "  <C-o> open Denite-file-buffer-list
@@ -125,8 +156,8 @@ nnoremap <silent> <C-o> :NERDTreeToggle<CR>
 
 " ----------------------------------------------------------------------
 " How to install Dein:
-" 	mkdir -p ~/.cache/dein
-" 	cd ~/.cache/dein/
+" 	mkdir -p ~/.cache/vim/dein
+" 	cd ~/.cache/vim/dein/
 " 	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 " 	sh ./installer.sh .
 "	rm ./installer.sh
