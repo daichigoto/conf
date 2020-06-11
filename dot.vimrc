@@ -58,11 +58,12 @@ if dein#load_state('~/.cache/vim/dein')
 	call dein#add('vim-airline/vim-airline')
 	call dein#add('vim-airline/vim-airline-themes')
 	call dein#add('preservim/nerdtree')
+	call dein#add('fholgado/minibufexpl.vim')
+	call dein#add('tpope/vim-commentary')
+	call dein#add('tpope/vim-fugitive')
 	"call dein#add('Shougo/denite.nvim')
 	"call dein#add('roxma/nvim-yarp') " required by denite.vim
 	"call dein#add('roxma/vim-hug-neovim-rpc') " required by denite.vim
-	call dein#add('tpope/vim-commentary')
-	call dein#add('tpope/vim-fugitive')
 
 	" Required:
 	call dein#end()
@@ -91,6 +92,28 @@ let g:airline_theme = 'molokai'
 " NERDTree
 "  <C-o> open NERDTree
 nnoremap <silent> <C-o> :NERDTreeToggle<CR>
+
+" minibufexpl
+"  bn	move to next buffer
+"  b1	move to buffer 1
+"  b2	move to buffer 2
+"  b3	move to buffer 3
+"  b4	move to buffer 4
+"  b5	move to buffer 5
+"  b6	move to buffer 6
+"  b7	move to buffer 7
+"  b8	move to buffer 8
+"  b9	move to buffer 9
+nnoremap <silent> bn :<C-u>:bnext<CR>
+nnoremap <silent> b1 :<C-u>:b1<CR>
+nnoremap <silent> b2 :<C-u>:b2<CR>
+nnoremap <silent> b3 :<C-u>:b3<CR>
+nnoremap <silent> b4 :<C-u>:b4<CR>
+nnoremap <silent> b5 :<C-u>:b5<CR>
+nnoremap <silent> b6 :<C-u>:b6<CR>
+nnoremap <silent> b7 :<C-u>:b7<CR>
+nnoremap <silent> b8 :<C-u>:b8<CR>
+nnoremap <silent> b9 :<C-u>:b9<CR>
 
 " denite
 "  <C-b> open Denite-buffer-list
