@@ -128,7 +128,6 @@ augroup AddHanbunMode
   " <C-c>e  Insert end tag
   autocmd BufNewFile,BufRead typescript.xml imap <C-c>e </<C-x><C-o>
   autocmd BufNewFile,BufRead typescript.xml nmap <C-c>e a</<C-x><C-o>
-  autocmd BufNewFile,BufRead typescript.xml imap </ </<C-x><C-o>
 
   " <C-e>  Move to empty element
   " <C-r>  Move to pre empty element
