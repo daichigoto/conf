@@ -129,8 +129,8 @@ augroup AddHanbunMode
   autocmd BufNewFile,BufRead typescript.xml imap <C-c>e </<C-x><C-o>
   autocmd BufNewFile,BufRead typescript.xml nmap <C-c>e a</<C-x><C-o>
 
-  " <C-e>  Move to empty element
-  " <C-r>  Move to pre empty element
+  " <C-c>n  Move to empty element
+  " <C-c>m  Move to pre empty element
   autocmd BufNewFile,BufRead typescript.xml nmap <C-c>n /<\([^>/]\+\)><\/\1><CR>/<<CR>
   autocmd BufNewFile,BufRead typescript.xml imap <C-c>n <ESC>/<\([^>/]\+\)><\/\1><CR>/<<CR>i
   autocmd BufNewFile,BufRead typescript.xml nmap <C-c>m ?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>
