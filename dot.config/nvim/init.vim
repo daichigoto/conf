@@ -56,6 +56,7 @@ if dein#load_state('~/.cache/nvim/dein/')
 	call dein#add('fholgado/minibufexpl.vim')
 	call dein#add('tpope/vim-commentary')
 	call dein#add('tpope/vim-fugitive')
+	call dein#add('dense-analysis/ale')
 	"call dein#add('Shougo/denite.nvim')
 
 	" Required:
