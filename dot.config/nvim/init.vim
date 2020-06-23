@@ -101,16 +101,16 @@ let g:NERDTreeQuitOnOpen = 1
 "  b7	move to buffer 7
 "  b8	move to buffer 8
 "  b9	move to buffer 9
-nnoremap <silent> bn :<C-u>:bnext<CR>
-nnoremap <silent> b1 :<C-u>:b1<CR>
-nnoremap <silent> b2 :<C-u>:b2<CR>
-nnoremap <silent> b3 :<C-u>:b3<CR>
-nnoremap <silent> b4 :<C-u>:b4<CR>
-nnoremap <silent> b5 :<C-u>:b5<CR>
-nnoremap <silent> b6 :<C-u>:b6<CR>
-nnoremap <silent> b7 :<C-u>:b7<CR>
-nnoremap <silent> b8 :<C-u>:b8<CR>
-nnoremap <silent> b9 :<C-u>:b9<CR>
+nnoremap <silent> bn :bnext<CR>
+nnoremap <silent> b1 :b1<CR>
+nnoremap <silent> b2 :b2<CR>
+nnoremap <silent> b3 :b3<CR>
+nnoremap <silent> b4 :b4<CR>
+nnoremap <silent> b5 :b5<CR>
+nnoremap <silent> b6 :b6<CR>
+nnoremap <silent> b7 :b7<CR>
+nnoremap <silent> b8 :b8<CR>
+nnoremap <silent> b9 :b9<CR>
 
 " denite
 "  <C-b> open Denite-buffer-list
