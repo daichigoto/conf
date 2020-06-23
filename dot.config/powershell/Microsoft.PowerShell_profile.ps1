@@ -33,7 +33,7 @@ Set-Alias -Name alias -Value Get-Alias
 function grep {
 	$input | wsl grep $args
 }
-function head {#
+function head {
 	$input | wsl head $args
 }
 function tail {
