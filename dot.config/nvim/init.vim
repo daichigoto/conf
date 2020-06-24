@@ -113,6 +113,8 @@ nnoremap <silent> b6 :b6<CR>
 nnoremap <silent> b7 :b7<CR>
 nnoremap <silent> b8 :b8<CR>
 nnoremap <silent> b9 :b9<CR>
+" always show MiniBufExplorer
+let g:miniBufExplorerMoreThanOne = 0
 
 " fzf
 nnoremap <silent> fzf :Files<CR>
