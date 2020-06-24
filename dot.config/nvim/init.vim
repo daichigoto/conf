@@ -57,6 +57,8 @@ if dein#load_state('~/.cache/nvim/dein/')
 	call dein#add('tpope/vim-commentary')
 	call dein#add('tpope/vim-fugitive')
 	call dein#add('dense-analysis/ale')
+	call dein#add('junegunn/fzf', {'build': './install --all'})
+	call dein#add('junegunn/fzf.vim')
 	"call dein#add('Shougo/denite.nvim')
 
 	" Required:
@@ -111,6 +113,9 @@ nnoremap <silent> b6 :b6<CR>
 nnoremap <silent> b7 :b7<CR>
 nnoremap <silent> b8 :b8<CR>
 nnoremap <silent> b9 :b9<CR>
+
+" fzf
+nnoremap <silent> fzf :Files<CR>
 
 " denite
 "  <C-b> open Denite-buffer-list
