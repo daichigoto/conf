@@ -120,7 +120,7 @@ let g:miniBufExplorerMoreThanOne = 0
 "  fzf	list files and directories
 "  ls	list buffers
 nnoremap <silent> fzf :Files<CR>
-nnoremap <silent> ls :Buffers<CR>
+nnoremap <silent> bu :Buffers<CR>
 
 " denite
 "  <C-b> open Denite-buffer-list
