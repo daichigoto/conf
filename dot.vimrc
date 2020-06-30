@@ -62,6 +62,8 @@ if dein#load_state('~/.cache/vim/dein')
 	call dein#add('tpope/vim-commentary')
 	call dein#add('tpope/vim-fugitive')
 	call dein#add('dense-analysis/ale')
+	call dein#add('junegunn/fzf', {'build': './install --all'})
+	call dein#add('junegunn/fzf.vim')
 	"call dein#add('Shougo/denite.nvim')
 	"call dein#add('roxma/nvim-yarp') " required by denite.vim
 	"call dein#add('roxma/vim-hug-neovim-rpc') " required by denite.vim
@@ -118,6 +120,14 @@ nnoremap <silent> b6 :<C-u>:b6<CR>
 nnoremap <silent> b7 :<C-u>:b7<CR>
 nnoremap <silent> b8 :<C-u>:b8<CR>
 nnoremap <silent> b9 :<C-u>:b9<CR>
+" always show MiniBufExplorer
+let g:miniBufExplorerMoreThanOne = 0
+
+" fzf
+"  fzf  list files and directories
+"  ls   list buffers
+nnoremap <silent> fzf :Files<CR>
+nnoremap <silent> bu :Buffers<CR>
 
 " denite
 "  <C-b> open Denite-buffer-list
