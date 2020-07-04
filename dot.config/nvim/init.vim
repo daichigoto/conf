@@ -59,6 +59,7 @@ if dein#load_state('~/.cache/nvim/dein/')
 	call dein#add('dense-analysis/ale')
 	call dein#add('junegunn/fzf', {'build': './install --all'})
 	call dein#add('junegunn/fzf.vim')
+	call dein#add('sheerun/vim-polyglot')
 	"call dein#add('Shougo/denite.nvim')
 
 	" Required:
