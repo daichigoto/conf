@@ -1,5 +1,3 @@
-" users generic init.vim file for nvim(1)
-"
 " Copyright (c) 2020 Daichi GOTO <daichi@ongs.co.jp>
 " All rights reserved.
 "
