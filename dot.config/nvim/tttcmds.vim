@@ -31,7 +31,23 @@ autocmd BufNewFile,BufRead *.OSH set filetype=sh
 autocmd BufNewFile,BufRead *.SH  set filetype=sh
 
 " set SSV file as csv compatible file (you need chrisbra/csv.vim)
+" 	g:csv_delim=' '		Set delimiter to a space
+" 	g:csv_highlight_column='y'
+" 				highlight the column on which the cursor is
 autocmd BufNewFile,BufRead *.SSV let g:csv_delim=' '
+autocmd BufNewFile,BufRead *.TAG let g:csv_highlight_column='y'
 autocmd BufNewFile,BufRead *.SSV set filetype=csv
+
 autocmd BufNewFile,BufRead *.TAG let g:csv_delim=' '
+autocmd BufNewFile,BufRead *.TAG let g:csv_highlight_column='y'
 autocmd BufNewFile,BufRead *.TAG set filetype=csv
+
+autocmd BufNewFile,BufRead *.csv let g:csv_highlight_column='y'
+"
+" chrisbra/csv.vim
+" 	Ctrl-→ or L		move field forwards
+" 	Ctrl-← or E		move field backwards
+" 	Ctrl-↑ or K		move lines upwards within the same column
+" 	Ctrl-↓ or J		move lines downwards within the same column
+" 	:CSVNrColumns		show number of columns
+" 	:CSVWhatColumn		show current index of columns
