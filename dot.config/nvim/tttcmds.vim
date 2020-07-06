@@ -35,14 +35,14 @@ autocmd BufNewFile,BufRead *.SH  set filetype=sh
 " 	g:csv_highlight_column='y'
 " 				highlight the column on which the cursor is
 autocmd BufNewFile,BufRead *.SSV let g:csv_delim=' '
-autocmd BufNewFile,BufRead *.TAG let g:csv_highlight_column='y'
+"autocmd BufNewFile,BufRead *.TAG let g:csv_highlight_column='y'
 autocmd BufNewFile,BufRead *.SSV set filetype=csv
 
 autocmd BufNewFile,BufRead *.TAG let g:csv_delim=' '
-autocmd BufNewFile,BufRead *.TAG let g:csv_highlight_column='y'
+"autocmd BufNewFile,BufRead *.TAG let g:csv_highlight_column='y'
 autocmd BufNewFile,BufRead *.TAG set filetype=csv
 
-autocmd BufNewFile,BufRead *.csv let g:csv_highlight_column='y'
+"autocmd BufNewFile,BufRead *.csv let g:csv_highlight_column='y'
 "
 " chrisbra/csv.vim
 " 	Ctrl-→ or L		move field forwards
