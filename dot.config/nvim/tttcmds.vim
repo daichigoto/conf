@@ -35,19 +35,35 @@ autocmd BufNewFile,BufRead *.SH  set filetype=sh
 " 	g:csv_highlight_column='y'
 " 				highlight the column on which the cursor is
 autocmd BufNewFile,BufRead *.SSV let g:csv_delim=' '
-"autocmd BufNewFile,BufRead *.TAG let g:csv_highlight_column='y'
+autocmd BufNewFile,BufRead *.SSV let b:csv_arrange_align = 'l*'
+"autocmd BufNewFile,BufRead *.SSV let g:csv_highlight_column='y'
 autocmd BufNewFile,BufRead *.SSV set filetype=csv
+autocmd BufNewFile,BufRead *.SSV %ArrangeColumn
 
 autocmd BufNewFile,BufRead *.TAG let g:csv_delim=' '
+autocmd BufNewFile,BufRead *.TAG let b:csv_arrange_align = 'l*'
 "autocmd BufNewFile,BufRead *.TAG let g:csv_highlight_column='y'
 autocmd BufNewFile,BufRead *.TAG set filetype=csv
+autocmd BufNewFile,BufRead *.TAG %ArrangeColumn
 
+autocmd BufNewFile,BufRead *.csv let b:csv_arrange_align = 'l*'
 "autocmd BufNewFile,BufRead *.csv let g:csv_highlight_column='y'
+autocmd BufNewFile,BufRead *.csv %ArrangeColumn
+
+autocmd BufNewFile,BufRead *.tsv let b:csv_arrange_align = 'l*'
+"autocmd BufNewFile,BufRead *.tsv let g:csv_highlight_column='y'
+autocmd BufNewFile,BufRead *.tsv %ArrangeColumn
 "
 " chrisbra/csv.vim
 " 	Ctrl-→ or L		move field forwards
 " 	Ctrl-← or E		move field backwards
 " 	Ctrl-↑ or K		move lines upwards within the same column
 " 	Ctrl-↓ or J		move lines downwards within the same column
-" 	:CSVNrColumns		show number of columns
-" 	:CSVWhatColumn		show current index of columns
+"
+" 	:%ArrangeCol		show in table style (%ArrangeCol!)
+" 	:HiColumn		highlight current column (:HiColumn!)
+" 	:Header			separate header (:Header!)
+" 	:VHeader		separate vertical header (:VHeader!)
+" 	:Search COL /PATTERN/	search specified column
+" 	:WhatCol		show current index of columns
+" 	:NrCol			show number of columns
