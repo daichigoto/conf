@@ -202,8 +202,6 @@ nnoremap <silent> bu :Buffers<CR>
 " disable mouse feature
 set mouse=
 
-set pastetoggle=<F2>
-
 " allow some keys to move the cursor left/right to move to the previous/next line when the cursor is on the first/last character in the line.
 "  b - [Backspace]  normal visual 
 "  s - [Space]      normal visual
