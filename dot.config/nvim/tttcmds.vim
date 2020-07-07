@@ -52,16 +52,13 @@ autocmd BufNewFile,BufRead *.SH  set filetype=sh
 autocmd BufNewFile,BufRead *.SSV let g:csv_delim=' '
 autocmd BufNewFile,BufRead *.SSV let b:csv_headerline=0
 autocmd BufNewFile,BufRead *.SSV set filetype=csv
-autocmd BufNewFile,BufRead *.SSV %ArrangeColumn
 
 autocmd BufNewFile,BufRead *.ssv let g:csv_delim=' '
 autocmd BufNewFile,BufRead *.ssv let b:csv_headerline=0
 autocmd BufNewFile,BufRead *.ssv set filetype=csv
-autocmd BufNewFile,BufRead *.ssv %ArrangeColumn
 
 autocmd BufNewFile,BufRead *.TAG let g:csv_delim=' '
 autocmd BufNewFile,BufRead *.TAG set filetype=csv
-autocmd BufNewFile,BufRead *.TAG %ArrangeColumn
 
 autocmd BufNewFile,BufRead *.tsv let g:csv_no_conceal=1
 autocmd BufNewFile,BufRead *.tsv set tabstop=20
