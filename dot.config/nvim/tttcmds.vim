@@ -31,6 +31,20 @@ autocmd BufNewFile,BufRead *.OSH set filetype=sh
 autocmd BufNewFile,BufRead *.SH  set filetype=sh
 
 " set SSV file as csv compatible file (you need chrisbra/csv.vim)
+"   chrisbra/csv.vim
+" 	Ctrl-→ or L		move field forwards
+" 	Ctrl-← or E		move field backwards
+" 	Ctrl-↑ or K		move lines upwards within the same column
+" 	Ctrl-↓ or J		move lines downwards within the same column
+"
+" 	:%ArrangeCol		show in table style (experimental)
+" 	:HiColumn		highlight current column (:HiColumn!)
+" 	:Header			separate header (:Header!)
+" 	:VHeader		separate vertical header (:VHeader!)
+" 	:Search COL /PATTERN/	search specified column
+" 	:WhatCol		show current index of columns
+" 	:NrCol			show number of columns
+"
 " 	g:csv_delim=' '		set delimiter to a space
 " 	b:csv_headerline=0	no head lines
 "	g:csv_no_conceal=1	do not use vertical line display
@@ -52,17 +66,3 @@ autocmd BufNewFile,BufRead *.TAG %ArrangeColumn
 autocmd BufNewFile,BufRead *.tsv let g:csv_no_conceal=1
 autocmd BufNewFile,BufRead *.tsv set tabstop=20
 autocmd BufNewFile,BufRead *.tsv set filetype=csv
-
-" chrisbra/csv.vim
-" 	Ctrl-→ or L		move field forwards
-" 	Ctrl-← or E		move field backwards
-" 	Ctrl-↑ or K		move lines upwards within the same column
-" 	Ctrl-↓ or J		move lines downwards within the same column
-"
-" 	:%ArrangeCol		show in table style (experimental)
-" 	:HiColumn		highlight current column (:HiColumn!)
-" 	:Header			separate header (:Header!)
-" 	:VHeader		separate vertical header (:VHeader!)
-" 	:Search COL /PATTERN/	search specified column
-" 	:WhatCol		show current index of columns
-" 	:NrCol			show number of columns
