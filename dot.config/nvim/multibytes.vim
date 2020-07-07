@@ -29,5 +29,5 @@
 " do not insert white space when concatenating multi-byte characters
 set formatoptions+=mM
 
-" prevents display collapse when using CJK fonts
-set ambiwidth=double
+" add parenthesis combination
+set matchpairs+=「:」,（:）,「:」,『:』,【:】,［:］,〈:〉,《:》,〔:〕,[:],｛:｝
