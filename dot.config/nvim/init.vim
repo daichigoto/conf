@@ -119,7 +119,7 @@ let g:miniBufExplorerMoreThanOne = 0
 
 " fzf
 "  fzf	list files and directories
-"  ls	list buffers
+"  bu	list buffers
 nnoremap <silent> fzf :Files<CR>
 nnoremap <silent> bu :Buffers<CR>
 
