@@ -30,6 +30,7 @@
 autocmd BufNewFile,BufRead *.OSH set filetype=sh
 autocmd BufNewFile,BufRead *.SH  set filetype=sh
 autocmd BufNewFile,BufRead *.RC  set filetype=sh
+autocmd BufNewFile,BufRead mk_*  set filetype=sh
 
 " set SSV file as csv compatible file (you need chrisbra/csv.vim)
 "   chrisbra/csv.vim
