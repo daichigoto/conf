@@ -66,8 +66,8 @@ autocmd BufNewFile,BufRead *.tsv let g:csv_no_conceal=1
 autocmd BufNewFile,BufRead *.tsv set tabstop=20
 autocmd BufNewFile,BufRead *.tsv set filetype=csv
 
-" move to the specified column, or show the number of columns if no 
-" column is specified
+" move to the specified column of CSV, or show the number of columns 
+" if no column is specified
 function TTTCSVMoveToColumn(...)
   if a:0 == 0
     CSVNrColumns
@@ -82,8 +82,8 @@ function TTTCSVMoveToColumn(...)
 endfunction
 command -nargs=? Retu call TTTCSVMoveToColumn(<f-args>)
 
-" show the header name of the specified column, or show the header 
-" name of the current column if no column is specified
+" show the header name of the specified column of CSV, or show the 
+" header name of the current column if no column is specified
 function TTTCSVShowHeaderNameOfColumn(...)
   if a:0 == 0
     CSVWhatColumn!
