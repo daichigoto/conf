@@ -65,3 +65,34 @@ autocmd BufNewFile,BufRead *.TAG set filetype=csv
 autocmd BufNewFile,BufRead *.tsv let g:csv_no_conceal=1
 autocmd BufNewFile,BufRead *.tsv set tabstop=20
 autocmd BufNewFile,BufRead *.tsv set filetype=csv
+
+" move to the specified column, or show the number of columns if no 
+" column is specified
+function TTTCSVMoveToColumn(...)
+  if a:0 == 0
+    CSVNrColumns
+  else
+    let cmd = "normal 0"
+    execute(cmd)
+
+    let offset = a:1 - 1
+    let cmd = "normal " . offset . "L"
+    execute(cmd)
+  end
+endfunction
+command -nargs=? Retu call TTTCSVMoveToColumn(<f-args>)
+
+" show the header name of the specified column, or show the header 
+" name of the current column if no column is specified
+function TTTCSVShowHeaderNameOfColumn(...)
+  if a:0 == 0
+    CSVWhatColumn!
+  else
+    let cursor_pos = getpos(".")
+    call TTTCSVMoveToColumn(a:1)
+    CSVWhatColumn!
+    call setpos('.',cursor_pos)
+  end
+endfunction
+command -nargs=? Retuname call TTTCSVShowHeaderNameOfColumn(<f-args>)
+command -nargs=? Retumei call TTTCSVShowHeaderNameOfColumn(<f-args>)
