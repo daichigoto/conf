@@ -90,7 +90,7 @@ let g:airline_theme = 'molokai'
 "  <C-o> open NERDTree
 "    <C-o>	close NERDTree
 "    <CR>	open file and close NERDTree
-nnoremap <silent> <C-o> :NERDTreeToggle<CR>
+"nnoremap <silent> <C-o> :NERDTreeToggle<CR>
 let g:NERDTreeQuitOnOpen = 1
 
 " minibufexpl
@@ -104,6 +104,7 @@ let g:NERDTreeQuitOnOpen = 1
 "  b7	move to buffer 7
 "  b8	move to buffer 8
 "  b9	move to buffer 9
+nnoremap <silent> <C-t> :bnext<CR>
 nnoremap <silent> bn :bnext<CR>
 nnoremap <silent> b1 :b1<CR>
 nnoremap <silent> b2 :b2<CR>
@@ -118,8 +119,10 @@ nnoremap <silent> b9 :b9<CR>
 let g:miniBufExplorerMoreThanOne = 0
 
 " fzf
-"  fzf	list files and directories
-"  bu	list buffers
+"  <C-o>	list files and directories
+"  fzf		list files and directories
+"  bu		list buffers
+nnoremap <silent> <C-o> :Files<CR>
 nnoremap <silent> fzf :Files<CR>
 nnoremap <silent> bu :Buffers<CR>
 
