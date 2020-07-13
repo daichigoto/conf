@@ -28,12 +28,22 @@
 
 " move cursor to center of line, scroll line to center of screen
 function MoveCurtorToCenterOfScreen()
+  let lwinheight = winheight('.')
   let lwinwidth = winwidth('.')
   let lhalfwidth = lwinwidth / 2
   let lwincol = wincol()
 
   " scroll line to center of screen
   execute("normal zz")
+
+  " scroll line to the top quarter of the screen
+  let offset = lwinheight / 4
+  let index = 0
+  while index < offset
+    execute("normal ")
+    let index = index + 1
+  endwhile
+
   if lwincol > lhalfwidth
     let offset = lwincol - lhalfwidth
     let index = 0
