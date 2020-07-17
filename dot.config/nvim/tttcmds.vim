@@ -81,6 +81,7 @@ function TTTCSVMoveToColumn(...)
   end
 endfunction
 command -nargs=? Retu call TTTCSVMoveToColumn(<f-args>)
+command -nargs=? R call TTTCSVMoveToColumn(<f-args>)
 
 " show the header name of the specified column of CSV, or show the 
 " header name of the current column if no column is specified
