@@ -51,6 +51,9 @@ autocmd BufNewFile,BufRead mk_*  set filetype=sh
 " 	b:csv_headerline=0	no head lines
 "	g:csv_no_conceal=1	do not use vertical line display
 "	
+autocmd BufNewFile,BufRead *.CSV let b:csv_headerline=0
+autocmd BufNewFile,BufRead *.CSV set filetype=csv
+
 autocmd BufNewFile,BufRead *.SSV let g:csv_delim=' '
 autocmd BufNewFile,BufRead *.SSV let b:csv_headerline=0
 autocmd BufNewFile,BufRead *.SSV set filetype=csv
