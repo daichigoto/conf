@@ -26,16 +26,40 @@
 # author: Daichi GOTO (daichi@ongs.co.jp)
 # first edition: Mon Jun 22 18:20:36 JST 2020
 
-Set-Alias -Name la -Value Get-ChildItem -Force
-Set-Alias -Name ll -Value Get-ChildItem
-Set-Alias -Name alias -Value Get-Alias
+function path_to_linux {
+	$linuxpath = @()
 
+	ForEach($winpath in $Args) {
+		if ($winpath -ne $null) {
+			if ($winpath -match '^C:') {
+				$linuxpath += "/mnt/c" + $winpath.Replace('C:','').Replace('\','/')
+			}
+			else {
+				$linuxpath += $winpath.Replace('\','/')
+			}
+		}
+	}
+
+	$linuxpath
+}
+
+function tree {
+	wsl tree $(path_to_linux $Args)
+}
 function grep {
-	$input | wsl grep $args
+	$Args[-1] = path_to_linux $Args[-1]
+
+	$Input | wsl grep $Args
 }
-function head {
-	$input | wsl head $args
+function nvim {
+	wsl nvim $(path_to_linux $Args)
 }
-function tail {
-	$input | wsl tail $args
-}
+
+Set-Alias -Name less -Value more
+Set-Alias -Name open -Value explorer
+
+function ll {	Get-ChildItem -Force	}
+function la {	Get-ChildItem -Force	}
+
+Set-Alias -Name edge -Value "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+Set-Alias -Name chrome -Value "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
