@@ -54,8 +54,13 @@ function grep {
 function nvim {
 	wsl nvim $(path_to_linux $Args)
 }
+function less {
+	wsl less $(path_to_linux $Args)
+}
+function lv {
+	wsl lv $(path_to_linux $Args)
+}
 
-Set-Alias -Name less -Value more
 Set-Alias -Name open -Value explorer
 
 function ll {	Get-ChildItem -Force	}
