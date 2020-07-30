@@ -68,13 +68,16 @@ function vim {
 function nvim {
     wsl nvim $(_path_to_linux $Args)
 }
+function tree {
+    wsl tree $(_path_to_linux $Args)
+}
+function git {
+    wsl git $(_path_to_linux $Args)
+}
 function grep {
     $Args[-1] = _path_to_linux $Args[-1]
 
     $Input | wsl grep $Args
-}
-function tree {
-    wsl tree $(_path_to_linux $Args)
 }
 
 Set-Alias -Name open -Value explorer
