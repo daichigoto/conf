@@ -26,45 +26,61 @@
 # author: Daichi GOTO (daichi@ongs.co.jp)
 # first edition: Mon Jun 22 18:20:36 JST 2020
 
-function path_to_linux {
-	$linuxpath = @()
+function _path_to_linux {
+    $linuxpath = @()
 
-	ForEach($winpath in $Args) {
-		if ($winpath -ne $null) {
-			if ($winpath -match '^C:') {
-				$linuxpath += "/mnt/c" + $winpath.Replace('C:','').Replace('\','/')
-			}
-			else {
-				$linuxpath += $winpath.Replace('\','/')
-			}
-		}
-	}
+    # Convert arguments to Linux path style
+    ForEach($winpath in $Args) {
+        if ($winpath -eq $null) {
+            Break
+        }
+    
+        # Change drive path to mount path
+        if ($winpath -match '^[A-Z]:') {
+            $drive = $winpath.Substring(0,1).ToLower()
+            $linuxpath += "/mnt/" + $drive + $winpath.Substring(2).Replace('\','/')
+        }
+        # Option is not converted
+        elseif ($winpath -match '^[-+]') {
+            $linuxpath += $winpath
+        }
+        # Other argument is converted
+        else {
+            $linuxpath += $winpath.Replace('\','/')
+        }
+    }
 
-	$linuxpath
+    $linuxpath
 }
 
-function tree {
-	wsl tree $(path_to_linux $Args)
-}
-function grep {
-	$Args[-1] = path_to_linux $Args[-1]
-
-	$Input | wsl grep $Args
-}
-function nvim {
-	wsl nvim $(path_to_linux $Args)
-}
 function less {
-	wsl less $(path_to_linux $Args)
+    wsl less $(_path_to_linux $Args)
 }
 function lv {
-	wsl lv $(path_to_linux $Args)
+    wsl lv $(_path_to_linux $Args)
+}
+function vi {
+    wsl vi $(_path_to_linux $Args)
+}
+function vim {
+    wsl vim $(_path_to_linux $Args)
+}
+function nvim {
+    wsl nvim $(_path_to_linux $Args)
+}
+function grep {
+    $Args[-1] = _path_to_linux $Args[-1]
+
+    $Input | wsl grep $Args
+}
+function tree {
+    wsl tree $(_path_to_linux $Args)
 }
 
 Set-Alias -Name open -Value explorer
 
-function ll {	Get-ChildItem -Force	}
-function la {	Get-ChildItem -Force	}
+function ll { Get-ChildItem -Force }
+function la { Get-ChildItem -Force }
 
 Set-Alias -Name edge -Value "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 Set-Alias -Name chrome -Value "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
