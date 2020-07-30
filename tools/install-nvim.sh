@@ -33,12 +33,15 @@
 #===================================================================
 dein_dir="${HOME}"/.cache/nvim/dein
 #rm -rf "${dein_dir}"
-mkdir -p "${dein_dir}"
-cd "${dein_dir}"
-curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-sh ./installer.sh .
-rm ./installer.sh
-cd -
+if [ ! -d "${dein_dir}"/repos/github.com/Shougo/dein.vim ]
+then
+	mkdir -p "${dein_dir}"
+	cd "${dein_dir}"
+	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+	sh ./installer.sh .
+	rm ./installer.sh
+	cd -
+fi
 
 #===================================================================
 # Move to config top directory
