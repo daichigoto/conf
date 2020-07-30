@@ -31,7 +31,14 @@
 " first edition: Fri May 17 12:31:53 JST 2002
 
 " ----------------------------------------------------------------------
-" Dein plug-ins management
+" Dein plug-ins management system
+" ----------------------------------------------------------------------
+" How to install Dein:
+" 	mkdir -p ~/.cache/nvim/dein
+" 	cd ~/.cache/nvim/dein/
+" 	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+" 	sh ./installer.sh .
+"	rm ./installer.sh
 " ----------------------------------------------------------------------
 if &compatible
 	set nocompatible
@@ -50,17 +57,17 @@ if dein#load_state('~/.cache/nvim/dein/')
 
 	" Add or remove your plugins here
 	call dein#add('junegunn/seoul256.vim')
+	call dein#add('fholgado/minibufexpl.vim')
 	call dein#add('vim-airline/vim-airline')
 	call dein#add('vim-airline/vim-airline-themes')
-	call dein#add('preservim/nerdtree')
-	call dein#add('fholgado/minibufexpl.vim')
-	call dein#add('tpope/vim-commentary')
-	call dein#add('tpope/vim-fugitive')
-	call dein#add('dense-analysis/ale')
 	call dein#add('junegunn/fzf', {'build': './install --all'})
 	call dein#add('junegunn/fzf.vim')
 	call dein#add('sheerun/vim-polyglot')
+	call dein#add('dense-analysis/ale')
+	call dein#add('tpope/vim-commentary')
+	"call dein#add('preservim/nerdtree')
 	"call dein#add('Shougo/denite.nvim')
+	"call dein#add('tpope/vim-fugitive')
 
 	" Required:
 	call dein#end()
@@ -71,27 +78,21 @@ endif
 filetype plugin indent on
 syntax enable
 
-" If you want to install not installed plugins on startup.
+" Install not installed plugins on startup.
 if dein#check_install()
 	call dein#install()
 endif
 
+" ----------------------------------------------------------------------
+" Settings for each plugin
+" ----------------------------------------------------------------------
 " seoul256
 let g:seoul256_background = 233
 colo seoul256
 
 " vim-airline
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'minimalist'
-let g:airline_theme = 'tomorrow'
 let g:airline_theme = 'molokai'
-
-" NERDTree
-"  <C-o> open NERDTree
-"    <C-o>	close NERDTree
-"    <CR>	open file and close NERDTree
-"nnoremap <silent> <C-o> :NERDTreeToggle<CR>
-let g:NERDTreeQuitOnOpen = 1
 
 " minibufexpl
 "  bn	move to next buffer
@@ -126,6 +127,13 @@ nnoremap <silent> <C-o> :Files<CR>
 nnoremap <silent> fzf :Files<CR>
 nnoremap <silent> bu :Buffers<CR>
 
+" NERDTree
+"  <C-o> open NERDTree
+"    <C-o>	close NERDTree
+"    <CR>	open file and close NERDTree
+"nnoremap <silent> <C-o> :NERDTreeToggle<CR>
+"let g:NERDTreeQuitOnOpen = 1
+
 " denite
 "  <C-b> open Denite-buffer-list
 "    <Esc>	close Denite-buffer-list
@@ -136,6 +144,10 @@ nnoremap <silent> bu :Buffers<CR>
 "    v		open buffers in split windows (vertical)
 "    i		filter by string
 "    ..		move to directory above
+"
+" If you use Denite, execute the following command:
+" 	pip install --user pynvim
+"
 "nnoremap <silent> <C-b> :<C-u>Denite buffer file:new<CR>
 "autocmd FileType denite call s:denite_my_settings()
 "function! s:denite_my_settings() abort
@@ -169,6 +181,10 @@ nnoremap <silent> bu :Buffers<CR>
 "    v		open files/buffers in split windows (vertical)
 "    i		filter by string
 "    ..		move to directory above
+"
+" If you use Denite, execute the following command:
+" 	pip install --user pynvim
+"
 "nnoremap <silent> <C-o> :<C-u>Denite file buffer file:new<CR>
 "autocmd FileType denite call s:denite_my_settings()
 "function! s:denite_my_settings() abort
@@ -191,17 +207,8 @@ nnoremap <silent> bu :Buffers<CR>
 "endfunction
 
 " ----------------------------------------------------------------------
-" How to install Dein:
-" 	mkdir -p ~/.cache/nvim/dein
-" 	cd ~/.cache/nvim/dein/
-" 	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-" 	sh ./installer.sh .
-"	rm ./installer.sh
-"
-" If you use Denite, also execute the following command:
-" 	pip install --user pynvim
+" Other settings
 " ----------------------------------------------------------------------
-
 " disable mouse feature
 set mouse=
 
