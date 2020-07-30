@@ -212,7 +212,9 @@ nnoremap <silent> bu :Buffers<CR>
 " disable mouse feature
 set mouse=
 
-" allow some keys to move the cursor left/right to move to the previous/next line when the cursor is on the first/last character in the line.
+" allow some keys to move the cursor left/right to move to
+" the previous/next line when the cursor is on the first/last
+" character in the line.
 "  b - [Backspace]  normal visual 
 "  s - [Space]      normal visual
 "  < - [Left]       normal visual
@@ -225,14 +227,17 @@ set whichwrap=b,s,[,],<,>,~,h,l
 set nohlsearch " non-highlight for search keyword
 set cursorline " use cursorline indicator
 
-" line numbers on
+" enable line numbers
 set number
 
-" incremental search and not case-sensitive on
+" enable incremental search and not case-sensitive
 set ignorecase
 
 " use extended menu complementation feature
 set wildmenu wildmode=list:full
+
+" use decimal instead of octal
+set nrformats=
 
 " displayed line movement gj/gk as default instead of j/k
 nnoremap k gk
@@ -248,9 +253,6 @@ vmap <silent> <S-Tab> <C-o>15<Left>
 
 " for useful argdo mutli-files replaces
 set hidden
-
-" syntax highlight on
-syntax enable
 
 " laod some customized files: ~/.config/nvim/*.vim
 let customvims = globpath(expand('~/.config/nvim'), "*.vim")
