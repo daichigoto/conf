@@ -30,13 +30,15 @@
 " author: Daichi GOTO (daichi@ongs.co.jp), Hiroaki TOMIDA (7gou@kiku33.com)
 " first edition: Fri May 17 12:31:53 JST 2002
 
-" evim.vim will already have done these configuration.
-if v:progname == "evim"
-  finish
-endif
-
 " ----------------------------------------------------------------------
-" Dein plug-ins management
+" Dein plug-ins management system
+" ----------------------------------------------------------------------
+" How to install Dein:
+"   mkdir -p ~/.cache/vim/dein
+"   cd ~/.cache/vim/dein/
+"   curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+"   sh ./installer.sh .
+"   rm ./installer.sh
 " ----------------------------------------------------------------------
 if &compatible
 	set nocompatible
@@ -55,19 +57,19 @@ if dein#load_state('~/.cache/vim/dein')
 
 	" Add or remove your plugins here
 	call dein#add('junegunn/seoul256.vim')
+	call dein#add('fholgado/minibufexpl.vim')
 	call dein#add('vim-airline/vim-airline')
 	call dein#add('vim-airline/vim-airline-themes')
-	call dein#add('preservim/nerdtree')
-	call dein#add('fholgado/minibufexpl.vim')
-	call dein#add('tpope/vim-commentary')
-	call dein#add('tpope/vim-fugitive')
-	call dein#add('dense-analysis/ale')
 	call dein#add('junegunn/fzf', {'build': './install --all'})
 	call dein#add('junegunn/fzf.vim')
 	call dein#add('sheerun/vim-polyglot')
+	call dein#add('dense-analysis/ale')
+	call dein#add('tpope/vim-commentary')
+	"call dein#add('preservim/nerdtree')
 	"call dein#add('Shougo/denite.nvim')
 	"call dein#add('roxma/nvim-yarp') " required by denite.vim
 	"call dein#add('roxma/vim-hug-neovim-rpc') " required by denite.vim
+	"call dein#add('tpope/vim-fugitive')
 
 	" Required:
 	call dein#end()
@@ -83,6 +85,9 @@ if dein#check_install()
 	call dein#install()
 endif
 
+" ----------------------------------------------------------------------
+" Settings for each plugin
+" ----------------------------------------------------------------------
 " seoul256
 let g:seoul256_background = 233
 colo seoul256
@@ -92,13 +97,6 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme = 'minimalist'
 let g:airline_theme = 'tomorrow'
 let g:airline_theme = 'molokai'
-
-" NERDTree
-"  <C-o> open NERDTree
-"    <C-o>      close NERDTree
-"    <CR>       open file and close NERDTree
-nnoremap <silent> <C-o> :NERDTreeToggle<CR>
-let g:NERDTreeQuitOnOpen = 1
 
 " minibufexpl
 "  bn	move to next buffer
@@ -130,6 +128,13 @@ let g:miniBufExplorerMoreThanOne = 0
 nnoremap <silent> fzf :Files<CR>
 nnoremap <silent> bu :Buffers<CR>
 
+" NERDTree
+"  <C-o> open NERDTree
+"    <C-o>      close NERDTree
+"    <CR>       open file and close NERDTree
+"nnoremap <silent> <C-o> :NERDTreeToggle<CR>
+"let g:NERDTreeQuitOnOpen = 1
+
 " denite
 "  <C-b> open Denite-buffer-list
 "    <C-b>	close Denite-buffer-list
@@ -141,6 +146,10 @@ nnoremap <silent> bu :Buffers<CR>
 "    v		open buffers in split windows (vertical)
 "    i		filter by string
 "    ..		move to directory above
+"
+" If you use Denite, also execute the following command:
+" 	pip install --user pynvim
+"
 "nnoremap <silent> <C-b> :<C-u>Denite buffer file:new<CR>
 "autocmd FileType denite call s:denite_my_settings()
 "function! s:denite_my_settings() abort
@@ -175,6 +184,10 @@ nnoremap <silent> bu :Buffers<CR>
 "    v		open files/buffers in split windows (vertical)
 "    i		filter by string
 "    ..		move to directory above
+"
+" If you use Denite, also execute the following command:
+" 	pip install --user pynvim
+"
 "nnoremap <silent> <C-o> :<C-u>Denite file buffer file:new<CR>
 "autocmd FileType denite call s:denite_my_settings()
 "function! s:denite_my_settings() abort
@@ -199,22 +212,10 @@ nnoremap <silent> bu :Buffers<CR>
 "endfunction
 
 " ----------------------------------------------------------------------
-" How to install Dein:
-" 	mkdir -p ~/.cache/vim/dein
-" 	cd ~/.cache/vim/dein/
-" 	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-" 	sh ./installer.sh .
-"	rm ./installer.sh
-"
-" If you use Denite, also execute the following command:
-" 	pip install --user pynvim
+" Other settings
 " ----------------------------------------------------------------------
-
-" allow [Backspace] over insert mode to remove charactors
-"  start - allow all charactors to remove
-"  eol - allow to remove eol and join lines
-"  indent - allow to remove indent in autoindent mode
-set backspace=start,eol,indent
+" disable mouse feature
+set mouse=
 
 " allow some keys to move the cursor left/right to move to 
 " the previous/next line when the cursor is on the first/last
@@ -228,23 +229,13 @@ set backspace=start,eol,indent
 "  ~ - ~            normal
 set whichwrap=b,s,[,],<,>,~,h,l
 
-" mouse feature off
-set mouse=
-
-" syntax highlight on
-syntax on
 set nohlsearch " non-highlight for search keyword
 set cursorline " use cursorline indicator
 
-" line numbers on
+" enable line numbers
 set number
 
-" status line on
-set laststatus=2 " always displaying status line
-set statusline=%F%r%h%= " statusline format
-
-" incremental search and not case-sensitive on
-set incsearch
+" enable incremental search and non-case-sensitive
 set ignorecase
 
 " use extended menu complementation feature
@@ -253,15 +244,17 @@ set wildmenu wildmode=list:full
 " use decimal instead of octal
 set nrformats=
 
-" set tab indent depth
-autocmd Filetype xml set tabstop=1 shiftwidth=1 softtabstop=1
-autocmd Filetype html set tabstop=1 shiftwidth=1 softtabstop=1
-
 " displayed line movement gj/gk as default instead of j/k
 nnoremap k gk
 nnoremap gk k
 nnoremap j gj
 nnoremap gj j
+
+" tab jump
+nmap <silent> <Tab> 15<Right>
+vmap <silent> <Tab> <C-o>15<Right>
+nmap <silent> <S-Tab> 15<Left>
+vmap <silent> <S-Tab> <C-o>15<Left>
 
 " for useful argdo mutli-files replaces
 set hidden
