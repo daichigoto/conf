@@ -73,7 +73,7 @@ function tree {
 }
 function git {
     wsl git $(_path_to_linux $Args)
-
+}
 function grep {
     $pattern_exists = $False
     $path_exists = $False
