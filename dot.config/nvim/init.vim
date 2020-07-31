@@ -121,10 +121,10 @@ let g:miniBufExplorerMoreThanOne = 0
 
 " fzf
 "  <C-o>	list files and directories
-"  fzf		list files and directories
+"  fzf		list files and directories of parent directory
 "  bu		list buffers
 nnoremap <silent> <C-o> :Files<CR>
-nnoremap <silent> fzf :Files<CR>
+nnoremap <silent> fzf :Files ..<CR>
 nnoremap <silent> bu :Buffers<CR>
 
 " NERDTree
