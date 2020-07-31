@@ -46,7 +46,7 @@ function _path_to_linux {
         }
         # Other argument is converted
         else {
-            $linuxpath += $winpath.Replace('\','/')
+            $linuxpath += ([String]$winpath).Replace('\','/')
         }
     }
 
@@ -73,9 +73,55 @@ function tree {
 }
 function git {
     wsl git $(_path_to_linux $Args)
-}
+
 function grep {
-    $Args[-1] = _path_to_linux $Args[-1]
+    $pattern_exists = $False
+    $path_exists = $False
+    $skip = $False
+    $i = 0
+
+    ForEach($a in $Args) {
+        if ($skip) {
+            $skip = $False
+            $i++
+            continue
+        }
+
+        # Options without argumetn
+        if ($a -cmatch '^-[abcdDEFGHhIiJLlmnOopqRSsUVvwxZ]') {
+        }
+	# Options with argument
+        elseif ($a -cmatch '^-[ABC]') {
+            $skip = $True
+        }
+	# Pattern file specification option
+        elseif ($a -ceq '-f') {
+            $skip = $True
+            $pattern_exists = $True
+            $Args[$i+1] = _path_to_linux $Args[$i+1]
+        }
+	# Pattern specification option
+        elseif ($a -ceq '-e') {
+            $skip = $True
+            $pattern_exists = $True
+        }
+	# Pattern or file path
+        elseif ($a -cnotmatch '^-') {
+            if ($pattern_exists) {
+                $path_exists = $True
+            }
+            else {
+                $pattern_exists = $True
+            }
+        }
+
+        $i++
+    }
+
+    # Change file path
+    if ($path_exists) {
+        $Args[-1] = _path_to_linux $Args[-1]
+    }
 
     $Input | wsl grep $Args
 }
