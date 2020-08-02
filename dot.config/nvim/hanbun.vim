@@ -129,18 +129,12 @@ augroup AddHanbunMode
   autocmd BufNewFile,BufRead typescript.xml imap <C-c>e </<C-x><C-o>
   autocmd BufNewFile,BufRead typescript.xml nmap <C-c>e a</<C-x><C-o>
 
-  " <C-c>n  Move to empty element
-  " nn      Move to empty element
-  " <C-c>m  Move to pre empty element
-  " mm      Move to pre empty element
-  autocmd BufNewFile,BufRead typescript.xml nmap <C-c>n /<\([^>/]\+\)><\/\1><CR>/<<CR>
-  autocmd BufNewFile,BufRead typescript.xml imap <C-c>n <ESC>/<\([^>/]\+\)><\/\1><CR>/<<CR>i
-  autocmd BufNewFile,BufRead typescript.xml nmap nn /<\([^>/]\+\)><\/\1><CR>/<<CR>
-  autocmd BufNewFile,BufRead typescript.xml imap nn <ESC>/<\([^>/]\+\)><\/\1><CR>/<<CR>i
-  autocmd BufNewFile,BufRead typescript.xml nmap <C-c>m ?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>
-  autocmd BufNewFile,BufRead typescript.xml imap <C-c>m <ESC>?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>i
-  autocmd BufNewFile,BufRead typescript.xml nmap mm ?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>
-  autocmd BufNewFile,BufRead typescript.xml imap mm <ESC>?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>i
+  " NN      Move to next empty element
+  " MM      Move to pre empty element
+  autocmd BufNewFile,BufRead typescript.xml nmap NN /<\([^>/]\+\)><\/\1><CR>/<<CR>
+  autocmd BufNewFile,BufRead typescript.xml imap NN <ESC>/<\([^>/]\+\)><\/\1><CR>/<<CR>i
+  autocmd BufNewFile,BufRead typescript.xml nmap MM ?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>
+  autocmd BufNewFile,BufRead typescript.xml imap MM <ESC>?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>i
 
   " Conflicts with the auto indent feature. For this reason, the indent 
   " on the plug-in side is turned off, and the formatting function by 
