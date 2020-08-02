@@ -53,5 +53,24 @@ cd $(dirname $(realpath ${0}))/../
 #===================================================================
 config_dir="${HOME}"/.config/nvim
 mkdir -p "${config_dir}"
-cp dot.config/nvim/*vim "${config_dir}"
+for i in dot.config/nvim/*vim
+do
+	filename=$(basename "$i")
+
+	src="$i"
+	dst="${config_dir}/$filename"
+
+	srctime=$(stat -f "%m" "$src")
+	if [ -f "$dst" ]
+	then
+		dsttime=$(stat -f "%m" "$dst")
+	fi
+
+	if [ "$srctime" != "$dsttime" ]
+	then
+		cp "$src" "$dst"
+		touch -r "$src" "$dst"
+		echo "copy $src -> $dst"
+	fi
+done
 echo "nvim: done"
