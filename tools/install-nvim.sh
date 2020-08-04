@@ -55,22 +55,21 @@ config_dir="${HOME}"/.config/nvim
 mkdir -p "${config_dir}"
 for i in dot.config/nvim/*vim
 do
-	filename=$(basename "$i")
-
 	src="$i"
-	dst="${config_dir}/$filename"
+	dst="${config_dir}/$(basename "$i")"
 
-	srctime=$(stat -f "%m" "$src")
-	if [ -f "$dst" ]
+	# Do not install if the last update time is the same
+	if [ -f $src -a -f $dst ]
 	then
-		dsttime=$(stat -f "%m" "$dst")
+		if [ ! "$src" -nt "$dst" -a ! "$src" -ot "$dst" ]
+		then
+			continue
+		fi
 	fi
 
-	if [ "$srctime" != "$dsttime" ]
-	then
-		cp "$src" "$dst"
-		touch -r "$src" "$dst"
-		echo "copy $src -> $dst"
-	fi
+	# Install configuration files
+	cp "$src" "$dst"
+	touch -r "$src" "$dst"
+	echo "copy $src -> $dst"
 done
 echo "nvim: done"
