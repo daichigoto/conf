@@ -38,5 +38,23 @@ Set-Location $config_dir
 #===================================================================
 # Install configuration file
 #===================================================================
-cp dot.config\powershell\profile.ps1 $PROFILE
+$src='dot.config\powershell\profile.ps1'
+$dst=$PROFILE
+
+# Install if $PROFILE is not exist
+if (-Not (Test-Path $dst)) {
+    cp dot.config\powershell\profile.ps1 $PROFILE
+    echo "copy $src -> $dst"
+}
+
+# Install when configuration file is updated
+$src_modtime = $(Get-ItemProperty $src).LastWriteTime
+$dst_modtime = $(Get-ItemProperty $dst).LastWriteTime
+
+if ($src_modtime -ne $dst_modtime) {
+    cp dot.config\powershell\profile.ps1 $PROFILE
+    Set-ItemProperty $dst -Name LastWriteTime -Value $src_modtime
+    echo "copy $src -> $dst"
+}
+
 echo "powershell: done"
