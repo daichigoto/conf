@@ -77,6 +77,10 @@ $_linux_functions | Out-File $_temp_ps1
 . $_temp_ps1
 Remove-Item $_temp_ps1
 
+# Delete unnecessary variables
+Remove-Variable _temp
+Remove-Variable _temp_ps1
+
 # Individual Linux command function definition
 function grep {
     $pattern_exists = $False
