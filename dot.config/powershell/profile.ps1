@@ -26,54 +26,58 @@
 # author: Daichi GOTO (daichi@ongs.co.jp)
 # first edition: Mon Jun 22 18:20:36 JST 2020
 
-function _path_to_linux {
-    $linuxpath = @()
+#========================================================================
+# Linux command definition used via wsl
+#========================================================================
+$_linux_command_names = @('less', 'lv', 'vi', 'vim', 'nvim', 'tree', 'git')
 
-    # Convert arguments to Linux path style
-    ForEach($winpath in $Args) {
-        if ($winpath -eq $null) {
-            Break
+# Generate Linux command function
+ForEach($n in $_linux_command_names) {
+    $_linux_functions += "
+        function $n {
+            wsl $n `$(_path_to_linux `$Args)
+        }"
+}
+$_linux_functions += @'
+    function _path_to_linux {
+        $linuxpath = @()
+    
+        # Convert arguments to Linux path style
+        ForEach($winpath in $Args) {
+            if ($winpath -eq $null) {
+                Break
+            }
+        
+            # Change drive path to mount path
+            if ($winpath -match '^[A-Z]:') {
+                $drive = $winpath.Substring(0,1).ToLower()
+                $linuxpath += "/mnt/" + $drive + $winpath.Substring(2).Replace('\','/')
+            }
+            # Option is not converted
+            elseif ($winpath -match '^[-+]') {
+                $linuxpath += $winpath
+            }
+            # Other argument is converted
+            else {
+                $linuxpath += ([String]$winpath).Replace('\','/')
+            }
         }
     
-        # Change drive path to mount path
-        if ($winpath -match '^[A-Z]:') {
-            $drive = $winpath.Substring(0,1).ToLower()
-            $linuxpath += "/mnt/" + $drive + $winpath.Substring(2).Replace('\','/')
-        }
-        # Option is not converted
-        elseif ($winpath -match '^[-+]') {
-            $linuxpath += $winpath
-        }
-        # Other argument is converted
-        else {
-            $linuxpath += ([String]$winpath).Replace('\','/')
-        }
+        $linuxpath
     }
+'@
 
-    $linuxpath
-}
+# Prepare temporary file path with extension .ps1
+$_temp = New-TemporaryFile
+$_temp_ps1 = $_temp.FullName + ".ps1"
+Remove-Item $_temp
 
-function less {
-    wsl less $(_path_to_linux $Args)
-}
-function lv {
-    wsl lv $(_path_to_linux $Args)
-}
-function vi {
-    wsl vi $(_path_to_linux $Args)
-}
-function vim {
-    wsl vim $(_path_to_linux $Args)
-}
-function nvim {
-    wsl nvim $(_path_to_linux $Args)
-}
-function tree {
-    wsl tree $(_path_to_linux $Args)
-}
-function git {
-    wsl git $(_path_to_linux $Args)
-}
+# Write function definition to temporary .ps1 file and parse
+$_linux_functions | Out-File $_temp_ps1
+. $_temp_ps1
+Remove-Item $_temp_ps1
+
+# Individual Linux command function definition
 function grep {
     $pattern_exists = $False
     $path_exists = $False
@@ -126,10 +130,15 @@ function grep {
     $Input | wsl grep $Args
 }
 
+#========================================================================
+# Alias definition
+#========================================================================
 Set-Alias -Name open -Value explorer
-
-function ll { Get-ChildItem -Force }
-function la { Get-ChildItem -Force }
-
 Set-Alias -Name edge -Value "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 Set-Alias -Name chrome -Value "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+
+#========================================================================
+# Short name definition
+#========================================================================
+function ll { Get-ChildItem -Force }
+function la { Get-ChildItem -Force }
