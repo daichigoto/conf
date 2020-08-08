@@ -94,8 +94,6 @@ colo seoul256
 
 " vim-airline
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'minimalist'
-let g:airline_theme = 'tomorrow'
 let g:airline_theme = 'molokai'
 
 " minibufexpl
@@ -260,8 +258,8 @@ vmap <silent> <S-Tab> <C-o>15<Left>
 set hidden
 
 " autoload configurations files
-set runtimepath+=~/.vim/
-runtime! userautoload/*.vim
+set runtimepath+=~/.config/vim
+runtime! *.vim
 
 " load user .vimrc configuration file
 if filereadable(expand('~/.vimrc.mine'))
