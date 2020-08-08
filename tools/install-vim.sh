@@ -51,5 +51,48 @@ cd $(dirname ${0})/../
 #===================================================================
 # Install configuration files
 #===================================================================
-cp dot.vimrc "${HOME}/.vimrc"
+# Install main configuraton file
+src="dot.vimrc"
+dst="${HOME}/.vimrc"
+# do not install if the last update time is the same
+if [ -f $src -a -f $dst ]
+then
+	if [ "$src" -nt "$dst" -o "$src" -ot "$dst" ]
+	then
+		# install main configuration files
+		cp "$src" "$dst"
+		touch -r "$src" "$dst"
+		echo "copy $src -> $dst"
+	fi
+fi
+
+# Divert additional configuration files of nvim
+config_dir="${HOME}"/.config/vim
+mkdir -p "${config_dir}"
+for i in dot.config/nvim/*vim
+do
+	# exclude nvim main configuration file
+	if [ "$i" = "dot.config/nvim/init.vim" ]
+	then
+		continue
+	fi
+
+	src="$i"
+	dst="${config_dir}/$(basename "$i")"
+
+	# do not install if the last update time is the same
+	if [ -f $src -a -f $dst ]
+	then
+		if [ ! "$src" -nt "$dst" -a ! "$src" -ot "$dst" ]
+		then
+			continue
+		fi
+	fi
+
+	# install configuration files
+	cp "$src" "$dst"
+	touch -r "$src" "$dst"
+	echo "copy $src -> $dst"
+done
+
 echo "vim: done"
