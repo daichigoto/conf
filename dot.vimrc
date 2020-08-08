@@ -258,8 +258,8 @@ vmap <silent> <S-Tab> <C-o>15<Left>
 set hidden
 
 " autoload configurations files
-set runtimepath+=~/.config/vim
-runtime! *.vim
+set runtimepath+=~/.config
+runtime! vim/*.vim
 
 " load user .vimrc configuration file
 if filereadable(expand('~/.vimrc.mine'))
