@@ -35,10 +35,12 @@ $_linux_command_names = wsl ls $_linux_path
 
 # Generate Linux command function
 ForEach($n in $_linux_command_names) {
-    $_linux_functions += "
-        function $n {
-            wsl $n `$(_path_to_linux `$Args)
-        }"
+    if ($n -ne "") {
+        $_linux_functions += "
+            function $n {
+                wsl $n `$(_path_to_linux `$Args)
+            }"
+    }
 }
 $_linux_functions += @'
     function _path_to_linux {
