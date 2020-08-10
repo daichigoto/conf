@@ -29,7 +29,9 @@
 #========================================================================
 # Linux command definition used via wsl
 #========================================================================
-$_linux_command_names = @('less', 'lv', 'vi', 'vim', 'nvim', 'tree', 'git')
+$_linux_path = @('/usr/local/sbin', '/usr/local/bin', '/usr/sbin', 
+                 '/usr/bin', '/sbin', '/bin')
+$_linux_command_names = wsl ls $_linux_path 
 
 # Generate Linux command function
 ForEach($n in $_linux_command_names) {
@@ -80,6 +82,9 @@ Remove-Item $_temp_ps1
 # Delete unnecessary variables
 Remove-Variable _temp
 Remove-Variable _temp_ps1
+#Remove-Variable _linux_path
+#Remove-Variable _linux_command_names
+#Remove-Variable _linux_functions
 
 # Individual Linux command function definition
 function grep {
