@@ -27,13 +27,13 @@
 # first edition: Mon Jun 22 18:20:36 JST 2020
 
 #========================================================================
-# Linux command definition used via wsl
+# Linux commands definition used via wsl
 #========================================================================
 $_linux_path = @('/usr/local/sbin', '/usr/local/bin', '/usr/sbin', 
                  '/usr/bin', '/sbin', '/bin')
 $_linux_command_names = wsl ls $_linux_path 
 
-# Generate Linux command function
+# Generate Linux command functions
 ForEach($n in $_linux_command_names) {
     if ($n -ne "") {
         $_linux_functions += "
@@ -88,7 +88,10 @@ Remove-Variable _temp_ps1
 #Remove-Variable _linux_command_names
 #Remove-Variable _linux_functions
 
-# Individual Linux command function definition
+#========================================================================
+# Individual Linux command function definitions
+#========================================================================
+# grep
 function grep {
     $pattern_exists = $False
     $path_exists = $False
@@ -141,15 +144,14 @@ function grep {
     $Input | wsl grep $Args
 }
 
+# ls
+Remove-Item alias:ls
+function ll { ls -l }
+function la { ls -a }
+
 #========================================================================
 # Alias definition
 #========================================================================
 Set-Alias -Name open -Value explorer
 Set-Alias -Name edge -Value "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 Set-Alias -Name chrome -Value "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
-
-#========================================================================
-# Short name definition
-#========================================================================
-function ll { Get-ChildItem -Force }
-function la { Get-ChildItem -Force }
