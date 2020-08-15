@@ -38,7 +38,7 @@ ForEach($n in $_linux_command_names) {
     if ($n -ne "") {
         $_linux_functions += "
             function $n {
-                wsl $n `$(_path_to_linux `$Args)
+                $Input | wsl $n `$(_path_to_linux `$Args)
             }"
     }
 }
