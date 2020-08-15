@@ -145,7 +145,7 @@ function grep {
 }
 
 # ls
-Remove-Item alias:ls
+Get-Alias ls *> $null && Remove-Item alias:ls
 function ls { wsl ls --color=auto $Args }
 function ll { ls -l }
 function la { ls -a }
