@@ -108,22 +108,22 @@ function grep {
         # Options without argumetn
         if ($a -cmatch '^-[abcdDEFGHhIiJLlmnOopqRSsUVvwxZ]') {
         }
-	# Options with argument
+        # Options with argument
         elseif ($a -cmatch '^-[ABC]') {
             $skip = $True
         }
-	# Pattern file specification option
+        # Pattern file specification option
         elseif ($a -ceq '-f') {
             $skip = $True
             $pattern_exists = $True
             $Args[$i+1] = _path_to_linux $Args[$i+1]
         }
-	# Pattern specification option
+        # Pattern specification option
         elseif ($a -ceq '-e') {
             $skip = $True
             $pattern_exists = $True
         }
-	# Pattern or file path
+        # Pattern or file path
         elseif ($a -cnotmatch '^-') {
             if ($pattern_exists) {
                 $path_exists = $True
@@ -146,7 +146,7 @@ function grep {
 
 # ls
 Remove-Item alias:ls
-function ll { wsl ls --color=auto $Args }
+function ls { wsl ls --color=auto $Args }
 function ll { ls -l }
 function la { ls -a }
 
