@@ -29,8 +29,7 @@
 #========================================================================
 # Linux commands definition used via wsl
 #========================================================================
-$_linux_path = @('/usr/local/sbin', '/usr/local/bin', '/usr/sbin', 
-                 '/usr/bin', '/sbin', '/bin')
+$_linux_path = (wsl echo '$PATH').Split(":") -NotMatch "/mnt"
 $_linux_command_names = wsl ls $_linux_path 
 
 # Generate Linux command functions
