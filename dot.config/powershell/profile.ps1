@@ -44,7 +44,6 @@ ForEach($n in $_linux_command_names) {
                     wsl $n `$(_path_to_linux `$Args)
 		}
             }"
-	}
     }
 }
 $_linux_functions += @'
