@@ -38,6 +38,7 @@ ForEach($n in $_linux_command_names) {
         $_linux_functions += "
             function $n {
                 if (`$Input.Length) {
+		    `$Input.Reset()
                     `$Input | wsl $n `$(_path_to_linux `$Args)
 		}
 		else {
