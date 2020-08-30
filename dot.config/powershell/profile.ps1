@@ -35,19 +35,15 @@ $_linux_command_names = wsl ls $_linux_path
 # Generate Linux command functions
 ForEach($n in $_linux_command_names) {
     if ($n -ne "") {
-        if ($Input.Length) {
-	    # Input from pipeline
-            $_linux_functions += "
-                function $n {
+        $_linux_functions += "
+            function $n {
+                if (`$Input.Length) {
                     `$Input | wsl $n `$(_path_to_linux `$Args)
-                }"
-	    }
-	else {
-	    # Input from stdin
-            $_linux_functions += "
-                function $n {
+		}
+		else {
                     wsl $n `$(_path_to_linux `$Args)
-                }"
+		}
+            }"
 	}
     }
 }
