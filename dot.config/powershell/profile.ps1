@@ -32,6 +32,11 @@
 $_linux_path = (wsl echo '$PATH').Split(":") -NotMatch "/mnt"
 $_linux_command_names = wsl ls $_linux_path 
 
+#XXX
+$_linux_command_paths = (
+    wsl ls -d ($_linux_path[($_linux_path.length-1)..0] -replace "$","/*")
+) 2> $null
+
 # Generate Linux command functions
 ForEach($n in $_linux_command_names) {
     if ($n -ne "") {
