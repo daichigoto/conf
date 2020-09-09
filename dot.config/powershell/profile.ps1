@@ -27,7 +27,7 @@
 # first edition: Mon Jun 22 18:20:36 JST 2020
 
 #========================================================================
-# Linux commands definition used via wsl
+# Definition of Linux commands used via wsl
 #========================================================================
 $_linux_path = (wsl echo '$PATH').Split(":") -NotMatch "/mnt"
 $_linux_command_names = wsl ls $_linux_path 
@@ -42,7 +42,13 @@ ForEach($n in $_linux_command_names) {
     if ($n -ne "") {
         $_linux_functions += "
             function $n {
-                `$Input | wsl $n `$(_path_to_linux `$Args)
+                if (`$Input.Length) {
+		    `$Input.Reset()
+                    `$Input | wsl $n `$(_path_to_linux `$Args)
+		}
+		else {
+                    wsl $n `$(_path_to_linux `$Args)
+		}
             }"
     }
 }
