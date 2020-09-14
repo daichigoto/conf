@@ -100,3 +100,14 @@ function TTTCSVShowHeaderNameOfColumn(...)
 endfunction
 command -nargs=? Retuname call TTTCSVShowHeaderNameOfColumn(<f-args>)
 command -nargs=? Retumei call TTTCSVShowHeaderNameOfColumn(<f-args>)
+
+" customize vim-easy-align settings
+function TTTVimEasyAlign()
+  " align comments
+  let g:easy_align_delimiters = {
+\   ':': { 'pattern': ':', 'ignore_groups': ['!Comment'] }
+\ }
+endfunction
+autocmd BufNewFile,BufRead *.OSH call TTTVimEasyAlign()
+autocmd BufNewFile,BufRead *.SH  call TTTVimEasyAlign()
+autocmd BufNewFile,BufRead *.sh  call TTTVimEasyAlign()
