@@ -65,6 +65,7 @@ if dein#load_state('~/.cache/vim/dein')
 	call dein#add('sheerun/vim-polyglot')
 	call dein#add('dense-analysis/ale')
 	call dein#add('tpope/vim-commentary')
+	call dein#add('junegunn/vim-easy-align')
 	"call dein#add('preservim/nerdtree')
 	"call dein#add('Shougo/denite.nvim')
 	"call dein#add('roxma/nvim-yarp') " required by denite.vim
@@ -97,16 +98,16 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme = 'molokai'
 
 " minibufexpl
-"  bn	move to next buffer
-"  b1	move to buffer 1
-"  b2	move to buffer 2
-"  b3	move to buffer 3
-"  b4	move to buffer 4
-"  b5	move to buffer 5
-"  b6	move to buffer 6
-"  b7	move to buffer 7
-"  b8	move to buffer 8
-"  b9	move to buffer 9
+"  bn		move to next buffer
+"  b1		move to buffer 1
+"  b2		move to buffer 2
+"  b3		move to buffer 3
+"  b4		move to buffer 4
+"  b5		move to buffer 5
+"  b6		move to buffer 6
+"  b7		move to buffer 7
+"  b8		move to buffer 8
+"  b9		move to buffer 9
 nnoremap <silent> bn :<C-u>:bnext<CR>
 nnoremap <silent> b1 :<C-u>:b1<CR>
 nnoremap <silent> b2 :<C-u>:b2<CR>
@@ -117,14 +118,18 @@ nnoremap <silent> b6 :<C-u>:b6<CR>
 nnoremap <silent> b7 :<C-u>:b7<CR>
 nnoremap <silent> b8 :<C-u>:b8<CR>
 nnoremap <silent> b9 :<C-u>:b9<CR>
-" always show MiniBufExplorer
-let g:miniBufExplorerMoreThanOne = 0
+let g:miniBufExplorerMoreThanOne = 0 " always show MiniBufExplorer
 
 " fzf
-"  fzf  list files and directories
-"  ls   list buffers
+"  fzf		list files and directories
+"  ls		list buffers
 nnoremap <silent> fzf :Files<CR>
 nnoremap <silent> bu :Buffers<CR>
+
+" vim-easy-align
+"  ga		start interactive EasyAlign
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " NERDTree
 "  <C-o> open NERDTree
