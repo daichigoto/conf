@@ -36,17 +36,17 @@ $_linux_command_paths = (
 
 # Generate Linux command functions
 ForEach($n in $_linux_command_paths) {
-   $_n = (Split-Path -Leaf $n)
-   $_linux_functions += "
-       function $_n {
-           if (`$Input.Length) {
-               `$Input.Reset()
-               `$Input | wsl $n `$(_path_to_linux `$Args)
-           }
-           else {
-               wsl $n `$(_path_to_linux `$Args)
-           }
-       }"
+    $_n = (Split-Path -Leaf $n)
+    $_linux_functions += "
+        function $_n {
+            if (`$Input.Length) {
+                `$Input.Reset()
+                `$Input | wsl $n `$(_path_to_linux `$Args)
+            }
+            else {
+                wsl $n `$(_path_to_linux `$Args)
+            }
+        }"
 }
 Remove-Variable n
 Remove-Variable _n
