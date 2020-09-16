@@ -30,28 +30,27 @@
 # Definition of Linux commands used via wsl
 #========================================================================
 $_linux_path = (wsl echo '$PATH').Split(":") -NotMatch "/mnt"
-$_linux_command_names = wsl ls $_linux_path 
-
-#XXX
 $_linux_command_paths = (
     wsl ls -d ($_linux_path[($_linux_path.length-1)..0] -replace "$","/*")
 ) 2> $null
 
 # Generate Linux command functions
-ForEach($n in $_linux_command_names) {
-    if ($n -ne "") {
-        $_linux_functions += "
-            function $n {
-                if (`$Input.Length) {
-		    `$Input.Reset()
-                    `$Input | wsl $n `$(_path_to_linux `$Args)
-		}
-		else {
-                    wsl $n `$(_path_to_linux `$Args)
-		}
-            }"
-    }
+ForEach($n in $_linux_command_paths) {
+   $_n = (Split-Path -Leaf $n)
+   $_linux_functions += "
+       function $_n {
+           if (`$Input.Length) {
+               `$Input.Reset()
+               `$Input | wsl $n `$(_path_to_linux `$Args)
+           }
+           else {
+               wsl $n `$(_path_to_linux `$Args)
+           }
+       }"
 }
+Remove-Variable n
+Remove-Variable _n
+
 $_linux_functions += @'
     function _path_to_linux {
         $linuxpath = @()
@@ -95,7 +94,6 @@ Remove-Item $_temp_ps1
 Remove-Variable _temp
 Remove-Variable _temp_ps1
 #Remove-Variable _linux_path
-#Remove-Variable _linux_command_names
 #Remove-Variable _linux_command_paths
 #Remove-Variable _linux_functions
 
