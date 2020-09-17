@@ -133,11 +133,8 @@ augroup AddHanbunMode
   " MM      Move to pre empty element
   " ""      Move to next empty single/double quotation
   autocmd BufNewFile,BufRead typescript.xml nmap NN /<\([^>/]\+\)><\/\1><CR>/<<CR>
-  autocmd BufNewFile,BufRead typescript.xml imap NN <ESC>/<\([^>/]\+\)><\/\1><CR>/<<CR>i
   autocmd BufNewFile,BufRead typescript.xml nmap MM ?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>
-  autocmd BufNewFile,BufRead typescript.xml imap MM <ESC>?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>i
   autocmd BufNewFile,BufRead typescript.xml nmap "" /\(""\\|''\)<CR>l
-  autocmd BufNewFile,BufRead typescript.xml imap "" <ESC>/\(""\\|''\)<CR>li
 
   " Conflicts with the auto indent feature. For this reason, the indent 
   " on the plug-in side is turned off, and the formatting function by 
