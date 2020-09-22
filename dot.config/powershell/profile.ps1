@@ -156,7 +156,7 @@ function grep {
 function less {
     if ($Input.Length) {
         $Input.Reset()
-        $Input | more.com
+        $Input | Out-Host -Paging
     }
     else {
         wsl less $(_path_to_linux $Args)
