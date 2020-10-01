@@ -136,6 +136,9 @@ augroup AddHanbunMode
   autocmd BufNewFile,BufRead typescript.xml nmap MM ?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>
   autocmd BufNewFile,BufRead typescript.xml nmap "" /\(""\\|''\)<CR>l
 
+  " viS     Visual selection of Japanese section
+  autocmd BufNewFile,BufRead typescript.xml nmap viS ?\(>\\|。\\|\n\n\)<CR>l<C-v>/。<CR>
+
   " Conflicts with the auto indent feature. For this reason, the indent 
   " on the plug-in side is turned off, and the formatting function by 
   " the auto indent mode is used. This is why I set shiftwidth to 1.
