@@ -152,12 +152,24 @@ function grep {
 
     $Input | wsl grep $Args
 }
+#less
+function less {
+    if ($Input.Length) {
+        $Input.Reset()
+        $Input | Out-Host -Paging
+    }
+    else {
+        wsl less $(_path_to_linux $Args)
+    }
+}
 
 # ls
 Get-Alias ls *> $null && Remove-Item alias:ls
 function ls { wsl ls --color=auto $Args }
 function ll { ls -l }
 function la { ls -a }
+# man
+Get-Alias man *> $null && Remove-Item alias:man
 
 #========================================================================
 # Alias definition
