@@ -27,6 +27,12 @@
 # first edition: Mon Jun 22 18:20:36 JST 2020
 
 #========================================================================
+# Set encoding to UTF-8
+#========================================================================
+$OutputEncoding = [System.Console]::OutputEncoding =
+    [System.Text.UTF8Encoding]::new()
+
+#========================================================================
 # Definition of Linux commands used via wsl
 #========================================================================
 $_linux_path = (wsl echo '$PATH').Split(":") -NotMatch "/mnt"
@@ -93,9 +99,9 @@ Remove-Item $_temp_ps1
 # Delete unnecessary variables
 Remove-Variable _temp
 Remove-Variable _temp_ps1
-#Remove-Variable _linux_path
-#Remove-Variable _linux_command_paths
-#Remove-Variable _linux_functions
+Remove-Variable _linux_path
+Remove-Variable _linux_command_paths
+Remove-Variable _linux_functions
 
 #========================================================================
 # Individual Linux command function definitions
@@ -168,8 +174,6 @@ Get-Alias ls *> $null && Remove-Item alias:ls
 function ls { wsl ls --color=auto $Args }
 function ll { ls -l }
 function la { ls -a }
-# man
-Get-Alias man *> $null && Remove-Item alias:man
 
 #========================================================================
 # Alias definition
@@ -177,3 +181,5 @@ Get-Alias man *> $null && Remove-Item alias:man
 Set-Alias -Name open -Value explorer
 Set-Alias -Name edge -Value "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 Set-Alias -Name chrome -Value "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+
+Get-Alias man *> $null && Remove-Item alias:man
