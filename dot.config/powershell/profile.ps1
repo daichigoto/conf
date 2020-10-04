@@ -29,6 +29,10 @@
 #========================================================================
 # Set encoding to UTF-8
 #========================================================================
+# [System.Console]::OutputEncoding is set to local encoding, so character 
+# corruption occurs when piped from WSL to WSL. Therefore, set 
+# [System.Console]::OutputEncoding and $OutputEncoding to UTF-8 to avoid 
+# the problem.
 $OutputEncoding = [System.Console]::OutputEncoding =
     [System.Text.UTF8Encoding]::new()
 
