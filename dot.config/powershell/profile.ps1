@@ -162,11 +162,24 @@ function grep {
 
     $Input | wsl grep $Args
 }
+
 #less
 function less {
     if ($Input.Length) {
         $Input.Reset()
-        $Input | Out-Host -Paging
+
+        # Prepare temporary file path
+        $_less_temp = New-TemporaryFile
+
+        # Write data from pipeline to the temporary file
+        $Input | Out-File $_less_temp
+
+        # Do less
+        wsl less $(_path_to_linux $_less_temp.ToString())
+
+        # Delete unnecessary temporary file and variable
+        Remove-Item $_less_temp
+        Remove-Variable _less_temp
     }
     else {
         wsl less $(_path_to_linux $Args)
@@ -175,9 +188,9 @@ function less {
 
 # ls
 Get-Alias ls *> $null && Remove-Item alias:ls
-function ls { wsl ls --color=auto $Args }
-function ll { ls -l }
-function la { ls -a }
+function ls { wsl ls --color=auto $(_path_to_linux $Args) }
+function ll { ls -l $(_path_to_linux $Args) }
+function la { ls -a $(_path_to_linux $Args) }
 
 #========================================================================
 # Alias definition
