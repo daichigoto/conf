@@ -169,17 +169,17 @@ function less {
         $Input.Reset()
 
         # Prepare temporary file path
-        $_less_temp = New-TemporaryFile
+        $_temp = New-TemporaryFile
 
         # Write data from pipeline to the temporary file
-        $Input | Out-File $_less_temp
+        $Input | Out-File $_temp
 
         # Do less
-        wsl less $(_path_to_linux $_less_temp.ToString())
+        wsl less $(_path_to_linux $_temp.ToString())
 
         # Delete unnecessary temporary file and variable
-        Remove-Item $_less_temp
-        Remove-Variable _less_temp
+        Remove-Item $_temp
+        Remove-Variable _temp
     }
     else {
         wsl less $(_path_to_linux $Args)
