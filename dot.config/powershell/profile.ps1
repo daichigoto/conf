@@ -175,7 +175,7 @@ function less {
         $Input | Out-File $_temp
 
         # Do less
-        wsl less $(_path_to_linux $_temp.ToString()).Split(' ')
+        wsl less $(_path_to_linux $Args).Split(' ') $(_path_to_linux $_temp.ToString()).Split(' ')
 
         # Delete unnecessary temporary file and variable
         Remove-Item $_temp
