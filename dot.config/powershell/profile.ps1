@@ -51,10 +51,10 @@ ForEach($n in $_linux_command_paths) {
         function $_n {
             if (`$Input.Length) {
                 `$Input.Reset()
-                `$Input | wsl $n `$(_path_to_linux `$Args).Split(" ")
+                `$Input | wsl $n `$(_path_to_linux `$Args).Split(' ')
             }
             else {
-                wsl $n `$(_path_to_linux `$Args).Split(" ")
+                wsl $n `$(_path_to_linux `$Args).Split(' ')
             }
         }"
 }
@@ -175,22 +175,22 @@ function less {
         $Input | Out-File $_temp
 
         # Do less
-        wsl less $(_path_to_linux $_temp.ToString()).Split(" ")
+        wsl less $(_path_to_linux $_temp.ToString()).Split(' ')
 
         # Delete unnecessary temporary file and variable
         Remove-Item $_temp
         Remove-Variable _temp
     }
     else {
-        wsl less $(_path_to_linux $Args).Split(" ")
+        wsl less $(_path_to_linux $Args).Split(' ')
     }
 }
 
 # ls
 Get-Alias ls *> $null && Remove-Item alias:ls
-function ls { wsl ls --color=auto $(_path_to_linux $Args).Split(" ") }
-function ll { ls -l $(_path_to_linux $Args).Split(" ") }
-function la { ls -a $(_path_to_linux $Args).Split(" ") }
+function ls { wsl ls --color=auto $(_path_to_linux $Args).Split(' ') }
+function ll { ls -l $(_path_to_linux $Args).Split(' ') }
+function la { ls -a $(_path_to_linux $Args).Split(' ') }
 
 #========================================================================
 # Alias definition
