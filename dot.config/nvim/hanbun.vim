@@ -126,10 +126,6 @@ augroup AddHanbunMode
   " <C-c>t  Insert Hanbun tag
   autocmd BufNewFile,BufRead typescript.xml imap <C-c>t <C-r>=<SID>hanbunTagInsert()<CR>
 
-  " <C-c>e  Insert end tag
-  autocmd BufNewFile,BufRead typescript.xml imap <C-c>e </<C-x><C-o>
-  autocmd BufNewFile,BufRead typescript.xml nmap <C-c>e a</<C-x><C-o>
-
   " NN      Move to next empty element
   " MM      Move to pre empty element
   " ""      Move to next empty single/double quotation
