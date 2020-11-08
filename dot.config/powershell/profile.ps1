@@ -41,7 +41,7 @@ $OutputEncoding = [System.Console]::OutputEncoding =
 #========================================================================
 $_linux_path = (wsl echo '$PATH').Split(":") -NotMatch "/mnt"
 $_linux_command_paths = (
-    wsl ls -d ($_linux_path[($_linux_path.length-1)..0] -replace "$","/*")
+    wsl ls -d ($_linux_path[($_linux_path.Length - 1)..0] -replace "$","/*")
 ) 2> $null
 
 # Generate Linux command functions
@@ -163,8 +163,14 @@ function grep {
     $Input | wsl grep $Args
 }
 
-#less
-function less {
+# pager
+function _linux_pager {
+    # The first argument is the pager command name
+    $pager = $Args[0]
+
+    # Remove pager command from arguments to pass arguments to pager
+    $Args = $Args[1..$Args.Length - 1]
+
     if ($Input.Length) {
         $Input.Reset()
 
@@ -175,16 +181,18 @@ function less {
         $Input | Out-File $_temp
 
         # Do less
-        wsl less $(_path_to_linux $Args).Split(' ') $(_path_to_linux $_temp.ToString()).Split(' ')
+        wsl $pager $(_path_to_linux $Args).Split(' ') $(_path_to_linux $_temp.ToString()).Split(' ')
 
         # Delete unnecessary temporary file and variable
         Remove-Item $_temp
         Remove-Variable _temp
     }
     else {
-        wsl less $(_path_to_linux $Args).Split(' ')
+        wsl $pager $(_path_to_linux $Args).Split(' ')
     }
 }
+function less { _linux_pager less $Args }
+function lv   { _linux_pager lv   $Args }
 
 # ls
 Get-Alias ls *> $null && Remove-Item alias:ls
