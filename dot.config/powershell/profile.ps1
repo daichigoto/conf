@@ -169,7 +169,7 @@ function _linux_pager {
     $pager = $Args[0]
 
     # Remove pager command from arguments to pass arguments to pager
-    $Args = $Args[1..$Args.Length - 1]
+    $Args = $Args[1..($Args.Length - 1)]
 
     if ($Input.Length) {
         $Input.Reset()
