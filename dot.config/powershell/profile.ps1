@@ -191,8 +191,8 @@ function _linux_pager {
         wsl $pager $(_path_to_linux $Args).Split(' ')
     }
 }
-function less { _linux_pager less $Args }
-function lv   { _linux_pager lv   $Args }
+function less { _linux_pager less $Args.Split(' ') }
+function lv   { _linux_pager lv   $Args.Split(' ') }
 
 # ls
 Get-Alias ls *> $null && Remove-Item alias:ls
