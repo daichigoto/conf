@@ -40,7 +40,7 @@ $OutputEncoding = [System.Console]::OutputEncoding =
 # Definition of Linux commands used via wsl
 #========================================================================
 # Linux pagers
-$_linux_pagers = $("less", "lv")
+$_linux_pagers = @("less", "lv")
 
 # Linux PATH and commands
 $_linux_path = (wsl echo '$PATH').Split(":") -NotMatch "/mnt"
