@@ -48,7 +48,7 @@ $_linux_command_paths = (
     wsl ls -d ($_linux_path[($_linux_path.Length - 1)..0] -replace "$","/*")
 ) 2> $null
 
-# Generate Linux command functions
+# Generate Linux commands functions
 ForEach($n in $_linux_command_paths) {
     $_n = (Split-Path -Leaf $n)
     $_linux_functions += "
@@ -90,6 +90,7 @@ ForEach($_n in $_linux_pagers) {
         }"
 }
 
+# Function that converts Windows paths to Linux paths
 $_linux_functions += @'
     function _path_to_linux {
         $linuxpath = @()
