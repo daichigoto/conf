@@ -136,7 +136,7 @@ Remove-Variable _temp
 Remove-Variable _temp_ps1
 Remove-Variable _linux_path
 Remove-Variable _linux_command_paths
-#Remove-Variable _linux_functions
+Remove-Variable _linux_functions
 
 #========================================================================
 # Individual Linux command function definitions
