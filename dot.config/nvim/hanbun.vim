@@ -134,7 +134,7 @@ augroup AddHanbunMode
   autocmd BufNewFile,BufRead typescript.xml nmap "" /\(""\\|''\)<CR>l
 
   " viS     Visual selection of Japanese section
-  autocmd BufNewFile,BufRead typescript.xml nmap viS ?\(>\\|。\\|\n\n\)<CR>l<C-v>/。<CR>
+  autocmd BufNewFile,BufRead typescript.xml nnoremap vis ?\(。\\|\.\\|^$\\|>\)<CR>lv/\(。\\|\.\\|^$\\|<\\|:\)<CR>
 
   " Conflicts with the auto indent feature. For this reason, the indent 
   " on the plug-in side is turned off, and the formatting function by 
