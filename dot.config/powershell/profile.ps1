@@ -39,12 +39,16 @@ $OutputEncoding = [System.Console]::OutputEncoding =
 #========================================================================
 # Definition of Linux commands used via wsl
 #========================================================================
+# Linux pagers
+$_linux_pagers = @("less", "lv")
+
+# Linux PATH and commands
 $_linux_path = (wsl echo '$PATH').Split(":") -NotMatch "/mnt"
 $_linux_command_paths = (
     wsl ls -d ($_linux_path[($_linux_path.Length - 1)..0] -replace "$","/*")
 ) 2> $null
 
-# Generate Linux command functions
+# Generate Linux commands functions
 ForEach($n in $_linux_command_paths) {
     $_n = (Split-Path -Leaf $n)
     $_linux_functions += "
@@ -58,9 +62,35 @@ ForEach($n in $_linux_command_paths) {
             }
         }"
 }
-Remove-Variable n
-Remove-Variable _n
 
+# Generate Linux pagers functions
+ForEach($_n in $_linux_pagers) {
+    $_linux_functions += "
+        function $_n {
+            if (`$Input.Length) { 
+                `$Input.Reset(); 
+        
+                # Prepare temporary file path
+                `$_temp = New-TemporaryFile
+        
+                # Write data from pipeline to the temporary file
+                `$Input | Out-File `$_temp
+        
+                # Do $_n
+                wsl $_n `$(_path_to_linux `$Args).Split(' ') ``
+                    `$(_path_to_linux `$_temp.ToString()).Split(' ')
+        
+                # Delete unnecessary temporary file and variable
+                Remove-Item `$_temp
+                Remove-Variable _temp
+            } 
+            else { 
+                wsl $_n `$(_path_to_linux `$Args).Split(' ')
+            }
+        }"
+}
+
+# Function that converts Windows paths to Linux paths
 $_linux_functions += @'
     function _path_to_linux {
         $linuxpath = @()
@@ -101,6 +131,8 @@ $_linux_functions | Out-File $_temp_ps1
 Remove-Item $_temp_ps1
 
 # Delete unnecessary variables
+Remove-Variable n
+Remove-Variable _n
 Remove-Variable _temp
 Remove-Variable _temp_ps1
 Remove-Variable _linux_path
@@ -162,37 +194,6 @@ function grep {
 
     $Input | wsl grep $Args
 }
-
-# pager
-function _linux_pager {
-    # The first argument is the pager command name
-    $pager = $Args[0]
-
-    # Remove pager command from arguments to pass arguments to pager
-    $Args = $Args[1..($Args.Length - 1)]
-
-    if ($Input.Length) {
-        $Input.Reset()
-
-        # Prepare temporary file path
-        $_temp = New-TemporaryFile
-
-        # Write data from pipeline to the temporary file
-        $Input | Out-File $_temp
-
-        # Do less
-        wsl $pager $(_path_to_linux $Args).Split(' ') $(_path_to_linux $_temp.ToString()).Split(' ')
-
-        # Delete unnecessary temporary file and variable
-        Remove-Item $_temp
-        Remove-Variable _temp
-    }
-    else {
-        wsl $pager $(_path_to_linux $Args).Split(' ')
-    }
-}
-function less { _linux_pager less $Args.Split(' ') }
-function lv   { _linux_pager lv   $Args.Split(' ') }
 
 # ls
 Get-Alias ls *> $null && Remove-Item alias:ls
