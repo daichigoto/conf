@@ -68,7 +68,8 @@ nnoremap cc :call MoveCurtorToCenterOfScreen()<CR>
 
 " NN	Move to next empty element
 " MM	Move to pre empty element
-" ""	Move to next empty single/double quotation
+" ""	Move to next empty double quotation
+" ''	Move to next empty single quotation
 autocmd BufNewFile,BufRead typescript.xml nmap NN /<\([^>/]\+\)><\/\1><CR>/<<CR>
 autocmd BufNewFile,BufRead typescript.xml nmap MM ?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>
 autocmd BufNewFile,BufRead typescript.xml nmap "" /""<CR>l
