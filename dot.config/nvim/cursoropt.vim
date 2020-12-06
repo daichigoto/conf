@@ -26,7 +26,7 @@
 " author: Daichi GOTO (daichi@ongs.co.jp)
 " first edition: Mon Jul  6 12:50:17 JST 2020
 
-" move cursor to center of line, scroll line to center of screen
+" Move cursor to center of line, scroll line to center of screen
 function MoveCurtorToCenterOfScreen()
   let lwinheight = winheight('.')
   let lwinwidth = winwidth('.')
@@ -63,4 +63,13 @@ function MoveCurtorToCenterOfScreen()
   endif
 endfunction
 
+" cc	Move cursor to center of line, scroll line to center of screen
 nnoremap cc :call MoveCurtorToCenterOfScreen()<CR>
+
+" NN	Move to next empty element
+" MM	Move to pre empty element
+" ""	Move to next empty single/double quotation
+autocmd BufNewFile,BufRead typescript.xml nmap NN /<\([^>/]\+\)><\/\1><CR>/<<CR>
+autocmd BufNewFile,BufRead typescript.xml nmap MM ?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>
+autocmd BufNewFile,BufRead typescript.xml nmap "" /""<CR>l
+autocmd BufNewFile,BufRead typescript.xml nmap '' /''<CR>l
