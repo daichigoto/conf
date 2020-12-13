@@ -45,10 +45,8 @@ nnoremap j gj
 nnoremap gj j
 
 " tab jump
-nmap <silent> <Tab> 15<Right>
-vmap <silent> <Tab> <C-o>15<Right>
-nmap <silent> <S-Tab> 15<Left>
-vmap <silent> <S-Tab> <C-o>15<Left>
+nnoremap <Tab> 15<Right>
+nnoremap <S-Tab> 15<Left>
 
 " C-a	Move to the beginning of the line
 " C-e	Move to the end of line
@@ -63,10 +61,10 @@ cnoremap <C-e> <End>
 " MM	Move to pre empty element
 " ""	Move to next empty double quotation
 " ''	Move to next empty single quotation
-nmap NN /<\([^>/]\+\)><\/\1><CR>/<<CR>
-nmap MM ?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>
-nmap "" /""<CR>l
-nmap '' /''<CR>l
+nnoremap NN /<\([^>/]\+\)><\/\1><CR>/<<CR>
+nnoremap MM ?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>
+nnoremap "" /""<CR>l
+nnoremap '' /''<CR>l
 
 " Move cursor to center of line, scroll line to center of screen
 function MoveCurtorToCenterOfScreen()
