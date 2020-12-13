@@ -26,6 +26,48 @@
 " author: Daichi GOTO (daichi@ongs.co.jp)
 " first edition: Mon Jul  6 12:50:17 JST 2020
 
+" allow some keys to move the cursor left/right to move to
+" the previous/next line when the cursor is on the first/last
+" character in the line.
+"  b - [Backspace]  normal visual 
+"  s - [Space]      normal visual
+"  < - [Left]       normal visual
+"  > - [Right]      normal visual
+"  [ - [Left]       insert replace
+"  ] - [Right]      insert replace
+"  ~ - ~            normal
+set whichwrap=b,s,[,],<,>,~,h,l
+
+" displayed line movement gj/gk as default instead of j/k
+nnoremap k gk
+nnoremap gk k
+nnoremap j gj
+nnoremap gj j
+
+" tab jump
+nmap <silent> <Tab> 15<Right>
+vmap <silent> <Tab> <C-o>15<Right>
+nmap <silent> <S-Tab> 15<Left>
+vmap <silent> <S-Tab> <C-o>15<Left>
+
+" C-a	Move to the beginning of the line
+" C-e	Move to the end of line
+nnoremap <C-a> <Home>
+inoremap <C-a> <Home>
+cnoremap <C-a> <Home>
+nnoremap <C-e> <End>
+inoremap <C-e> <End>
+cnoremap <C-e> <End>
+
+" NN	Move to next empty element
+" MM	Move to pre empty element
+" ""	Move to next empty double quotation
+" ''	Move to next empty single quotation
+nmap NN /<\([^>/]\+\)><\/\1><CR>/<<CR>
+nmap MM ?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>
+nmap "" /""<CR>l
+nmap '' /''<CR>l
+
 " Move cursor to center of line, scroll line to center of screen
 function MoveCurtorToCenterOfScreen()
   let lwinheight = winheight('.')
@@ -65,12 +107,3 @@ endfunction
 
 " cc	Move cursor to center of line, scroll line to center of screen
 nnoremap cc :call MoveCurtorToCenterOfScreen()<CR>
-
-" NN	Move to next empty element
-" MM	Move to pre empty element
-" ""	Move to next empty double quotation
-" ''	Move to next empty single quotation
-nmap NN /<\([^>/]\+\)><\/\1><CR>/<<CR>
-nmap MM ?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>
-nmap "" /""<CR>l
-nmap '' /''<CR>l

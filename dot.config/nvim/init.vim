@@ -107,16 +107,16 @@ let g:airline_theme = 'molokai'
 "  b8		move to buffer 8
 "  b9		move to buffer 9
 nnoremap <silent> <C-t> :bnext<CR>
-nnoremap <silent> bn :bnext<CR>
-nnoremap <silent> b1 :b1<CR>
-nnoremap <silent> b2 :b2<CR>
-nnoremap <silent> b3 :b3<CR>
-nnoremap <silent> b4 :b4<CR>
-nnoremap <silent> b5 :b5<CR>
-nnoremap <silent> b6 :b6<CR>
-nnoremap <silent> b7 :b7<CR>
-nnoremap <silent> b8 :b8<CR>
-nnoremap <silent> b9 :b9<CR>
+"nnoremap <silent> bn :bnext<CR>
+"nnoremap <silent> b1 :b1<CR>
+"nnoremap <silent> b2 :b2<CR>
+"nnoremap <silent> b3 :b3<CR>
+"nnoremap <silent> b4 :b4<CR>
+"nnoremap <silent> b5 :b5<CR>
+"nnoremap <silent> b6 :b6<CR>
+"nnoremap <silent> b7 :b7<CR>
+"nnoremap <silent> b8 :b8<CR>
+"nnoremap <silent> b9 :b9<CR>
 let g:miniBufExplorerMoreThanOne = 0 "always show MiniBufExplorer
 
 " fzf
@@ -217,20 +217,11 @@ nmap ga <Plug>(EasyAlign)
 " disable mouse feature
 set mouse=
 
-" allow some keys to move the cursor left/right to move to
-" the previous/next line when the cursor is on the first/last
-" character in the line.
-"  b - [Backspace]  normal visual 
-"  s - [Space]      normal visual
-"  < - [Left]       normal visual
-"  > - [Right]      normal visual
-"  [ - [Left]       insert replace
-"  ] - [Right]      insert replace
-"  ~ - ~            normal
-set whichwrap=b,s,[,],<,>,~,h,l
+" non-highlight for search keyword
+set nohlsearch
 
-set nohlsearch " non-highlight for search keyword
-set cursorline " use cursorline indicator
+" use cursorline indicator
+set cursorline
 
 " enable line numbers
 set number
@@ -243,18 +234,6 @@ set wildmenu wildmode=list:full
 
 " use decimal instead of octal
 set nrformats=
-
-" displayed line movement gj/gk as default instead of j/k
-nnoremap k gk
-nnoremap gk k
-nnoremap j gj
-nnoremap gj j
-
-" tab jump
-nmap <silent> <Tab> 15<Right>
-vmap <silent> <Tab> <C-o>15<Right>
-nmap <silent> <S-Tab> 15<Left>
-vmap <silent> <S-Tab> <C-o>15<Left>
 
 " for useful argdo mutli-files replaces
 set hidden
