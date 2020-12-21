@@ -61,10 +61,18 @@ cnoremap <C-e> <End>
 " MM	Move to pre empty element
 " ""	Move to next empty double quotation
 " ''	Move to next empty single quotation
+" ..	Move to next period and comma
+" ::	Move to pre empty double quotation (Opposite of "")
+" ;;	Move to pre empty single quotation (Opposite of '')
+" ,,	Move to pre period and comma (Opposite of ..)
 nnoremap NN /<\([^>/]\+\)><\/\1><CR>/<<CR>
 nnoremap MM ?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>
 nnoremap "" /""<CR>l
 nnoremap '' /''<CR>l
+nnoremap .. /\(。\\|、\\|[.,][ 	$]\)<CR>l
+nnoremap :: ?""<CR>l
+nnoremap ;; ?''<CR>l
+nnoremap ,, ?\(。\\|、\\|[.,][ 	$]\)<CR>h?\(。\\|、\\|[.,][  $]\)<CR>l
 
 " Move cursor to center of line, scroll line to center of screen
 function MoveCurtorToCenterOfScreen()
