@@ -36,5 +36,5 @@ set matchpairs+=「:」,（:）,「:」,『:』,【:】,［:］,〈:〉,《:》,
 nnoremap vis ?\(。\\|\.\\|^$\\|>\)<CR>lv/\(。\\|\.\\|^$\\|<\\|:\)<CR>
 
 " ( ) - Extend the movement of the sentence to the Japanese
-nnoremap ( ?\(。\\|、\\|[.,:][ \t$]\)<CR>h?\(。\\|、\\|[.,:][ \t$]\)<CR>l
-nnoremap ) /\(。\\|、\\|[.,:][ \t$]\)<CR>l
+nnoremap ( ?\(。\\|、\\|[.:][ \t\n]\)<CR>h?\(。\\|、\\|[.:][ \t\n]\)<CR>l
+nnoremap ) /\(。\\|、\\|[.:][ \t\n]\\|^\n\)<CR>l
