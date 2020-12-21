@@ -32,5 +32,9 @@ set formatoptions+=mM
 " add parenthesis combination
 set matchpairs+=「:」,（:）,「:」,『:』,【:】,［:］,〈:〉,《:》,〔:〕,[:],｛:｝
 
-" viS - Visual selection of Japanese section
+" viS - Extend the selection of the sentence to the Japanese
 nnoremap vis ?\(。\\|\.\\|^$\\|>\)<CR>lv/\(。\\|\.\\|^$\\|<\\|:\)<CR>
+
+" ( ) - Extend the movement of the sentence to the Japanese
+nnoremap ( ?\(。\\|、\\|[.,:][ \t$]\)<CR>h?\(。\\|、\\|[.,:][ \t$]\)<CR>l
+nnoremap ) /\(。\\|、\\|[.,:][ \t$]\)<CR>l
