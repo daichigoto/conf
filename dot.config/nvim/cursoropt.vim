@@ -57,14 +57,14 @@ nnoremap <C-e> <End>
 inoremap <C-e> <End>
 cnoremap <C-e> <End>
 
-" NN	Move to next empty element
-" MM	Move to pre empty element
+" ><	Move to next empty element
+" <>	Move to pre empty element (Opposite direction of ><)
 " ""	Move to next empty double quotation
 " ''	Move to next empty single quotation
-" ::	Move to pre empty double quotation (Opposite of "")
-" ;;	Move to pre empty single quotation (Opposite of '')
-nnoremap NN /<\([^>/]\+\)><\/\1><CR>/<<CR>
-nnoremap MM ?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>
+" ::	Move to pre empty double quotation (Opposite direction of "")
+" ;;	Move to pre empty single quotation (Opposite direction of '')
+nnoremap >< /<\([^>/]\+\)><\/\1><CR>/<<CR>
+nnoremap <> ?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>
 nnoremap "" /""<CR>l
 nnoremap '' /''<CR>l
 nnoremap :: ?""<CR>l
