@@ -44,6 +44,10 @@ nnoremap gk k
 nnoremap j gj
 nnoremap gj j
 
+" set the left side of the w key (q on US keyboard) to move in the opposite 
+" direction of w
+nnoremap q b
+
 " tab jump
 nnoremap <Tab> 15<Right>
 nnoremap <S-Tab> 15<Left>
