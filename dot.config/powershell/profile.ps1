@@ -232,4 +232,4 @@ function cd16 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-16] }
 function cd17 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-17] }
 function cd18 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-18] }
 function cd19 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-19] }
-function cd12 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-20] }
+function cd20 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-20] }
