@@ -1,4 +1,4 @@
-# Copyright (c) 2020 Daichi GOTO <daichi@ongs.co.jp>
+# Copyright (c) 2020,2021 Daichi GOTO <daichi@ongs.co.jp>
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -209,3 +209,27 @@ Set-Alias -Name edge -Value "C:\Program Files (x86)\Microsoft\Edge\Application\m
 Set-Alias -Name chrome -Value "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
 
 Get-Alias man *> $null && Remove-Item alias:man
+
+#========================================================================
+# cd shortcuts
+#========================================================================
+function cd1 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-1] }
+function cd2 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-2] }
+function cd3 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-3] }
+function cd4 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-4] }
+function cd5 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-5] }
+function cd6 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-6] }
+function cd7 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-7] }
+function cd8 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-8] }
+function cd9 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-9] }
+function cd10 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-10] }
+function cd11 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-11] }
+function cd12 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-12] }
+function cd13 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-13] }
+function cd14 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-14] }
+function cd15 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-15] }
+function cd16 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-16] }
+function cd17 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-17] }
+function cd18 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-18] }
+function cd19 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-19] }
+function cd12 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-20] }
