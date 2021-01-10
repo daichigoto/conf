@@ -1,4 +1,4 @@
-" Copyright (c) 2020 Daichi GOTO <daichi@ongs.co.jp>
+" Copyright (c) 2020,2021 Daichi GOTO <daichi@ongs.co.jp>
 " All rights reserved.
 "
 " Redistribution and use in source and binary forms, with or without
@@ -57,22 +57,28 @@ nnoremap <S-Tab> 15<Left>
 nnoremap <C-a> <Home>
 inoremap <C-a> <Home>
 cnoremap <C-a> <Home>
+vnoremap <C-a> <Home>
 nnoremap <C-e> <End>
 inoremap <C-e> <End>
 cnoremap <C-e> <End>
+vnoremap <C-e> <End>
 
-" ><	Move to next empty element
-" <>	Move to pre empty element (Opposite direction of ><)
-" ""	Move to next empty double quotation
-" ''	Move to next empty single quotation
-" ::	Move to pre empty double quotation (Opposite direction of "")
-" ;;	Move to pre empty single quotation (Opposite direction of '')
+" ><	Move to the next empty element
+" <>	Move to the pre empty element (Opposite direction of ><)
+" ""	Move to the next empty double quotation
+" ''	Move to the next empty single quotation
+" ::	Move to the pre empty double quotation (Opposite direction of "")
+" ;;	Move to the pre empty single quotation (Opposite direction of '')
+" )	Move to the next break of the current sentence (visual mode)
+" (	Move to the pre break of the current sentence (visual mode)
 nnoremap >< /<\([^>/]\+\)><\/\1><CR>/<<CR>
 nnoremap <> ?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>
 nnoremap "" /""<CR>l
 nnoremap '' /''<CR>l
 nnoremap :: ?""<CR>l
 nnoremap ;; ?''<CR>l
+vnoremap ( ?\(。\\|、\\|[.:][ \t\n]\)<CR>h?\(。\\|、\\|[.:][ \t\n]\)<CR>l
+vnoremap ) /\(。\\|、\\|[.:][ \t\n]\\|^\n\)<CR>
 
 " Move cursor to center of line, scroll line to center of screen
 function MoveCurtorToCenterOfScreen()
