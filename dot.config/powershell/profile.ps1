@@ -213,23 +213,44 @@ Get-Alias man *> $null && Remove-Item alias:man
 #========================================================================
 # cd shortcuts
 #========================================================================
-function cd1 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-1] }
-function cd2 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-2] }
-function cd3 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-3] }
-function cd4 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-4] }
-function cd5 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-5] }
-function cd6 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-6] }
-function cd7 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-7] }
-function cd8 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-8] }
-function cd9 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-9] }
-function cd10 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-10] }
-function cd11 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-11] }
-function cd12 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-12] }
-function cd13 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-13] }
-function cd14 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-14] }
-function cd15 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-15] }
-function cd16 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-16] }
-function cd17 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-17] }
-function cd18 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-18] }
-function cd19 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-19] }
-function cd20 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-20] }
+function cd1 { cd (dir -Directory)[-1] }
+function cd1 { cd (dir -Directory)[-1] }
+function cd2 { cd (dir -Directory)[-2] }
+function cd3 { cd (dir -Directory)[-3] }
+function cd4 { cd (dir -Directory)[-4] }
+function cd5 { cd (dir -Directory)[-5] }
+function cd6 { cd (dir -Directory)[-6] }
+function cd7 { cd (dir -Directory)[-7] }
+function cd8 { cd (dir -Directory)[-8] }
+function cd9 { cd (dir -Directory)[-9] }
+function cd10 { cd (dir -Directory)[-10] }
+function cd11 { cd (dir -Directory)[-11] }
+function cd12 { cd (dir -Directory)[-12] }
+function cd13 { cd (dir -Directory)[-13] }
+function cd14 { cd (dir -Directory)[-14] }
+function cd15 { cd (dir -Directory)[-15] }
+function cd16 { cd (dir -Directory)[-16] }
+function cd17 { cd (dir -Directory)[-17] }
+function cd18 { cd (dir -Directory)[-18] }
+function cd19 { cd (dir -Directory)[-19] }
+function cd20 { cd (dir -Directory)[-20] }
+#function cd1 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-1] }
+#function cd2 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-2] }
+#function cd3 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-3] }
+#function cd4 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-4] }
+#function cd5 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-5] }
+#function cd6 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-6] }
+#function cd7 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-7] }
+#function cd8 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-8] }
+#function cd9 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-9] }
+#function cd10 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-10] }
+#function cd11 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-11] }
+#function cd12 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-12] }
+#function cd13 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-13] }
+#function cd14 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-14] }
+#function cd15 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-15] }
+#function cd16 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-16] }
+#function cd17 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-17] }
+#function cd18 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-18] }
+#function cd19 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-19] }
+#function cd20 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-20] }
