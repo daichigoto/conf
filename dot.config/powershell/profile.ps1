@@ -214,7 +214,6 @@ Get-Alias man *> $null && Remove-Item alias:man
 # cd shortcuts
 #========================================================================
 function cd1 { cd (dir -Directory)[-1] }
-function cd1 { cd (dir -Directory)[-1] }
 function cd2 { cd (dir -Directory)[-2] }
 function cd3 { cd (dir -Directory)[-3] }
 function cd4 { cd (dir -Directory)[-4] }
