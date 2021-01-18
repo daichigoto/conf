@@ -75,8 +75,8 @@ nnoremap >< /<\([^>/]\+\)><\/\1><CR>/<<CR>
 nnoremap <> ?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>
 nnoremap "" /""<CR>l
 nnoremap '' /''<CR>l
-nnoremap :: ?""<CR>l
-nnoremap ;; ?''<CR>l
+nnoremap :: hh?""<CR>l
+nnoremap ;; hh?''<CR>l
 vnoremap ( hh?\(。\\|、\\|[.:][ \t\n]\)<CR>l
 vnoremap ) /\(。\\|、\\|[.:][ \t\n]\\|^\n\)<CR>
 
