@@ -77,8 +77,6 @@ nnoremap "" /""<CR>l
 nnoremap '' /''<CR>l
 nnoremap :: hh?""<CR>l
 nnoremap ;; hh?''<CR>l
-vnoremap ( hh?\(。\\|、\\|[.:][ \t\n]\)<CR>l
-vnoremap ) /\(。\\|、\\|[.:][ \t\n]\\|^\n\)<CR>
 
 " Move cursor to center of line, scroll line to center of screen
 function MoveCurtorToCenterOfScreen()
