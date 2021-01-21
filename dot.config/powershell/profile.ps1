@@ -253,3 +253,8 @@ function cd20 { cd (dir -Directory)[-20] }
 #function cd18 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-18] }
 #function cd19 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-19] }
 #function cd20 { cd (dir | Select-String -Pattern '[0-9]{8}$')[-20] }
+function doc { cd ~/Documents/ }    
+function dwm { cd ~/Downloads/ }    
+function drv { cd ~/OneDrive/ }    
+function pic { cd ~/Pictures/ }    
+function vid { cd ~/Videos/ }
