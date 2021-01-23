@@ -258,3 +258,12 @@ function dwm { cd ~/Downloads/ }
 function drv { cd ~/OneDrive/ }    
 function pic { cd ~/Pictures/ }    
 function vid { cd ~/Videos/ }
+
+#========================================================================
+# utilities shortcuts
+#========================================================================
+function g_pull { git pull }
+function g_push { git commit -m 'updated'; git push origin master }
+function g_add { git add }
+
+function getpass { openssl rand -base64 20 }
