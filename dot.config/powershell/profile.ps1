@@ -55,10 +55,10 @@ ForEach($n in $_linux_command_paths) {
         function $_n {
             if (`$Input.Length) {
                 `$Input.Reset()
-                `$Input | wsl $n `$(_path_to_linux `$Args).Split(' ')
+                `$Input | wsl $n ([String]`$(_path_to_linux `$Args)).Split(' ')
             }
             else {
-                wsl $n `$(_path_to_linux `$Args).Split(' ')
+                wsl $n ([String]`$(_path_to_linux `$Args)).Split(' ')
             }
         }"
 }
