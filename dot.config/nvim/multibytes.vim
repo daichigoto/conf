@@ -33,10 +33,10 @@ set formatoptions+=mM
 set matchpairs+=「:」,（:）,「:」,『:』,【:】,［:］,〈:〉,《:》,〔:〕,[:],｛:｝
 
 " viS - Extend the selection of the sentence to the Japanese
-nnoremap vis ?\(。\\|\.\\|^$\\|>\)<CR>lv/\(。\\|\.\\|^$\\|<\\|:\)<CR>
+nnoremap vis ?\(。\\|\.\\|^$\\|[>:]\)<CR>lv/\(。\\|\.\\|^$\\|<\\|:\)<CR>
 
 " ( ) - Extend the movement of the sentence to the Japanese
-nnoremap ( ?\(。\\|、\\|[.:][ \t\n]\)<CR>h?\(。\\|、\\|[.:][ \t\n]\)<CR>l
-vnoremap ( hh?\(。\\|、\\|[.:][ \t\n]\)<CR>l
+nnoremap ( ?\(。\\|、\\|[.:][ \t\n]\\|[\[>]\)<CR>h?\(。\\|、\\|[.:][ \t\n]\\|[\[>]\)<CR>l
+vnoremap ( hh?\(。\\|、\\|[.:][ \t\n]\\|[\[>]\)<CR>l
 nnoremap ) /\(。\\|、\\|[.:][ \t\n]\\|^\n\)<CR>l
-vnoremap ) /\(。\\|、\\|[.:][ \t\n]\\|^\n\)<CR>
+vnoremap ) /\(。\\|、\\|[.:][ \t\n]\\|<\/\\|^\n\)<CR>
