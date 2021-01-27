@@ -1,4 +1,4 @@
-# Copyright (c) 2016 Daichi GOTO <daichi@ongs.co.jp>
+# Copyright (c) 2016,2021 Daichi GOTO <daichi@ongs.co.jp>
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -31,7 +31,7 @@ case '*'
 end	
 
 function prompt_pwd
-        set -l realhome ~
+	set -l realhome ~
 	awk -v PWD=(echo $PWD | sed "s|^$realhome|~|") -v COLS=$COLUMNS \
 	'BEGIN {
 		limit=COLS*4/10
@@ -88,11 +88,9 @@ alias du="du -h"
 alias df="df -h"
 alias su="su -l"
 
-## load iTerm2 Shell Integration initialization
-if [ -f ~/.iterm2_shell_integration.fish ]
-	not type iterm2_status > /dev/null 2>&1
-	and source ~/.iterm2_shell_integration.fish
-end
+## shortcut keys
+bind \cD kill-word		# Ctrl-d
+bind \cW backward-kill-word	# Ctrl-w
 
 ## load user .aliases and user .
 function source_alias --description "source ~/.aliases of Bourne Shell"
