@@ -33,10 +33,12 @@ set formatoptions+=mM
 set matchpairs+=「:」,（:）,「:」,『:』,【:】,［:］,〈:〉,《:》,〔:〕,[:],｛:｝
 
 " viS - Extend the selection of the sentence to the Japanese
-nnoremap vis ?\(。\\|\.\\|^$\\|[>:]\)<CR>lv/\(。\\|\.\\|^$\\|<\\|:\)<CR>
+"nnoremap vis ?\(。\\|\.\\|^$\\|[>:]\)<CR>lv/\(。\\|\.\\|^$\\|<\\|:\)<CR>
+nnoremap vis ?\(>[^\n]\\|[。？！]\\|[.?!][ \t\n]\)<CR>lv/\(.[^> ]<\\|[。？！]\\|[.?!][ \t\n]\)<CR>
+"nnoremap vis ?\(>[^\n]\\|[。？！]\\|[.?!][ \t\n]\)<CR>
 
 " ( ) - Extend the movement of the sentence to the Japanese
-nnoremap ( h?\([:[。、]\\|[^ \t]<\\|>\\|[.,][ \t\n]\)<CR>l
-vnoremap ( h?\([:[。、]\\|[^ \t]<\\|>\\|[.,][ \t\n]\)<CR>l
-nnoremap ) h/\(>\\|[:[\]。、]\\|[^ \t]<\\|[.,][ \t\n]\)<CR>l
-vnoremap ) h/\(>\\|[:[\]。、]\\|[^ \t]<\\|[.,][ \t\n]\)<CR>l
+nnoremap ( h?\(><\\|.[^> ]<\\|>[^\n]\\|[:。、？！]\\|[.,?!][ \t\n]\)<CR>l
+vnoremap ( h?\(><\\|.[^> ]<\\|>[^\n]\\|[:。、？！]\\|[.,?!][ \t\n]\)<CR>l
+nnoremap ) h/\(><\\|.[^> ]<\\|>[^\n]\\|[:。、？！]\\|[.,?!][ \t\n]\)<CR>l
+vnoremap ) h/\(><\\|.[^> ]<\\|>[^\n]\\|[:。、？！]\\|[.,?!][ \t\n]\)<CR>l
