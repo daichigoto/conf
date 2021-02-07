@@ -33,7 +33,7 @@ set formatoptions+=mM
 set matchpairs+=「:」,（:）,「:」,『:』,【:】,［:］,〈:〉,《:》,〔:〕,[:],｛:｝
 
 " viS - Extend the selection of the sentence to the Japanese
-nnoremap vis ?>[^\n]\\|.[^ \t>]<\\|[。？！]\\|[.?!][ \t\n]<CR>
+nnoremap vis h?>[^\n]\\|.[^ \t>]<\\|[。？！]\\|[.?!][ \t\n]<CR>
    \lv/>[^\n]\\|.[^ \t>]<\\|[。？！]\\|[.?!][ \t\n]<CR>l
 
 " ( ) - Extend the movement of the sentence to the Japanese
