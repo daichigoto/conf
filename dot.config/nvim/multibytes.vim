@@ -34,7 +34,7 @@ set matchpairs+=「:」,（:）,「:」,『:』,【:】,［:］,〈:〉,《:》,
 
 " viS - Extend the selection of the sentence to the Japanese
 nnoremap vis h?>[^\n]\\|.[^ \t>]<\\|[。？！]\\|[.?!][ \t\n]<CR>
-   \lv/>[^\n]\\|.[^ \t>]<\\|[。？！]\\|[.?!][ \t\n]<CR>l
+   \lv/>[^\n]\\|.[^ \t>]<\\|[。？！]\\|[.?!][ \t\n]<CR>
 
 " ( ) - Extend the movement of the sentence to the Japanese
 nnoremap ( h?>[^\n]\\|.[^ \t>]<\\|[:。、？！]\\|[.,?!][ \t\n]<CR>l
