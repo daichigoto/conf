@@ -130,4 +130,8 @@ augroup AddHanbunMode
   " on the plug-in side is turned off, and the formatting function by 
   " the auto indent mode is used. This is why I set shiftwidth to 1.
   set shiftwidth=1
+
+  " XXX
+  autocmd BufNewFile,BufRead typescript.xml nnoremap lead /lead:<CR>5l
+  autocmd BufNewFile,BufRead typescript.xml nnoremap title /   <title><p><CR>13l
 augroup End
