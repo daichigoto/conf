@@ -227,9 +227,9 @@ function linuxcmds {
 # Alias definition
 #========================================================================
 Set-Alias -Name open -Value explorer
-Set-Alias -Name edge -Value 
+Set-Alias -Name edge -Value `
     "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-Set-Alias -Name chrome -Value 
+Set-Alias -Name chrome -Value `
     "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
 Get-Alias man *> $null && Remove-Item alias:man
 
