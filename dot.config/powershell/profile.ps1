@@ -48,6 +48,7 @@ function linuxcmds {
     $_linux_pagers = @("less", "lv")
     
     # Linux PATH and commands
+    Write-Host "preparing linux commands:"
     $_linux_path = (wsl echo '$PATH').Split(":") -NotMatch "/mnt"
     $_linux_command_paths = (
         wsl ls -d ($_linux_path[($_linux_path.Length - 1)..0] -replace "$","/*")
@@ -65,7 +66,10 @@ function linuxcmds {
                 else {
                     wsl $n ([String]`$(_path_to_linux `$Args)).Split(' ')
                 }
-            }"
+            }
+	    Write-Host -NoNewline .
+	"
+        Write-Host -NoNewline '_'
     }
     
     # Generate Linux pagers functions
@@ -92,7 +96,10 @@ function linuxcmds {
                 else { 
                     wsl $_n `$(_path_to_linux `$Args).Split(' ')
                 }
-            }"
+            }
+	    Write-Host -NoNewline '_'
+	"
+        Write-Host -NoNewline .
     }
     
     # Function that converts Windows paths to Linux paths
@@ -123,7 +130,9 @@ function linuxcmds {
         
             $linuxpath
         }
+	Write-Host '_'
 '@
+    Write-Host -NoNewline .
     
     # Prepare temporary file path with extension .ps1
     $_temp = New-TemporaryFile
@@ -132,6 +141,8 @@ function linuxcmds {
     
     # Write function definition to temporary .ps1 file and parse
     $_linux_functions | Out-File $_temp_ps1
+    Write-Host
+    Write-Host "loading linux commands:"
     . $_temp_ps1
     Remove-Item $_temp_ps1
     
