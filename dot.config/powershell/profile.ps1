@@ -37,7 +37,7 @@ $OutputEncoding = [System.Console]::OutputEncoding =
     [System.Text.UTF8Encoding]::new()
 
 #========================================================================
-# Linux commnds integration mode
+# Linux commands integration mode
 #========================================================================
 function linuxcmds {
 
@@ -48,10 +48,11 @@ function linuxcmds {
     $_linux_pagers = @("less", "lv")
     
     # Linux PATH and commands
-    Write-Host "preparing linux commands:"
+    Write-Host "checking linux commands:"
     $_linux_path = (wsl echo '$PATH').Split(":") -NotMatch "/mnt"
     $_linux_command_paths = (
-        wsl ls -d ($_linux_path[($_linux_path.Length - 1)..0] -replace "$","/*")
+        wsl ls -d ($_linux_path[($_linux_path.Length - 1)..0] -replace 
+            "$","/*")
     ) 2> $null
     
     # Generate Linux commands functions
@@ -61,14 +62,15 @@ function linuxcmds {
             function global:$_n {
                 if (`$Input.Length) {
                     `$Input.Reset()
-                    `$Input | wsl $n ([String]`$(_path_to_linux `$Args)).Split(' ')
+                    `$Input | wsl $n ([String]`$(_path_to_linux 
+                        `$Args)).Split(' ')
                 }
                 else {
                     wsl $n ([String]`$(_path_to_linux `$Args)).Split(' ')
                 }
             }
-	    Write-Host -NoNewline .
-	"
+            Write-Host -NoNewline .
+        "
         Write-Host -NoNewline '_'
     }
     
@@ -97,9 +99,9 @@ function linuxcmds {
                     wsl $_n `$(_path_to_linux `$Args).Split(' ')
                 }
             }
-	    Write-Host -NoNewline '_'
-	"
-        Write-Host -NoNewline .
+            Write-Host -NoNewline .
+        "
+        Write-Host -NoNewline '_'
     }
     
     # Function that converts Windows paths to Linux paths
@@ -116,7 +118,8 @@ function linuxcmds {
                 # Change drive path to mount path
                 if ($winpath -match '^[A-Z]:') {
                     $drive = $winpath.Substring(0,1).ToLower()
-                    $linuxpath += "/mnt/" + $drive + $winpath.Substring(2).Replace('\','/')
+                    $linuxpath += "/mnt/" + $drive + 
+		        $winpath.Substring(2).Replace('\','/')
                 }
                 # Option is not converted
                 elseif ($winpath -match '^[-+]') {
@@ -130,9 +133,9 @@ function linuxcmds {
         
             $linuxpath
         }
-	Write-Host '_'
+        Write-Host .
 '@
-    Write-Host -NoNewline .
+    Write-Host -NoNewline '_'
     
     # Prepare temporary file path with extension .ps1
     $_temp = New-TemporaryFile
@@ -142,7 +145,7 @@ function linuxcmds {
     # Write function definition to temporary .ps1 file and parse
     $_linux_functions | Out-File $_temp_ps1
     Write-Host
-    Write-Host "loading linux commands:"
+    Write-Host "functionizing linux commands:"
     . $_temp_ps1
     Remove-Item $_temp_ps1
     
@@ -214,7 +217,8 @@ function linuxcmds {
     
     # ls
     Get-Alias ls *> $null && Remove-Item alias:ls
-    function global:ls { wsl ls --color=auto $(_path_to_linux $Args).Split(' ') }
+    function global:ls { wsl ls --color=auto $(_path_to_linux 
+        $Args).Split(' ') }
     function global:ll { ls -l $(_path_to_linux $Args).Split(' ') }
     function global:la { ls -a $(_path_to_linux $Args).Split(' ') }
 }
@@ -223,9 +227,10 @@ function linuxcmds {
 # Alias definition
 #========================================================================
 Set-Alias -Name open -Value explorer
-Set-Alias -Name edge -Value "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-Set-Alias -Name chrome -Value "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
-
+Set-Alias -Name edge -Value 
+    "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+Set-Alias -Name chrome -Value 
+    "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
 Get-Alias man *> $null && Remove-Item alias:man
 
 #========================================================================
