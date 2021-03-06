@@ -37,170 +37,177 @@ $OutputEncoding = [System.Console]::OutputEncoding =
     [System.Text.UTF8Encoding]::new()
 
 #========================================================================
-# Definition of Linux commands used via wsl
+# Linux commnds integration mode
 #========================================================================
-# Linux pagers
-$_linux_pagers = @("less", "lv")
+function linuxcmds {
 
-# Linux PATH and commands
-$_linux_path = (wsl echo '$PATH').Split(":") -NotMatch "/mnt"
-$_linux_command_paths = (
-    wsl ls -d ($_linux_path[($_linux_path.Length - 1)..0] -replace "$","/*")
-) 2> $null
-
-# Generate Linux commands functions
-ForEach($n in $_linux_command_paths) {
-    $_n = (Split-Path -Leaf $n)
-    $_linux_functions += "
-        function $_n {
-            if (`$Input.Length) {
-                `$Input.Reset()
-                `$Input | wsl $n ([String]`$(_path_to_linux `$Args)).Split(' ')
-            }
-            else {
-                wsl $n ([String]`$(_path_to_linux `$Args)).Split(' ')
-            }
-        }"
-}
-
-# Generate Linux pagers functions
-ForEach($_n in $_linux_pagers) {
-    $_linux_functions += "
-        function $_n {
-            if (`$Input.Length) { 
-                `$Input.Reset(); 
-        
-                # Prepare temporary file path
-                `$_temp = New-TemporaryFile
-        
-                # Write data from pipeline to the temporary file
-                `$Input | Out-File `$_temp
-        
-                # Do $_n
-                wsl $_n `$(_path_to_linux `$Args).Split(' ') ``
-                    `$(_path_to_linux `$_temp.ToString()).Split(' ')
-        
-                # Delete unnecessary temporary file and variable
-                Remove-Item `$_temp
-                Remove-Variable _temp
-            } 
-            else { 
-                wsl $_n `$(_path_to_linux `$Args).Split(' ')
-            }
-        }"
-}
-
-# Function that converts Windows paths to Linux paths
-$_linux_functions += @'
-    function _path_to_linux {
-        $linuxpath = @()
-    
-        # Convert arguments to Linux path style
-        ForEach($winpath in $Args) {
-            if ($winpath -eq $null) {
-                Break
-            }
-        
-            # Change drive path to mount path
-            if ($winpath -match '^[A-Z]:') {
-                $drive = $winpath.Substring(0,1).ToLower()
-                $linuxpath += "/mnt/" + $drive + $winpath.Substring(2).Replace('\','/')
-            }
-            # Option is not converted
-            elseif ($winpath -match '^[-+]') {
-                $linuxpath += $winpath
-            }
-            # Other argument is converted
-            else {
-                $linuxpath += ([String]$winpath).Replace('\','/')
-            }
-        }
-    
-        $linuxpath
-    }
+	#----------------------------------------------------------------
+	# Definition of Linux commands used via wsl
+	#----------------------------------------------------------------
+	# Linux pagers
+	$_linux_pagers = @("less", "lv")
+	
+	# Linux PATH and commands
+	$_linux_path = (wsl echo '$PATH').Split(":") -NotMatch "/mnt"
+	$_linux_command_paths = (
+	    wsl ls -d ($_linux_path[($_linux_path.Length - 1)..0] -replace "$","/*")
+	) 2> $null
+	
+	# Generate Linux commands functions
+	ForEach($n in $_linux_command_paths) {
+	    $_n = (Split-Path -Leaf $n)
+	    $_linux_functions += "
+	        function $_n {
+	            if (`$Input.Length) {
+	                `$Input.Reset()
+	                `$Input | wsl $n ([String]`$(_path_to_linux `$Args)).Split(' ')
+	            }
+	            else {
+	                wsl $n ([String]`$(_path_to_linux `$Args)).Split(' ')
+	            }
+	        }"
+	}
+	
+	# Generate Linux pagers functions
+	ForEach($_n in $_linux_pagers) {
+	    $_linux_functions += "
+	        function $_n {
+	            if (`$Input.Length) { 
+	                `$Input.Reset(); 
+	        
+	                # Prepare temporary file path
+	                `$_temp = New-TemporaryFile
+	        
+	                # Write data from pipeline to the temporary file
+	                `$Input | Out-File `$_temp
+	        
+	                # Do $_n
+	                wsl $_n `$(_path_to_linux `$Args).Split(' ') ``
+	                    `$(_path_to_linux `$_temp.ToString()).Split(' ')
+	        
+	                # Delete unnecessary temporary file and variable
+	                Remove-Item `$_temp
+	                Remove-Variable _temp
+	            } 
+	            else { 
+	                wsl $_n `$(_path_to_linux `$Args).Split(' ')
+	            }
+	        }"
+	}
+	
+	# Function that converts Windows paths to Linux paths
+	$_linux_functions += @'
+	    function _path_to_linux {
+	        $linuxpath = @()
+	    
+	        # Convert arguments to Linux path style
+	        ForEach($winpath in $Args) {
+	            if ($winpath -eq $null) {
+	                Break
+	            }
+	        
+	            # Change drive path to mount path
+	            if ($winpath -match '^[A-Z]:') {
+	                $drive = $winpath.Substring(0,1).ToLower()
+	                $linuxpath += "/mnt/" + $drive + $winpath.Substring(2).Replace('\','/')
+	            }
+	            # Option is not converted
+	            elseif ($winpath -match '^[-+]') {
+	                $linuxpath += $winpath
+	            }
+	            # Other argument is converted
+	            else {
+	                $linuxpath += ([String]$winpath).Replace('\','/')
+	            }
+	        }
+	    
+	        $linuxpath
+	    }
 '@
-
-# Prepare temporary file path with extension .ps1
-$_temp = New-TemporaryFile
-$_temp_ps1 = $_temp.FullName + ".ps1"
-Remove-Item $_temp
-
-# Write function definition to temporary .ps1 file and parse
-$_linux_functions | Out-File $_temp_ps1
-. $_temp_ps1
-Remove-Item $_temp_ps1
-
-# Delete unnecessary variables
-Remove-Variable n
-Remove-Variable _n
-Remove-Variable _temp
-Remove-Variable _temp_ps1
-Remove-Variable _linux_path
-Remove-Variable _linux_command_paths
-Remove-Variable _linux_functions
-
-#========================================================================
-# Individual Linux command function definitions
-#========================================================================
-# grep
-function grep {
-    $pattern_exists = $False
-    $path_exists = $False
-    $skip = $False
-    $i = 0
-
-    ForEach($a in $Args) {
-        if ($skip) {
-            $skip = $False
-            $i++
-            continue
-        }
-
-        # Options without argumetn
-        if ($a -cmatch '^-[abcdDEFGHhIiJLlmnOopqRSsUVvwxZ]') {
-        }
-        # Options with argument
-        elseif ($a -cmatch '^-[ABC]') {
-            $skip = $True
-        }
-        # Pattern file specification option
-        elseif ($a -ceq '-f') {
-            $skip = $True
-            $pattern_exists = $True
-            $Args[$i+1] = _path_to_linux $Args[$i+1]
-        }
-        # Pattern specification option
-        elseif ($a -ceq '-e') {
-            $skip = $True
-            $pattern_exists = $True
-        }
-        # Pattern or file path
-        elseif ($a -cnotmatch '^-') {
-            if ($pattern_exists) {
-                $path_exists = $True
-            }
-            else {
-                $pattern_exists = $True
-            }
-        }
-
-        $i++
-    }
-
-    # Change file path
-    if ($path_exists) {
-        $Args[-1] = _path_to_linux $Args[-1]
-    }
-
-    $Input | wsl grep $Args
+	
+	# Prepare temporary file path with extension .ps1
+	$_temp = New-TemporaryFile
+	$_temp_ps1 = $_temp.FullName + ".ps1"
+	Remove-Item $_temp
+	
+	# Write function definition to temporary .ps1 file and parse
+	$_linux_functions | Out-File $_temp_ps1
+	. $_temp_ps1
+	Remove-Item $_temp_ps1
+	
+	# Delete unnecessary variables
+	Remove-Variable n
+	Remove-Variable _n
+	Remove-Variable _temp
+	Remove-Variable _temp_ps1
+	Remove-Variable _linux_pagers
+	Remove-Variable _linux_path
+	Remove-Variable _linux_command_paths
+	Remove-Variable _linux_functions
+	
+	#----------------------------------------------------------------
+	# Individual Linux command function definitions
+	#----------------------------------------------------------------
+	# grep
+	function global:grep {
+	    $pattern_exists = $False
+	    $path_exists = $False
+	    $skip = $False
+	    $i = 0
+	
+	    ForEach($a in $Args) {
+	        if ($skip) {
+	            $skip = $False
+	            $i++
+	            continue
+	        }
+	
+	        # Options without argumetn
+	        if ($a -cmatch '^-[abcdDEFGHhIiJLlmnOopqRSsUVvwxZ]') {
+	        }
+	        # Options with argument
+	        elseif ($a -cmatch '^-[ABC]') {
+	            $skip = $True
+	        }
+	        # Pattern file specification option
+	        elseif ($a -ceq '-f') {
+	            $skip = $True
+	            $pattern_exists = $True
+	            $Args[$i+1] = _path_to_linux $Args[$i+1]
+	        }
+	        # Pattern specification option
+	        elseif ($a -ceq '-e') {
+	            $skip = $True
+	            $pattern_exists = $True
+	        }
+	        # Pattern or file path
+	        elseif ($a -cnotmatch '^-') {
+	            if ($pattern_exists) {
+	                $path_exists = $True
+	            }
+	            else {
+	                $pattern_exists = $True
+	            }
+	        }
+	
+	        $i++
+	    }
+	
+	    # Change file path
+	    if ($path_exists) {
+	        $Args[-1] = _path_to_linux $Args[-1]
+	    }
+	
+	    $Input | wsl grep $Args
+	}
+	
+	# ls
+	Get-Alias ls *> $null && Remove-Item alias:ls
+	function global:ls { wsl ls --color=auto $(_path_to_linux $Args).Split(' ') }
+	function global:ll { ls -l $(_path_to_linux $Args).Split(' ') }
+	function global:la { ls -a $(_path_to_linux $Args).Split(' ') }
 }
-
-# ls
-Get-Alias ls *> $null && Remove-Item alias:ls
-function ls { wsl ls --color=auto $(_path_to_linux $Args).Split(' ') }
-function ll { ls -l $(_path_to_linux $Args).Split(' ') }
-function la { ls -a $(_path_to_linux $Args).Split(' ') }
-
+	
 #========================================================================
 # Alias definition
 #========================================================================
