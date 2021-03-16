@@ -69,8 +69,6 @@ vnoremap <C-e> <End>
 " ''	Move to the next empty single quotation
 " ::	Move to the pre empty double quotation (Opposite direction of "")
 " ;;	Move to the pre empty single quotation (Opposite direction of '')
-" )	Move to the next break of the current sentence (visual mode)
-" (	Move to the pre break of the current sentence (visual mode)
 nnoremap >< /<\([^>/]\+\)><\/\1><CR>/<<CR>
 nnoremap <> ?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>
 nnoremap "" /""<CR>l
