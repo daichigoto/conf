@@ -132,6 +132,6 @@ augroup AddHanbunMode
   set shiftwidth=1
 
   " XXX
-  autocmd BufNewFile,BufRead typescript.xml nnoremap LEE /lead:<CR>5l
-  autocmd BufNewFile,BufRead typescript.xml nnoremap TII /   <title><p><CR>13l
+  autocmd BufNewFile,BufRead typescript.xml nnoremap LEAD /lead:<CR>5l
+  autocmd BufNewFile,BufRead typescript.xml nnoremap TITLE /   <title><p><CR>13l
 augroup End
