@@ -51,5 +51,9 @@ set bell-style none
 # useful keyboard shortcuts
 #
 "\C-h": backward-kill-word	# Ctrl-Backspace (BAD for Mac)
+"\e[3;5~": kill-word		# Ctrl-Backspace 
 "\e[1;5H": unix-line-discard	# Ctrl-Home
 "\e[1;5F": kill-line		# Ctrl-End
+
+"\e\C-h": backward-kill-word	# ESC Backspace (for Mac)
+"\e\e[3~": kill-word		# ESC Delete    (for Mac)
