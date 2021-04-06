@@ -1,6 +1,6 @@
 # users generic .inputrc file for readline library
 #
-# Copyright (c) 2006 Daichi GOTO <daichi@ongs.co.jp>
+# Copyright (c) 2006,2021 Daichi GOTO <daichi@ongs.co.jp>
 # Copyright (c) 2006 ONGS Inc. <info@ongs.co.jp>
 # All rights reserved.
 #
@@ -47,3 +47,9 @@ set bell-style none
 # historical forward search with linehead string binded to down-key
 #
 "\en": history-search-forward
+
+# useful keyboard shortcuts
+#
+"\C-h": backward-kill-word	# Ctrl-Backspace
+"\e[1;5H": unix-line-discard	# Ctrl-Home
+"\e[1;5F": kill-line		# Ctrl-End
