@@ -62,6 +62,9 @@ alias su="su -l"
 # undef stop/start cchar for some applications to use C-s/C-q as their keybind
 stty start undef
 stty stop undef
+#
+# dismiss Ctrl-o for readline's operate-and-get-next
+stty discard undef
 
 case $TERM in
 xterm*)
