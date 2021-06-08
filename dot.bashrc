@@ -134,3 +134,6 @@ esac
 #
 [ -f $HOME/.aliases ] && . $HOME/.aliases
 [ -f $HOME/.bashrc.mine ] && . $HOME/.bashrc.mine
+
+
+# change for commit test
