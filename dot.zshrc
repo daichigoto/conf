@@ -64,30 +64,25 @@ setopt nolistbeep
 
 ## Keybind configuration
 #
-# emacs like keybind (e.x. Ctrl-a gets to line head and Ctrl-e gets
-#   to end) and something additions
-#
-bindkey -e
-bindkey "^[[1~" beginning-of-line # Home gets to line head
-bindkey "^[[4~" end-of-line # End gets to line end
-bindkey "^[[3~" delete-char # Del
+stty start undef				# Free for Ctrl-s
+stty stop undef					# Free for Ctrl-q
+stty discard undef				# Free for Ctrl-o
 
-# historical backward/forward search with linehead string binded to ^P/^N
-# incremental backward/forward search with pattern string binded to ^R/^S
-# 
-autoload history-search-end
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
-bindkey "^p" history-beginning-search-backward-end
-bindkey "^n" history-beginning-search-forward-end
-bindkey "\\ep" history-beginning-search-backward-end
-bindkey "\\en" history-beginning-search-forward-end
-bindkey '^r' history-incremental-pattern-search-backward
-bindkey '^s' history-incremental-pattern-search-forward
+# for Mac Terminal
+bindkey '^O'		accept-and-hold		# Ctrl-o
+bindkey '^[[1;5C'	forward-word		# Ctrl-→
+bindkey '^[[1;5D'	backward-word		# Ctrl-←
+bindkey '^[^[[3~'	kill-word		# ESC-Delete
+bindkey '^Q'		quoted-insert		# Ctrl-q
 
-# reverse menu completion binded to Shift-Tab
-#
-bindkey "\e[Z" reverse-menu-complete
+# for Windows Terminal
+#bindkey '^O'		accept-and-hold		# Ctrl-o
+#bindkey '^[[1;5C'	forward-word		# Ctrl-→
+#bindkey '^[[1;5D'	backward-word		# Ctrl-←
+#bindkey '^[[3;5~'	kill-word		# Ctrl-Delete 
+#bindkey '^H'		backward-kill-word	# Ctrl-Backspace
+#bindkey '^[[1;5F'	kill-line		# Ctrl-End
+#bindkey '^Q'		quoted-insert		# Ctrl-q
 
 ## Command history configuration
 #
