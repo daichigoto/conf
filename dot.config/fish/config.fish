@@ -87,6 +87,7 @@ alias less="less -X"
 alias du="du -h"
 alias df="df -h"
 alias su="su -l"
+alias dir="ls -l"
 
 ## shortcut keys
 bind \cD kill-word		# Ctrl-d
