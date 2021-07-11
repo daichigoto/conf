@@ -1,6 +1,6 @@
 " users generic .vimrc file for vim(1)
 "
-" Copyright (c) 2001-2020 Daichi GOTO <daichi@ongs.co.jp>
+" Copyright (c) 2001-2021 Daichi GOTO <daichi@ongs.co.jp>
 " Copyright (c) 2006,2009-2012,2015,2019 ONGS Inc. <info@ongs.co.jp>
 " Copyright (c) 2010 Hiroaki TOMIDA <7gou@kiku33.com>
 " All rights reserved.
@@ -33,12 +33,19 @@
 " ----------------------------------------------------------------------
 " Dein plug-ins management system
 " ----------------------------------------------------------------------
-" How to install Dein:
+" How to install Dein (UNIX):
 "   mkdir -p ~/.cache/vim/dein
 "   cd ~/.cache/vim/dein/
 "   curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 "   sh ./installer.sh .
 "   rm ./installer.sh
+" ----------------------------------------------------------------------
+" How to install Dein (Windows):
+"   mkdir ~\.cache\vim\dein
+"   cd ~\.cache\vim\dein\
+"   Invoke-WebRequest https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.ps1 -OutFile installer.ps1
+"   ./installer.ps1 .
+"   del ./installer.ps1
 " ----------------------------------------------------------------------
 if &compatible
 	set nocompatible
