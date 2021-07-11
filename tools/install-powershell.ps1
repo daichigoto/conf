@@ -1,6 +1,6 @@
 #!/usr/bin/env pwsh
 #
-# Copyright (c) 2020 Daichi GOTO <daichi@ongs.co.jp>
+# Copyright (c) 2020,2021 Daichi GOTO <daichi@ongs.co.jp>
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -43,7 +43,7 @@ $dst=$PROFILE
 
 # Install if $PROFILE is not exist
 if (-Not (Test-Path $dst)) {
-    cp dot.config\powershell\profile.ps1 $PROFILE
+    cp $src $PROFILE
     echo "copy $src -> $dst"
 }
 
@@ -52,7 +52,7 @@ $src_modtime = $(Get-ItemProperty $src).LastWriteTime
 $dst_modtime = $(Get-ItemProperty $dst).LastWriteTime
 
 if ($src_modtime -ne $dst_modtime) {
-    cp dot.config\powershell\profile.ps1 $PROFILE
+    cp $src $PROFILE
     Set-ItemProperty $dst -Name LastWriteTime -Value $src_modtime
     echo "copy $src -> $dst"
 }
