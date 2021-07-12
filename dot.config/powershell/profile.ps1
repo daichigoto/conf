@@ -290,3 +290,10 @@ function g_push { git commit -m 'updated'; git push origin master }
 function g_add { git add }
 
 function getpass { openssl rand -base64 20 }
+
+#========================================================================
+# load ~/.profile.ps1
+#========================================================================
+if (Test-Path ~/.profile.ps1) {
+            . ~/.profile.ps1
+}
