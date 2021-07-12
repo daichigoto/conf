@@ -36,6 +36,14 @@ $config_dir = $(Split-Path -Parent $script_dir)
 Set-Location $config_dir
 
 #===================================================================
+# Make $PROFILE directory
+#===================================================================
+$profile_dir = $(Split-Path -Parent $PROFILE)
+if (-Not (Test-Path $profile_dir)) {
+	New-Item $profile_dir -ItemType Directory
+}
+
+#===================================================================
 # Install configuration file
 #===================================================================
 $src='dot.config\powershell\profile.ps1'
