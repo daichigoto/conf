@@ -115,21 +115,23 @@ let g:airline_theme = 'molokai'
 "  b7		move to buffer 7
 "  b8		move to buffer 8
 "  b9		move to buffer 9
-nnoremap <silent> bn :<C-u>:bnext<CR>
-nnoremap <silent> b1 :<C-u>:b1<CR>
-nnoremap <silent> b2 :<C-u>:b2<CR>
-nnoremap <silent> b3 :<C-u>:b3<CR>
-nnoremap <silent> b4 :<C-u>:b4<CR>
-nnoremap <silent> b5 :<C-u>:b5<CR>
-nnoremap <silent> b6 :<C-u>:b6<CR>
-nnoremap <silent> b7 :<C-u>:b7<CR>
-nnoremap <silent> b8 :<C-u>:b8<CR>
-nnoremap <silent> b9 :<C-u>:b9<CR>
+nnoremap <silent> <C-t> :bnext<CR>
+"nnoremap <silent> bn :<C-u>:bnext<CR>
+"nnoremap <silent> b1 :<C-u>:b1<CR>
+"nnoremap <silent> b2 :<C-u>:b2<CR>
+"nnoremap <silent> b3 :<C-u>:b3<CR>
+"nnoremap <silent> b4 :<C-u>:b4<CR>
+"nnoremap <silent> b5 :<C-u>:b5<CR>
+"nnoremap <silent> b6 :<C-u>:b6<CR>
+"nnoremap <silent> b7 :<C-u>:b7<CR>
+"nnoremap <silent> b8 :<C-u>:b8<CR>
+"nnoremap <silent> b9 :<C-u>:b9<CR>
 let g:miniBufExplorerMoreThanOne = 0 " always show MiniBufExplorer
 
 " fzf
 "  fzf		list files and directories
 "  ls		list buffers
+nnoremap <silent> <C-o> :Files<CR>
 nnoremap <silent> fzf :Files<CR>
 nnoremap <silent> bu :Buffers<CR>
 
@@ -227,20 +229,11 @@ nmap ga <Plug>(EasyAlign)
 " disable mouse feature
 set mouse=
 
-" allow some keys to move the cursor left/right to move to 
-" the previous/next line when the cursor is on the first/last
-" character in the line.
-"  b - [Backspace]  normal visual 
-"  s - [Space]      normal visual
-"  < - [Left]       normal visual
-"  > - [Right]      normal visual
-"  [ - [Left]       insert replace
-"  ] - [Right]      insert replace
-"  ~ - ~            normal
-set whichwrap=b,s,[,],<,>,~,h,l
+" non-highlight for search keyword
+set nohlsearch
 
-set nohlsearch " non-highlight for search keyword
-set cursorline " use cursorline indicator
+" use cursorline indicator
+set cursorline 
 
 " enable line numbers
 set number
@@ -254,11 +247,30 @@ set wildmenu wildmode=list:full
 " use decimal instead of octal
 set nrformats=
 
+" for useful argdo mutli-files replaces
+set hidden
+
+" allow some keys to move the cursor left/right to move to 
+" the previous/next line when the cursor is on the first/last
+" character in the line.
+"  b - [Backspace]  normal visual 
+"  s - [Space]      normal visual
+"  < - [Left]       normal visual
+"  > - [Right]      normal visual
+"  [ - [Left]       insert replace
+"  ] - [Right]      insert replace
+"  ~ - ~            normal
+set whichwrap=b,s,[,],<,>,~,h,l
+
 " displayed line movement gj/gk as default instead of j/k
 nnoremap k gk
 nnoremap gk k
 nnoremap j gj
 nnoremap gj j
+
+" set the left side of the w key (q on US keyboard) to move in the opposite
+" direction of w
+nnoremap q b
 
 " tab jump
 nmap <silent> <Tab> 15<Right>
@@ -266,8 +278,69 @@ vmap <silent> <Tab> <C-o>15<Right>
 nmap <silent> <S-Tab> 15<Left>
 vmap <silent> <S-Tab> <C-o>15<Left>
 
-" for useful argdo mutli-files replaces
-set hidden
+" C-a   Move to the beginning of the line
+" C-e   Move to the end of line
+nnoremap <C-a> <Home>
+inoremap <C-a> <Home>
+cnoremap <C-a> <Home>
+vnoremap <C-a> <Home>
+nnoremap <C-e> <End>
+inoremap <C-e> <End>
+cnoremap <C-e> <End>
+vnoremap <C-e> <End>
+
+" ><    Move to the next empty element
+" <>    Move to the pre empty element (Opposite direction of ><)
+" ""    Move to the next empty double quotation
+" ''    Move to the next empty single quotation
+" ::    Move to the pre empty double quotation (Opposite direction of "")
+" ;;    Move to the pre empty single quotation (Opposite direction of '')
+nnoremap >< /<\([^>/]\+\)><\/\1><CR>/<<CR>
+nnoremap <> ?<<CR>h?<\([^>/]\+\)><\/\1><CR>/<<CR>
+nnoremap "" /""<CR>l
+nnoremap '' /''<CR>l
+nnoremap :: hh?""<CR>l
+nnoremap ;; hh?''<CR>l
+
+" Move cursor to center of line, scroll line to center of screen
+function MoveCurtorToCenterOfScreen()
+  let lwinheight = winheight('.')
+  let lwinwidth = winwidth('.')
+  let lhalfwidth = lwinwidth / 2
+  let lwincol = wincol()
+
+  " scroll line to center of screen
+  execute("normal zz")
+
+  " scroll line to the top quarter of the screen
+  let offset = lwinheight / 4
+  let index = 0
+  while index < offset
+    execute("normal ")
+    let index = index + 1
+  endwhile
+
+  if lwincol > lhalfwidth
+    let offset = lwincol - lhalfwidth
+    let index = 0
+    " move cursor to center of line
+    while index < offset
+      execute("normal zl")
+      let index = index + 1
+    endwhile
+  elseif lwincol < lhalfwidth
+    let offset = lhalfwidth - lwincol
+    let index = 0
+    " move cursor to center of line
+    while index < offset
+      execute("normal zh")
+      let index = index + 1
+    endwhile
+  endif
+endfunction
+
+" cc    Move cursor to center of line, scroll line to center of screen
+nnoremap cc :call MoveCurtorToCenterOfScreen()<CR>
 
 " autoload configurations files
 set runtimepath+=~/.config
