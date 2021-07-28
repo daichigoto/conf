@@ -46,11 +46,8 @@ function prompt_pwd
 end
 
 function fish_prompt
-	set -l hostname (hostname -s | tr 'a-z' 'A-Z') > /dev/null 2>&1
-	switch $hostname
-	case 'MAC*'
-		set hostname MAC
-	end
+  set -q host
+	or set host (hostname -s | tr 'a-z' 'A-Z') > /dev/null 2>&1
 	set -l color_cwd
 	set -l color_hst
 	set -l suffix
@@ -59,12 +56,12 @@ function fish_prompt
 		set color_cwd $fish_color_cwd_root
 		set color_hst $color_cwd
 		set suffix '#'
-		echo -n -s (set_color $color_hst) "$hostname" ' ' (set_color $color_cwd) (prompt_pwd) "$suffix " (set_color normal)
+		echo -n -s (set_color $color_hst) "$host" ' ' (set_color $color_cwd) (prompt_pwd) "$suffix " (set_color normal)
 	case '*'
 		set color_cwd $fish_color_cwd
 		set color_hst white
 		set suffix '%'
-		echo -n -s "$hostname" ' ' (set_color $color_cwd) (prompt_pwd) (set_color normal) "$suffix "
+		echo -n -s "$host" ' ' (set_color $color_cwd) (prompt_pwd) (set_color normal) "$suffix "
 	end
 end
 
