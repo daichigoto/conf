@@ -82,6 +82,10 @@ do
 	then
 		continue
 	fi
+	if [ "$i" = "dot.config/nvim/cursoropt.vim" ]
+	then
+		continue
+	fi
 
 	src="$i"
 	dst="${config_dir}/$(basename "$i")"
