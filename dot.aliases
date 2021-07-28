@@ -1,0 +1,77 @@
+# users generic .aliases file for *sh(1)
+#
+# Copyright (c) 2021 Daichi GOTO <daichi@ongs.co.jp>
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+#
+# 1. Redistributions of source code must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright
+#    notice, this list of conditions and the following disclaimer in the
+#    documentation and/or other materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+# PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS
+# BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+# IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+# THE POSSIBILITY OF SUCH DAMAGE.
+
+# author: Daichi GOTO (daichi@ongs.co.jp)
+# first edition: Wed Jul 28 18:44:09 JST 2021
+
+# Color pagers
+alias less="/usr/local/bin/bat --style=plain"
+alias bat="env BAT_PAGER=cat /usr/local/bin/bat --style=plain"
+alias cat="env BAT_PAGER=cat /usr/local/bin/bat --style=plain"
+
+# Useful cds
+alias cd..='cd ..'
+alias cd1='cd $(ls | grep -E "[0-9]{4}" | tail -1)'
+alias cd2='cd $(ls | grep -E "[0-9]{4}" | tail -2 | head -1)'
+alias cd3='cd $(ls | grep -E "[0-9]{4}" | tail -3 | head -1)'
+alias cd4='cd $(ls | grep -E "[0-9]{4}" | tail -4 | head -1)'
+alias cd5='cd $(ls | grep -E "[0-9]{4}" | tail -5 | head -1)'
+alias cd6='cd $(ls | grep -E "[0-9]{4}" | tail -6 | head -1)'
+alias cd7='cd $(ls | grep -E "[0-9]{4}" | tail -7 | head -1)'
+alias cd8='cd $(ls | grep -E "[0-9]{4}" | tail -8 | head -1)'
+alias cd9='cd $(ls | grep -E "[0-9]{4}" | tail -9 | head -1)'
+alias cd10='cd $(ls | grep -E "[0-9]{4}" | tail -10 | head -1)'
+alias cd11='cd $(ls | grep -E "[0-9]{4}" | tail -11 | head -1)'
+alias cd12='cd $(ls | grep -E "[0-9]{4}" | tail -12 | head -1)'
+alias cd13='cd $(ls | grep -E "[0-9]{4}" | tail -13 | head -1)'
+alias cd14='cd $(ls | grep -E "[0-9]{4}" | tail -14 | head -1)'
+alias cd15='cd $(ls | grep -E "[0-9]{4}" | tail -15 | head -1)'
+alias cd16='cd $(ls | grep -E "[0-9]{4}" | tail -16 | head -1)'
+alias cd17='cd $(ls | grep -E "[0-9]{4}" | tail -17 | head -1)'
+alias cd18='cd $(ls | grep -E "[0-9]{4}" | tail -18 | head -1)'
+alias cd19='cd $(ls | grep -E "[0-9]{4}" | tail -19 | head -1)'
+alias cd20='cd $(ls | grep -E "[0-9]{4}" | tail -20 | head -1)'
+alias cd-1='cd $(ls | grep -E "[0-9]{4}" | head -1)'
+
+# Password generation command
+alias passwdgen="openssl rand -base64 12"
+
+# Shortcuts to work area 
+alias lwt="cd ~/Documents/lwt/;clear;ls"
+alias ipad="cd ~/Documents/ipad/;clear;ls"
+alias c4win="cd ~/Documents/c-for-win/;clear;ls"
+alias shortcuts="cd ~/Documents/shortcutkeys/;clear;ls"
+alias smartwatch="cd ~/Documents/smartwatch/;clear;ls"
+alias powershell="cd ~/Documents/powershell/;clear;ls"
+alias mj="cd ~/Documents/mynavi/;clear;ls"
+alias itmedia="cd ~/Documents/itmedia/;clear;ls"
+
+# Load other alias files
+for f in ${HOME}/.aliases_*
+do
+    . "$f"
+done
