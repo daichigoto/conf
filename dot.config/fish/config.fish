@@ -93,12 +93,12 @@ alias dir="ls -l"
 bind \cD kill-word		# Ctrl-d
 bind \cW backward-kill-word	# Ctrl-w
 
-## load user .aliases and user .
-function source_alias --description "source ~/.aliases of Bourne Shell"
-	if [ -f ~/.aliases ]
-		grep '^[a-z0-9][a-z0-9_-]*=' ~/.aliases | sed 's/^/set /' | sed 's/=/ /' | source
-		grep '^alias ' ~/.aliases | sed -e 's/$(/(/g' -e 's/&&/; and /g' | source
-	end
+## load user .aliases*
+function source_alias --description "source ~/.aliase* of Bourne Shell"
+  for f in ~/.aliases*
+    grep '^[a-z0-9][a-z0-9_-]*=' "$f" | sed 's/^/set /' | sed 's/=/ /' | source
+    grep '^alias ' "$f" | sed -e 's/$(/(/g' -e 's/&&/; and /g' | source
+  end
 end
 source_alias
 
