@@ -32,7 +32,7 @@
 # Source and destination directories
 #===================================================================
 $srcdir='dot.config\nvim'
-$dstdir="${HOME}\.config\nvim"
+$dstdir="${HOME}\AppData\Local\nvim"
 
 #===================================================================
 # Move to config top directory
