@@ -1,6 +1,6 @@
 " users generic init.vim file for nvim(1)
 "
-" Copyright (c) 2001-2004,2020 Daichi GOTO <daichi@ongs.co.jp>
+" Copyright (c) 2001-2004,2020,2021 Daichi GOTO <daichi@ongs.co.jp>
 " Copyright (c) 2006,2009-2012,2015,2016 ONGS Inc. <info@ongs.co.jp>
 " Copyright (c) 2010 Hiroaki TOMIDA <7gou@kiku33.com>
 " All rights reserved.
@@ -41,8 +41,8 @@
 "	rm ./installer.sh
 " ----------------------------------------------------------------------
 " How to install Dein (Windows):
-"   mkdir ~\.cache\vim\dein
-"   cd ~\.cache\vim\dein\
+"   mkdir ~\.cache\nvim\dein
+"   cd ~\.cache\nvim\dein\
 "   Invoke-WebRequest https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.ps1 -OutFile installer.ps1
 "   ./installer.ps1 .
 "   del ./installer.ps1
