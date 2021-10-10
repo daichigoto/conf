@@ -245,6 +245,9 @@ set nrformats=
 " for useful argdo mutli-files replaces
 set hidden
 
+" set tab length
+set tabstop=8
+
 " laod some customized files: ~/.config/nvim/*.vim
 let customvims = globpath(expand('~/.config/nvim'), "*.vim")
 while strlen(customvims) > 0
