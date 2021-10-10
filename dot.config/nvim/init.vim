@@ -248,8 +248,14 @@ set hidden
 " set tab length
 set tabstop=8
 
-" laod some customized files: ~/.config/nvim/*.vim
-let customvims = globpath(expand('~/.config/nvim'), "*.vim")
+" laod some customized files
+let customvims = ""
+if filereadable(expand('~/.config/nvim/init.vim'))
+	let customvims = globpath(expand('~/.config/nvim'), "*.vim")
+endif
+if filereadable(expand('~/AppData/Local/nvim/init.vim'))
+	let customvims = globpath(expand('~/AppData/Local/nvim'), "*.vim")
+endif
 while strlen(customvims) > 0
 	let i = stridx(customvims, "\n")
 	if i < 0
@@ -259,9 +265,7 @@ while strlen(customvims) > 0
 		let f = strpart(customvims, 0, i)
 		let customvims = strpart(customvims, i+1, 9999)
 	endif
-	if filereadable(f) &&
-	   \ f !~ '\s*/init.vim' && 
-	   \ f !~ '\s*/state_nvim.vim'
+	if filereadable(f) && -1 == stridx(f, "init.vim")
 		exe 'source ' . f
 	endif
 	unlet f
