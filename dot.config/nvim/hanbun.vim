@@ -121,9 +121,9 @@ function! <SID>hanbunTagInsert()
   return l:bf
 endfunction
 
-let genlist_timestamp = strftime("%s")
-function GenList()
-  if strftime("%s") != g:genlist_timestamp
+let g:genlist_timestamp = strftime("%H%M%S")
+function! GenList()
+  if strftime("%H%M%S") != g:genlist_timestamp
     :'<,'>s/^[ ]*//g
     :'<,'>s/[ ]*$//g
     :'<,'>s/    / /g
@@ -139,7 +139,7 @@ function GenList()
     :'<,'>s/（Windows、macOS）/（Windows版、macOS版）/g
     :'<,'>s/Windows and macOS/(Windows版、macOS版)/g
     :'<,'>s/^\(.*\)$/   <item><p>\1<\/p><\/item>/
-    let g:genlist_timestamp = strftime("%s")
+    let g:genlist_timestamp = strftime("%H%M%S")
   endif
 endfunction
 
