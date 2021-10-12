@@ -144,10 +144,6 @@ function! GenList()
 endfunction
 
 augroup AddHanbunMode
-  " formatting process
-  normal! gg=G
-  normal! gg
-
   autocmd!
 
   " Makefile.win file type definition
