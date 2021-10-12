@@ -1,4 +1,4 @@
-" Copyright (c) 2010,2012,2016,2020 ONGS Inc. <info@ongs.co.jp>
+" Copyright (c) 2010,2012,2016,2020,2021 ONGS Inc. <info@ongs.co.jp>
 " All rights reserved.
 "
 " Redistribution and use in source and binary forms, with or without
@@ -121,17 +121,45 @@ function! <SID>hanbunTagInsert()
   return l:bf
 endfunction
 
+let genlist_timestamp = strftime("%s")
+function GenList()
+  if strftime("%s") != g:genlist_timestamp
+    :'<,'>s/^[ ]*//g
+    :'<,'>s/[ ]*$//g
+    :'<,'>s/    / /g
+    :'<,'>s/[ ][ ]*/ /g
+    :'<,'>s/ and earlier versions/およびこれよりも前のバージョン/g
+    :'<,'>s/ and earlier versions/およびこれよりも前のバージョン/g
+    :'<,'>s/およびそれ以前 (/およびそれよりも前のバージョン(/g
+    :'<,'>s/およびそれ以前（/およびそれよりも前のバージョン（/g
+    :'<,'>s/およびそれ以前$/およびそれよりも前のバージョン/g
+    :'<,'>s/およびそれ以前の/およびそれよりも前のバージョン/g
+    :'<,'>s/（Windows）/（Windows版）/g
+    :'<,'>s/（macOS）/（macOS版）/g
+    :'<,'>s/（Windows、macOS）/（Windows版、macOS版）/g
+    :'<,'>s/Windows and macOS/(Windows版、macOS版)/g
+    :'<,'>s/^\(.*\)$/   <item><p>\1<\/p><\/item>/
+    let g:genlist_timestamp = strftime("%s")
+  endif
+endfunction
+
 augroup AddHanbunMode
   autocmd!
+
+  " Makefile.win file type definition
+  autocmd BufRead,BufNewFile Makefile.win setfiletype make
+
   " <C-c>t  Insert Hanbun tag
   autocmd BufNewFile,BufRead typescript.xml imap <C-c>t <C-r>=<SID>hanbunTagInsert()<CR>
+
+  " LT      Smart list generator
+  autocmd BufNewFile,BufRead typescript.xml vnoremap LT :call GenList()<CR>
 
   " Conflicts with the auto indent feature. For this reason, the indent 
   " on the plug-in side is turned off, and the formatting function by 
   " the auto indent mode is used. This is why I set shiftwidth to 1.
   set shiftwidth=1
 
-  " XXX
   autocmd BufNewFile,BufRead typescript.xml nnoremap LEAD /lead:<CR>5l
   autocmd BufNewFile,BufRead typescript.xml nnoremap TITLE /   <title><p><CR>13l
 augroup End
