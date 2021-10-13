@@ -146,20 +146,24 @@ endfunction
 augroup AddHanbunMode
   autocmd!
 
+  " A space is the indent
+  set shiftwidth=1
+
   " Makefile.win file type definition
   autocmd BufRead,BufNewFile Makefile.win setfiletype make
 
-  " <C-c>t  Insert Hanbun tag
-  autocmd BufNewFile,BufRead typescript.xml imap <C-c>t <C-r>=<SID>hanbunTagInsert()<CR>
+  " <C-n> or <C-t>	tab forwarding when make post mode
+  autocmd BufNewFile,BufRead typescript.xml inoremap <C-t> <ESC>:w<CR>:bn<CR>gg=G/POST:]<CR>5li
+  autocmd BufNewFile,BufRead typescript.xml inoremap <C-n> <ESC>:w<CR>:bn<CR>gg=G/POST:]<CR>5li
+  autocmd BufNewFile,BufRead typescript.xml nnoremap <C-n>      :w<CR>:bn<CR>gg=G/POST:]<CR>5li
 
-  " LT      Smart list generator
+  " <C-c>t	Insert Hanbun tag
+  autocmd BufNewFile,BufRead typescript.xml inoremap <C-c>t <C-r>=<SID>hanbunTagInsert()<CR>
+
+  " LT		Smart list generator
   autocmd BufNewFile,BufRead typescript.xml vnoremap LT :call GenList()<CR>
 
-  " Conflicts with the auto indent feature. For this reason, the indent 
-  " on the plug-in side is turned off, and the formatting function by 
-  " the auto indent mode is used. This is why I set shiftwidth to 1.
-  set shiftwidth=1
-
+  " useful jump
   autocmd BufNewFile,BufRead typescript.xml nnoremap LEAD /lead:<CR>5l
   autocmd BufNewFile,BufRead typescript.xml nnoremap TITLE /   <title><p><CR>13l
 augroup End
