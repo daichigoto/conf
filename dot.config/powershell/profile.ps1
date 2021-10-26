@@ -278,6 +278,30 @@ function cd19 { cd (dir | Select-String -Pattern '[0-9]{8}')[-19] }
 function cd20 { cd (dir | Select-String -Pattern '[0-9]{8}')[-20] }
 
 #========================================================================
+# ls shortcuts
+#========================================================================
+function ls1 { tree.exe (dir | Select-String -Pattern '[0-9]{8}')[-1] }
+function ls2 { tree.exe (dir | Select-String -Pattern '[0-9]{8}')[-2] }
+function ls3 { tree.exe (dir | Select-String -Pattern '[0-9]{8}')[-3] }
+function ls4 { tree.exe (dir | Select-String -Pattern '[0-9]{8}')[-4] }
+function ls5 { tree.exe (dir | Select-String -Pattern '[0-9]{8}')[-5] }
+function ls6 { tree.exe (dir | Select-String -Pattern '[0-9]{8}')[-6] }
+function ls7 { tree.exe (dir | Select-String -Pattern '[0-9]{8}')[-7] }
+function ls8 { tree.exe (dir | Select-String -Pattern '[0-9]{8}')[-8] }
+function ls9 { tree.exe (dir | Select-String -Pattern '[0-9]{8}')[-9] }
+function ls10 { tree.exe (dir | Select-String -Pattern '[0-9]{8}')[-10] }
+function ls11 { tree.exe (dir | Select-String -Pattern '[0-9]{8}')[-11] }
+function ls12 { tree.exe (dir | Select-String -Pattern '[0-9]{8}')[-12] }
+function ls13 { tree.exe (dir | Select-String -Pattern '[0-9]{8}')[-13] }
+function ls14 { tree.exe (dir | Select-String -Pattern '[0-9]{8}')[-14] }
+function ls15 { tree.exe (dir | Select-String -Pattern '[0-9]{8}')[-15] }
+function ls16 { tree.exe (dir | Select-String -Pattern '[0-9]{8}')[-16] }
+function ls17 { tree.exe (dir | Select-String -Pattern '[0-9]{8}')[-17] }
+function ls18 { tree.exe (dir | Select-String -Pattern '[0-9]{8}')[-18] }
+function ls19 { tree.exe (dir | Select-String -Pattern '[0-9]{8}')[-19] }
+function ls20 { tree.exe (dir | Select-String -Pattern '[0-9]{8}')[-20] }
+
+#========================================================================
 # utilities shortcuts
 #========================================================================
 function genkey { openssl rand -base64 20 }
