@@ -68,7 +68,7 @@ do
 	fi
 
 	# Install configuration files
-	cp "$src" "$dst"
+	cat "$src" | tr -d '' > "$dst"
 	touch -r "$src" "$dst"
 	echo "copy $src -> $dst"
 done
