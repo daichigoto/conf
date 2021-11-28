@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (c) 2020 Daichi GOTO <daichi@ongs.co.jp>
+# Copyright (c) 2020,2021 Daichi GOTO <daichi@ongs.co.jp>
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -100,7 +100,7 @@ do
 	fi
 
 	# install configuration files
-	cp "$src" "$dst"
+	cat "$src" | tr -d '' > "$dst"
 	touch -r "$src" "$dst"
 	echo "copy $src -> $dst"
 done
