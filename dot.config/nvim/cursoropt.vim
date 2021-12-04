@@ -115,3 +115,9 @@ endfunction
 
 " cc	Move cursor to center of line, scroll line to center of screen
 nnoremap cc :call MoveCurtorToCenterOfScreen()<CR>
+
+" XXX experimental configurations
+nnoremap FF <C-f>	" PageDown
+nnoremap BB <C-b>	" PageUp
+nnoremap DD <C-d>	" Half/PageDown
+nnoremap UU <C-u>	" Half/PageUp
