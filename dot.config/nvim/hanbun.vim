@@ -124,11 +124,12 @@ endfunction
 let g:genlist_timestamp = strftime("%H%M%S")
 function! GenList()
   " [　-￥] is a range of Japanese as much as possible in UTF-8.
+  " [ -~] is a range of ASCII as much as possible.
   "
-  " s/\([^ a-zA-Z0-9.-\+　-￥]\)/ /g replaces invisible whitespace data 
+  " s/\([^ -~　-￥]\)/ /g replaces invisible whitespace data 
   " included when copied from a browser with normal whitespace.
   if strftime("%H%M%S") != g:genlist_timestamp
-    :'<,'>s/\([^ a-zA-Z0-9.-\+　-￥]\)/ /g
+    :'<,'>s/\([^ -~　-￥]\)/ /g
     :'<,'>s/^[ ]*//g
     :'<,'>s/[ ]*$//g
     :'<,'>s/[ ][ ]*/ /g
@@ -144,6 +145,8 @@ function! GenList()
     :'<,'>s/（macOS）/（macOS版）/g
     :'<,'>s/（Windows、macOS）/（Windows版、macOS版）/g
     :'<,'>s/Windows and macOS/(Windows版、macOS版)/g
+    :'<,'>s/Windows$/(Windows版)/g
+    :'<,'>s/macOS$/(macOS版)/g
     :'<,'>s/^\(.*\)$/   <item><p>\1<\/p><\/item>/
     let g:genlist_timestamp = strftime("%H%M%S")
   endif
