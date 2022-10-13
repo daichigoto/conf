@@ -130,9 +130,9 @@ let g:miniBufExplorerMoreThanOne = 0 "always show MiniBufExplorer
 "  <C-o>	list files and directories
 "  fzf		list files and directories of parent directory
 "  bu		list buffers
-nnoremap <silent> <C-o> :Files<CR>
-nnoremap <silent> fzf :Files ..<CR>
-nnoremap <silent> bu :Buffers<CR>
+"nnoremap <silent> <C-o> :Files<CR>
+"nnoremap <silent> fzf :Files ..<CR>
+"nnoremap <silent> bu :Buffers<CR>
 
 " vim-easy-align
 "  ga		start interactive EasyAlign
