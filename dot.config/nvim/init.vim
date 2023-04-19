@@ -1,6 +1,6 @@
 " users generic init.vim file for nvim(1)
 "
-" Copyright (c) 2001-2004,2020,2021 Daichi GOTO <daichi@ongs.co.jp>
+" Copyright (c) 2001-2004,2020,2021,2023 Daichi GOTO <daichi@ongs.co.jp>
 " Copyright (c) 2006,2009-2012,2015,2016 ONGS Inc. <info@ongs.co.jp>
 " Copyright (c) 2010 Hiroaki TOMIDA <7gou@kiku33.com>
 " All rights reserved.
@@ -29,28 +29,32 @@
 
 " author: Daichi GOTO (daichi@ongs.co.jp), Hiroaki TOMIDA (7gou@kiku33.com)
 " first edition: Fri May 17 12:31:53 JST 2002
-
-" ----------------------------------------------------------------------
-" Dein plug-ins management system
-" ----------------------------------------------------------------------
-" How to install Dein (UNIX):
-" 	mkdir -p ~/.cache/nvim/dein
-" 	cd ~/.cache/nvim/dein/
-" 	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-" 	sh ./installer.sh .
-"	rm ./installer.sh
-" ----------------------------------------------------------------------
-" How to install Dein (Windows):
-"   mkdir ~\.cache\nvim\dein
-"   cd ~\.cache\nvim\dein\
-"   Invoke-WebRequest https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.ps1 -OutFile installer.ps1
-"   ./installer.ps1 .
-"   del ./installer.ps1
-" ----------------------------------------------------------------------
+"
 if &compatible
 	set nocompatible
 endif
+" ----------------------------------------------------------------------
+" Dein plug-ins management system installation
+" ----------------------------------------------------------------------
+let $CACHE = expand('~/.cache')
+if !isdirectory($CACHE)
+	call mkdir($CACHE, 'p')
+endif
+if &runtimepath !~# '/dein.vim'
+	let s:dein_dir = fnamemodify('dein.vim', ':p')
+	if !isdirectory(s:dein_dir)
+		let s:dein_dir = $CACHE .. '/dein/repos/github.com/Shougo/dein.vim'
+		if !isdirectory(s:dein_dir)
+			execute '!git clone https://github.com/Shougo/dein.vim' s:dein_dir
+		endif
+	endif
+	execute 'set runtimepath^=' .. substitute(
+				\ fnamemodify(s:dein_dir, ':p') , '[/\\]$', '', '')
+endif
 
+" ----------------------------------------------------------------------
+" Dein plug-ins management system setup
+" ----------------------------------------------------------------------
 " Required:
 set runtimepath+=~/.cache/nvim/dein/repos/github.com/Shougo/dein.vim
 
