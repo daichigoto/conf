@@ -30,23 +30,6 @@
 " author: Daichi GOTO (daichi@ongs.co.jp), Hiroaki TOMIDA (7gou@kiku33.com)
 " first edition: Fri May 17 12:31:53 JST 2002
 
-" ----------------------------------------------------------------------
-" Dein plug-ins management system
-" ----------------------------------------------------------------------
-" How to install Dein (UNIX):
-"   mkdir -p ~/.cache/vim/dein
-"   cd ~/.cache/vim/dein/
-"   curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-"   sh ./installer.sh .
-"   rm ./installer.sh
-" ----------------------------------------------------------------------
-" How to install Dein (Windows):
-"   mkdir ~\.cache\vim\dein
-"   cd ~\.cache\vim\dein\
-"   Invoke-WebRequest https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.ps1 -OutFile installer.ps1
-"   ./installer.ps1 .
-"   del ./installer.ps1
-" ----------------------------------------------------------------------
 if &compatible
 	set nocompatible
 endif
@@ -70,6 +53,9 @@ if &runtimepath !~# '/dein.vim'
 		\ fnamemodify(s:dein_dir, ':p') , '[/\\]$', '', '')
 endif
 
+" ----------------------------------------------------------------------
+" Dein plug-ins management system setup
+" ----------------------------------------------------------------------
 " Required:
 set runtimepath+=~/.cache/vim/dein/repos/github.com/Shougo/dein.vim
 
