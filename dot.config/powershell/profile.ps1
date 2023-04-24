@@ -1,4 +1,4 @@
-# Copyright (c) 2020,2021 Daichi GOTO <daichi@ongs.co.jp>
+# Copyright (c) 2020,2021,2023 Daichi GOTO <daichi@ongs.co.jp>
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -35,6 +35,16 @@
 # the problem.
 $OutputEncoding = [System.Console]::OutputEncoding =
     [System.Text.UTF8Encoding]::new()
+
+#========================================================================
+# ReadLine settings
+#========================================================================
+Set-PSReadLineOption -PredictionSource History
+Set-PSReadLineOption -PredictionViewStyle InlineView
+Set-PSReadLineKeyHandler -Key "Ctrl+f" -Function AcceptSuggestion
+
+#Set-PSReadLineOption -PredictionViewStyle ListView
+#Set-PSReadLineKeyHandler -Key "Ctrl+f" -Function AcceptNextSuggestionWord
 
 #========================================================================
 # Linux commands integration mode
@@ -226,7 +236,8 @@ function linuxcmds {
 #========================================================================
 # Alias definition
 #========================================================================
-Set-Alias -Name open -Value explorer
+Set-Alias -Name cl -Value clip.exe
+Set-Alias -Name open -Value explorer.exe
 Set-Alias -Name edge -Value `
     "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 Set-Alias -Name chrome -Value `
@@ -306,6 +317,98 @@ function ls20 { tree.exe (dir | Select-String -Pattern '[0-9]{8}')[-20] }
 #========================================================================
 function genkey { openssl rand -base64 20 }
 function tree { tree.com /f }
+
+#========================================================================
+# MSYS2 integration
+#========================================================================
+if (Test-Path -PathType Container C:\msys64\)
+{
+	$env:HOME = "C:\Users\${env:USERNAME}"
+	$env:LANG = "ja_JP.UTF-8"
+	$env:LC_CTYPE = "ja_JP.UTF-8"
+	$env:TZ = "Asia/Tokyo"
+	$env:REMOVE_AFTER_GETIMG = "YES"
+
+	function mode_msys2 {
+		# MSYS2のコマンドパスを最優先に入れ替える
+		$sshpath = "C:\WINDOWS\System32\OpenSSH"
+		$msyspath = "C:\msys64\usr\bin"
+		$mingw64path = "C:\msys64\mingw64\bin"
+		$miscpath = $env:HOMEDRIVE + $env:HOMEPATH + "\Documents\misc\bin"
+		$tttcmdspath = $env:HOMEDRIVE + $env:HOMEPATH + "\Documents\tttcmds\bin"
+
+		Set-Item Env:Path $env:Path.Replace($sshpath,"")
+		Set-Item Env:Path $env:Path.Replace($msyspath,"")
+		Set-Item Env:Path $env:Path.Replace($mingw64path,"")
+		Set-Item Env:Path $env:Path.Replace($miscpath,"")
+		Set-Item Env:Path $env:Path.Replace($tttcmdspath,"")
+
+		Set-Item Env:Path "$mingw64path;$env:Path"
+		Set-Item Env:Path "$msyspath;$env:Path"
+		Set-Item Env:Path "$tttcmdspath;$env:Path"
+		Set-Item Env:Path "$miscpath;$env:Path"
+		Set-Item Env:Path "$sshpath;$env:Path"
+
+		# MSYS2コマンドと重複するエイリアスを削除する
+		Get-Alias cat > $null 2>&1 && Remove-Alias cat
+		Get-Alias cp > $null 2>&1 && Remove-Alias cp
+		Get-Alias ls > $null 2>&1 && Remove-Alias ls
+		Get-Alias mv > $null 2>&1 && Remove-Alias mv
+		Get-Alias rm > $null 2>&1 && Remove-Alias rm
+		Get-Alias diff > $null 2>&1 && Remove-Alias -Force diff
+		Get-Alias sort > $null 2>&1 && Remove-Alias -Force sort
+		Get-Alias tee > $null 2>&1 && Remove-Alias -Force tee
+	
+		# ls系短縮コマンドを関数として作成
+		function global:ls { C:\msys64\usr\bin\ls.exe --color $Args }
+		function global:ll { C:\msys64\usr\bin\ls.exe --color $Args -l }
+		function global:la { C:\msys64\usr\bin\ls.exe --color $Args -a }
+
+		function global:cat { C:\msys64\usr\bin\env.exe BAT_PAGER=cat bat --style plain --tabs 8 $Args }
+		function global:cmdcat { C:\msys64\usr\bin\cat.exe $Args }
+	}
+
+	function mode_pwsh {
+		# MSYS2のコマンドパスを低優先へ入れ替える
+		$sshpath = "C:\WINDOWS\System32\OpenSSH"
+		$msyspath = "C:\msys64\usr\bin"
+		$mingw64path = "C:\msys64\mingw64\bin"
+		$miscpath = $env:HOMEDRIVE + $env:HOMEPATH + "\Documents\misc\bin"
+		$tttcmdspath = $env:HOMEDRIVE + $env:HOMEPATH + "\Documents\tttcmds\bin"
+
+		Set-Item Env:Path $env:Path.Replace($sshpath,"")
+		Set-Item Env:Path $env:Path.Replace($msyspath,"")
+		Set-Item Env:Path $env:Path.Replace($mingw64path,"")
+		Set-Item Env:Path $env:Path.Replace($miscpath,"")
+		Set-Item Env:Path $env:Path.Replace($tttcmdspath,"")
+
+		Set-Item Env:Path "$env:Path;$sshpath"
+		Set-Item Env:Path "$env:Path;$miscpath"
+		Set-Item Env:Path "$env:Path;$tttcmdspath"
+		Set-Item Env:Path "$env:Path;$msyspath"
+		Set-Item Env:Path "$env:Path;$mingw64path"
+
+		# 作成した関数を削除
+		Get-Item Function:ls > $null 2>&1 && Remove-Item Function:ls
+		Get-Item Function:ll > $null 2>&1 &&Remove-Item Function:ll
+		Get-Item Function:la > $null 2>&1 &&Remove-Item Function:la
+
+		Get-Item Function:cat > $null 2>&1 &&Remove-Item Function:cat
+		Get-Item Function:cmdcat > $null 2>&1 &&Remove-Item Function:cmdcat
+
+		# 削除したエイリアスを元に戻す
+		Get-Alias cat > $null 2>&1 || Set-Alias -Name cat -Value Get-Content
+		Get-Alias cp > $null 2>&1 || Set-Alias -Name cp -Value Copy-Item
+		Get-Alias ls > $null 2>&1 || Set-Alias -Name ls -Value Get-ChildItem
+		Get-Alias mv > $null 2>&1 || Set-Alias -Name mv -Value Move-Item
+		Get-Alias rm > $null 2>&1 || Set-Alias -Name rm -Value Remove-Item
+		Get-Alias diff > $null 2>&1 || Set-Alias -Force -Name diff -Value Compare-Object
+		Get-Alias sort > $null 2>&1 || Set-Alias -Force -Name sort -Value Sort-Object -Option ReadOnly
+		Get-Alias tee > $null 2>&1 || Set-Alias -Force -Name tee -Value Tee-Object -Option ReadOnly
+	}
+
+	mode_msys2
+}
 
 #========================================================================
 # load ~/.profile.ps1
