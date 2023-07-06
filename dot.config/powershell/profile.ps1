@@ -39,9 +39,11 @@ $OutputEncoding = [System.Console]::OutputEncoding =
 #========================================================================
 # ReadLine settings
 #========================================================================
+$ErrorActionPreference = "silentlycontinue"
 Set-PSReadLineOption -PredictionSource History
 Set-PSReadLineOption -PredictionViewStyle InlineView
 Set-PSReadLineKeyHandler -Key "Ctrl+f" -Function AcceptSuggestion
+$ErrorActionPreference = "continue"
 
 #Set-PSReadLineOption -PredictionViewStyle ListView
 #Set-PSReadLineKeyHandler -Key "Ctrl+f" -Function AcceptNextSuggestionWord
