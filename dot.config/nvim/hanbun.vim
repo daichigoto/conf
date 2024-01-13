@@ -162,17 +162,17 @@ augroup AddHanbunMode
   autocmd BufRead,BufNewFile Makefile.win setfiletype make
 
   " <C-n> or <C-t>	tab forwarding when make post mode
-  autocmd BufNewFile,BufRead typescript.xml inoremap <C-t> <ESC>:w<CR>:bn<CR>gg=G/POST:]<CR>5li
-  autocmd BufNewFile,BufRead typescript.xml inoremap <C-n> <ESC>:w<CR>:bn<CR>gg=G/POST:]<CR>5li
-  autocmd BufNewFile,BufRead typescript.xml nnoremap <C-n>      :w<CR>:bn<CR>gg=G/POST:]<CR>5li
+  autocmd BufNewFile,BufRead typescript*.xml inoremap <C-t> <ESC>:w<CR>:bn<CR>gg=G/POST:]<CR>5li
+  autocmd BufNewFile,BufRead typescript*.xml inoremap <C-n> <ESC>:w<CR>:bn<CR>gg=G/POST:]<CR>5li
+  autocmd BufNewFile,BufRead typescript*.xml nnoremap <C-n>      :w<CR>:bn<CR>gg=G/POST:]<CR>5li
 
   " <C-c>t	Insert Hanbun tag
-  autocmd BufNewFile,BufRead typescript.xml inoremap <C-c>t <C-r>=<SID>hanbunTagInsert()<CR>
+  autocmd BufNewFile,BufRead typescript*.xml inoremap <C-c>t <C-r>=<SID>hanbunTagInsert()<CR>
 
   " LT		Smart list generator
-  autocmd BufNewFile,BufRead typescript.xml vnoremap LT :call GenList()<CR>
+  autocmd BufNewFile,BufRead typescript*.xml vnoremap LT :call GenList()<CR>
 
   " useful jump
-  autocmd BufNewFile,BufRead typescript.xml nnoremap LEAD /lead:<CR>5l
-  autocmd BufNewFile,BufRead typescript.xml nnoremap TITLE /   <title><p><CR>13l
+  autocmd BufNewFile,BufRead typescript*.xml nnoremap LEAD /lead:<CR>5l
+  autocmd BufNewFile,BufRead typescript*.xml nnoremap TITLE /   <title><p><CR>13l
 augroup End
