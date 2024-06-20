@@ -118,7 +118,7 @@ function! <SID>hanbunTagInsert()
     \  '<quote>' . "\<CR>" .
     \  '<p></p>' . "\<CR>" .
     \  "\<Left>" . '</quote>' . "\<CR>" .
-    \  <SID>back(0) . <SID>back(14 + 1 * (l:eleidx - 1))
+    \  <SID>back(0) . <SID>back(17 + 1 * (l:eleidx - 1))
 
   elseif 'access' == l:tag
     let l:bf = '<access ref=""></access>' . <SID>back(11)
