@@ -41,6 +41,7 @@ function! HanbunTags(ArgLead, CmdLine, CusorPos)
   \  'list'			. "\n" .
   \  'order'			. "\n" .
   \  'item'			. "\n" .
+  \  'quote'			. "\n" .
   \  'thebibliography'		. "\n" .
   \  'bibitem'			. "\n" .
   \  'publisher'		. "\n" .
@@ -111,6 +112,13 @@ function! <SID>hanbunTagInsert()
     \  '<item><p></p></item>' . "\<CR>" .
     \  "\<Left>" . '</list>' .
     \  <SID>back(0) . <SID>back(107 + 5 * (l:eleidx - 1))
+
+  elseif 'order' == l:tag
+    let l:bf = 
+    \  '<quote>' . "\<CR>" .
+    \  '<p></p>' . "\<CR>" .
+    \  "\<Left>" . '</quote>' .
+    \  <SID>back(0) . <SID>back(12 + 1 * (l:eleidx - 1))
 
   elseif 'access' == l:tag
     let l:bf = '<access ref=""></access>' . <SID>back(11)
