@@ -1,4 +1,4 @@
-" Copyright (c) 2010,2012,2016,2020,2021 ONGS Inc. <info@ongs.co.jp>
+" Copyright (c) 2010,2012,2016,2020,2021,2024 ONGS Inc. <info@ongs.co.jp>
 " All rights reserved.
 "
 " Redistribution and use in source and binary forms, with or without
@@ -113,12 +113,12 @@ function! <SID>hanbunTagInsert()
     \  "\<Left>" . '</list>' .
     \  <SID>back(0) . <SID>back(107 + 5 * (l:eleidx - 1))
 
-  elseif 'order' == l:tag
+  elseif 'quote' == l:tag
     let l:bf = 
     \  '<quote>' . "\<CR>" .
     \  '<p></p>' . "\<CR>" .
-    \  "\<Left>" . '</quote>' .
-    \  <SID>back(0) . <SID>back(12 + 1 * (l:eleidx - 1))
+    \  "\<Left>" . '</quote>' . "\<CR>" .
+    \  <SID>back(0) . <SID>back(14 + 1 * (l:eleidx - 1))
 
   elseif 'access' == l:tag
     let l:bf = '<access ref=""></access>' . <SID>back(11)
